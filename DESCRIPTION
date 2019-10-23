@@ -1,0 +1,15 @@
+Package: breedbase
+Version: 0.1
+Date: 2019-10-22
+Title: breeDBase
+Description: Helper functions for generating breeDBase upload templates.
+Author: David Waring <djw64@cornell.edu>
+Maintainer: David Waring <djw64@cornell.edu>
+License: MIT + file LICENSE
+Depends:
+    methods
+Imports:
+    tibble,
+    dplyr,
+    WriteXLS
+RoxygenNote: 6.1.1
