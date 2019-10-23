@@ -112,6 +112,9 @@ buildAccessionTemplate <- function(
         return(template)
     }
 
+    # Ensure a vector
+    accessions = c(accessions)
+
     # Add each of the Accessions
     for ( accession in accessions ) {
         row <- tibble::tibble(
