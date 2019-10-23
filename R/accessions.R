@@ -73,11 +73,6 @@ buildAccessionTemplate <- function(
     accessions = NULL
 ) {
 
-    # Check for required arguments
-    if ( is.null(accessions) ) {
-        stop("Cannot create Accession Template: vector of accessions required")
-    }
-
     # Set template headers
     template <- tibble::tibble(
         "accession_name" = character(),
@@ -111,6 +106,11 @@ buildAccessionTemplate <- function(
         "introgression_start_position_bp" = numeric(),
         "introgression_end_position_bp" = numeric()
     )
+
+    # Return blank template if no accessions provided
+    if ( is.null(accessions) ) {
+        return(template)
+    }
 
     # Add each of the Accessions
     for ( accession in accessions ) {
