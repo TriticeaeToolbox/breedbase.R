@@ -170,12 +170,14 @@ buildAccessionTemplate <- function(
 #' @param input Either a vector of Accessions to include in the template OR 
 #' a \code{tibble} representation of the upload template
 #' @param output The file path to the output .xls file
+#' @param chunk Chunk the file into parts with up to `chunk` number of lines per file
 #' 
 #' @import WriteXLS
 #' @export
 writeAccessionTemplate <- function(
     input=NULL,
-    output=NULL
+    output=NULL,
+    chunk=NULL
 ) {
 
     # Check for required arguments
@@ -196,8 +198,36 @@ writeAccessionTemplate <- function(
         output = paste(output, ".xls", sep="")
     }
 
-    # Write Excel File
-    WriteXLS::WriteXLS(input, output)
+    # Split the input file, if chunk is provided
+    if ( !is.null(chunk) ) {
+        max <- nrow(input)
+        index <- 1
+        start <- 1
+        end <- ifelse(max < chunk, max, chunk)
+        while ( end <= max ) {
+            
+            # Subset data and write the subset
+            subset <- input[c(start:end),]
+            subset_output <- gsub("\\.xls$", paste0("_part", index, ".xls"), output)
+            writeAccessionTemplate(subset, subset_output)
+
+            if ( end == max ) {
+                end <- max + 1
+            }
+            else {
+                index <- index + 1
+                start <- end + 1
+                end <- end + chunk
+                end <- ifelse(end > max, max, end)
+            }
+        }
+    }
+
+    # Write the entire file
+    else {
+        print(sprintf("Writing Accession Template: %s", output))
+        WriteXLS::WriteXLS(input, output)
+    }
 
 }
 

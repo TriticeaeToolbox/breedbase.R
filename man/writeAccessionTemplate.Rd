@@ -4,13 +4,15 @@
 \alias{writeAccessionTemplate}
 \title{Write Accession Template}
 \usage{
-writeAccessionTemplate(input = NULL, output = NULL)
+writeAccessionTemplate(input = NULL, output = NULL, chunk = NULL)
 }
 \arguments{
 \item{input}{Either a vector of Accessions to include in the template OR 
 a \code{tibble} representation of the upload template}
 
 \item{output}{The file path to the output .xls file}
+
+\item{chunk}{Chunk the file into parts with up to `chunk` number of lines per file}
 }
 \description{
 Write a breeDBase upload template (.xls file) for accessions
