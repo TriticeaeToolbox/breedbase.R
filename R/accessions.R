@@ -113,7 +113,7 @@ buildAccessionTemplate <- function(
     }
 
     # Ensure a vector
-    accessions = c(accessions)
+    accessions <- c(accessions)
 
     # Add each of the Accessions
     for ( accession in accessions ) {
@@ -154,7 +154,7 @@ buildAccessionTemplate <- function(
 
     # Clean template
     for ( name in names(template) ) {
-        template[name][which(template[name] == ""),] = NA
+        template[name][which(template[name] == ""),] <- NA
     }
 
     # Return the template
@@ -175,9 +175,9 @@ buildAccessionTemplate <- function(
 #' @import WriteXLS
 #' @export
 writeAccessionTemplate <- function(
-    input=NULL,
-    output=NULL,
-    chunk=NULL
+    input = NULL,
+    output = NULL,
+    chunk = NULL
 ) {
 
     # Check for required arguments
@@ -195,7 +195,7 @@ writeAccessionTemplate <- function(
 
     # Set output extension
     if ( !grepl("\\.xls$", output) ) {
-        output = paste(output, ".xls", sep="")
+        output <- paste(output, ".xls", sep="")
     }
 
     # Split the input file, if chunk is provided
