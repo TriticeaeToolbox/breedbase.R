@@ -158,7 +158,67 @@ geocodeLocation <- function(location) {
 
 }
 
+#' Build Location Template
+#' 
+#' Create a \code{tibble} representing the breeDBase upload 
+#' template for the provided locations
+#' 
+#' @param locations Vector of Locations to add to the template
+#' 
+#' @return A \code{tibble} representation of the upload template
+#' 
+#' @import dplyr tibble
+#' @export
+buildLocationTemplate <- function(
+    locations = NULL
+) {
 
+    # Set template headers
+    template <- tibble::tibble(
+        "Name" = character(),
+        "Abbreviation" = character(),
+        "Country Code" = character(),
+        "Country Name" = character(),
+        "Program" = character(),
+        "Type" = character(),
+        "Latitude" = numeric(),
+        "Longitude" = numeric(),
+        "Altitude" = numeric()
+    )
+
+    # Return blank template if no accessions provided
+    if ( is.null(locations) ) {
+        return(template)
+    }
+
+    # Ensure a vector
+    locations <- c(locations)
+
+    # Parse each location
+    for ( location in locations ) {
+        row <- tibble::tibble(
+            "Name"  = location@name,
+            "Abbreviation" = location@abbreviation,
+            "Country Code" = location@country_code,
+            "Country Name" = location@country_name,
+            "Program" = paste(location@program, sep="&"),
+            "Type" = location@type,
+            "Latitude" = location@latitude,
+            "Longitude" = location@longitude,
+            "Altitude" = location@altitude
+        )
+        template <- dplyr::bind_rows(template, row)
+    }
+
+    # Clean template
+    for ( name in names(template) ) {
+        template[name][which(template[name] == ""),] <- NA
+    }
+
+    # Return the template
+    return(template)
+
+}
 
 
 

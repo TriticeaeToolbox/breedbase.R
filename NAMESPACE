@@ -3,6 +3,7 @@
 export(Accession)
 export(Location)
 export(buildAccessionTemplate)
+export(buildLocationTemplate)
 export(geocodeLocation)
 export(writeAccessionTemplate)
 exportClasses(Accession)
