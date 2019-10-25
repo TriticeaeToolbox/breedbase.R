@@ -12,4 +12,8 @@ Imports:
     tibble,
     dplyr,
     WriteXLS
+Suggests:
+    utils,
+    httr,
+    rjson
 RoxygenNote: 6.1.1
