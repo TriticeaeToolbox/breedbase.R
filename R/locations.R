@@ -222,6 +222,77 @@ buildLocationTemplate <- function(
 
 
 
+#' Write Location Template
+#' 
+#' Write a breeDBase upload template (.xls file) for locations
+#' 
+#' @param input Either a vector of Locations to include in the template OR 
+#' a \code{tibble} representation of the upload template
+#' @param output The file path to the output .xls file
+#' @param chunk Chunk the file into parts with up to `chunk` number of lines per file
+#' 
+#' @import WriteXLS
+#' @export
+writeLocationTemplate <- function(
+    input = NULL,
+    output = NULL,
+    chunk = NULL
+) {
+
+    # Check for required arguments
+    if ( is.null(input) ) {
+        stop("Cannot write Location Template file: input of a template as a tibble or vector of locations is required")
+    }
+    if ( is.null(output) ) {
+        stop("Cannot write Location Template file: output of the file path to the .xls file is required")
+    }
+
+    # Create template if not provided one
+    if ( !("tbl_df" %in% is(input)) ) {
+        input <- buildLocationTemplate(input)
+    }
+
+    # Set output extension
+    if ( !grepl("\\.xls$", output) ) {
+        output <- paste(output, ".xls", sep="")
+    }
+
+    # Split the input file, if chunk is provided
+    if ( !is.null(chunk) ) {
+        max <- nrow(input)
+        index <- 1
+        start <- 1
+        end <- ifelse(max < chunk, max, chunk)
+        while ( end <= max ) {
+            
+            # Subset data and write the subset
+            subset <- input[c(start:end),]
+            subset_output <- gsub("\\.xls$", paste0("_part", index, ".xls"), output)
+            writeLocationTemplate(subset, subset_output)
+
+            if ( end == max ) {
+                end <- max + 1
+            }
+            else {
+                index <- index + 1
+                start <- end + 1
+                end <- end + chunk
+                end <- ifelse(end > max, max, end)
+            }
+        }
+    }
+
+    # Write the entire file
+    else {
+        print(sprintf("Writing Location Template: %s", output))
+        WriteXLS::WriteXLS(input, output)
+    }
+
+}
+
+
+
+
 
 
 
