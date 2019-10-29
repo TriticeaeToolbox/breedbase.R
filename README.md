@@ -26,7 +26,7 @@ jerry <- Accession(
      )
 )
 
-calendonia <- Accession(
+caledonia <- Accession(
      "CALEDONIA", 
      "Triticum aestivum",
      list(
@@ -36,15 +36,27 @@ calendonia <- Accession(
      )
 )
 
-accessions <- c(jerry, calendonia)
+my_cross <- Accession(
+    "MY_CROSS",
+    "Triticum aestivum"
+    list(
+        institude_codes = "CNL",
+        organization_name = "Cornell University"
+    )
+)
+
+# Create a vector of accessions
+accessions <- c(jerry, caledonia, my_cross)
+
+# Set the cross pedigree
+my_cross_pedigree <- Progeny(my_cross, jerry, caledonia)
 
 
-# Create the Upload Template
-template <- buildAccessionTemplate(accessions)
+# Write the Accession Upload Template to a File
+writeAccessionTemplate(accessions, '/path/to/accessions.xls')
 
-
-# Write the Upload Template to a File
-writeAccessionTemplate(template, '/path/to/file.xls')
+# Write the Pedigree Upload Template to a File
+writeProgenyTemplate(my_cross_pedigree, "/path/to/pedigrees.txt")
 ```
 
 

@@ -158,6 +158,7 @@ geocodeLocation <- function(location) {
 
 }
 
+
 #' Build Location Template
 #' 
 #' Create a \code{tibble} representing the breeDBase upload 
@@ -219,7 +220,6 @@ buildLocationTemplate <- function(
     return(template)
 
 }
-
 
 
 #' Write Location Template

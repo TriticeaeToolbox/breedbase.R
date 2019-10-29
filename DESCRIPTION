@@ -11,9 +11,9 @@ Depends:
 Imports:
     tibble,
     dplyr,
+    httr,
+    rjson,
     WriteXLS
 Suggests:
-    utils,
-    httr,
-    rjson
+    utils
 RoxygenNote: 6.1.1
