@@ -10,7 +10,7 @@ geocodeLocation(location)
 \item{location}{Location to parse (ie Ithaca, NY; Caldwell Dr, Ithaca, NY; etc...)}
 }
 \value{
-A list with components
+A list with components:
 \describe{
   \item{latitude}{Location latitude (decimal degrees)}
   \item{longitude}{Location longitude (decimal degrees)}
@@ -22,4 +22,11 @@ Lookup the coordinates and elevation for the specified
 location.  The location text will be parsed by DataScienceToolkit's
 `street2coordinates` API into coordinates and the elevation will be 
 queried using the `coordinates2statistics` API.
+}
+\examples{
+caldwell <- geocodeLocation("2 Caldwell Dr, Ithaca, NY")
+lat <- caldwell$latitude
+lon <- caldwell$longitude
+alt <- caldwell$altitude
+
 }

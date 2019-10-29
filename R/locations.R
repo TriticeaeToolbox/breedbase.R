@@ -121,7 +121,7 @@ Location <- function(
 #' 
 #' @param location Location to parse (ie Ithaca, NY; Caldwell Dr, Ithaca, NY; etc...)
 #' 
-#' @example
+#' @examples
 #' caldwell <- geocodeLocation("2 Caldwell Dr, Ithaca, NY")
 #' lat <- caldwell$latitude
 #' lon <- caldwell$longitude
