@@ -10,7 +10,12 @@ geocodeLocation(location)
 \item{location}{Location to parse (ie Ithaca, NY; Caldwell Dr, Ithaca, NY; etc...)}
 }
 \value{
-list(latitude, longitude, altitude)
+A list with components
+\describe{
+  \item{latitude}{Location latitude (decimal degrees)}
+  \item{longitude}{Location longitude (decimal degrees)}
+  \item{altitude}{Location elevation (meters)}
+}
 }
 \description{
 Lookup the coordinates and elevation for the specified 

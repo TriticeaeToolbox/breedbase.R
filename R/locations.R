@@ -121,7 +121,18 @@ Location <- function(
 #' 
 #' @param location Location to parse (ie Ithaca, NY; Caldwell Dr, Ithaca, NY; etc...)
 #' 
-#' @return list(latitude, longitude, altitude)
+#' @example
+#' caldwell <- geocodeLocation("2 Caldwell Dr, Ithaca, NY")
+#' lat <- caldwell$latitude
+#' lon <- caldwell$longitude
+#' alt <- caldwell$altitude
+#' 
+#' @return A list with components:
+#' \describe{
+#'   \item{latitude}{Location latitude (decimal degrees)}
+#'   \item{longitude}{Location longitude (decimal degrees)}
+#'   \item{altitude}{Location elevation (meters)}
+#' }
 #' 
 #' @import utils httr rjson
 #' @export
