@@ -11,7 +11,7 @@ adding data through the breeDBase website.
 
 ## Example
 
-Create new accessions and the upload template to add them to a breeDBase instance
+Create new accessions, a cross pedigree, and the upload templates to add them to a breeDBase instance
 
 ```R
 
@@ -41,7 +41,7 @@ my_cross <- Accession(
     "Triticum aestivum"
     list(
         institude_codes = "CNL",
-        organization_name = "Cornell University"
+        organization_names = "Cornell University"
     )
 )
 
@@ -68,3 +68,4 @@ The package currently contains functions for the following data types:
 
 - Accession
 - Location
+- Progeny
