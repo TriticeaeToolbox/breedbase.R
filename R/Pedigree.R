@@ -1,6 +1,6 @@
-#' Progeny Class
+#' Pedigree Class
 #' 
-#' An S4 Class to represent a breeDBase progeny / pedigree
+#' An S4 Class to represent a breeDBase pedigree
 #' 
 #' @slot progeny_name Name or synonym of the Accession to add pedigree information to (must exist in database)
 #' @slot female_parent_accession Name of female parent Accession
@@ -10,7 +10,7 @@
 #' @importFrom methods is new slot<-
 #' @export
 setClass(
-    "Progeny",
+    "Pedigree",
 
     slots = list(
         progeny_name = "character",
@@ -37,8 +37,8 @@ setClass(
             return("Male Parent Accession is required")
         }
 
-        if ( !(object@type %in% PROGENY_TYPES) ) {
-            return("Progeny Type is not recognized")
+        if ( !(object@type %in% CROSS_TYPES) ) {
+            return("Cross Type is not recognized")
         }
 
         return(TRUE)
@@ -46,5 +46,5 @@ setClass(
 
 )
 
-# List of approved progeny types
-PROGENY_TYPES <- c("biparental", "self", "open", "sib")
+# List of approved cross types
+CROSS_TYPES <- c("biparental", "self", "open", "sib")

@@ -7,6 +7,9 @@
 \description{
 An S4 Class to represent a breeDBase accession
 }
+\details{
+The `accession_name` and `species_name` are required
+}
 \section{Slots}{
 
 \describe{

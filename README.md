@@ -9,12 +9,27 @@ function to create and/or write an upload template to be used for
 adding data through the breeDBase website.
 
 
+## Installation
+
+Currently, the breedbase package can be installed directly from GitHub using `devtools`.
+
+```R
+library(devtools)
+install_github("TriticeaeToolbox/breeDBase.R")
+```
+
+
+## Documentation
+
+Documentation for all Classes and functions can be found in the package's R documentation 
+or online at [https://triticeaetoolbox.github.io/breeDBase.R/](https://triticeaetoolbox.github.io/breeDBase.R/).
+
+
 ## Example
 
 Create new accessions, a cross pedigree, and the upload templates to add them to a breeDBase instance
 
 ```R
-
 # Create the Accessions
 jerry <- Accession(
      "JERRY", 
@@ -48,18 +63,16 @@ my_cross <- Accession(
 # Create a vector of accessions
 accessions <- c(jerry, caledonia, my_cross)
 
-# Set the cross pedigree
-my_cross_pedigree <- Progeny(my_cross, jerry, caledonia)
+# Set the pedigree for MY_CROSS
+my_cross_pedigree <- Pedigree(my_cross, jerry, caledonia)
 
 
 # Write the Accession Upload Template to a File
 writeAccessionTemplate(accessions, '/path/to/accessions.xls')
 
 # Write the Pedigree Upload Template to a File
-writeProgenyTemplate(my_cross_pedigree, "/path/to/pedigrees.txt")
+writePedigreeTemplate(my_cross_pedigree, "/path/to/pedigrees.txt")
 ```
-
-
 
 
 ## Current Status
@@ -68,4 +81,4 @@ The package currently contains functions for the following data types:
 
 - Accession
 - Location
-- Progeny
+- Pedigree

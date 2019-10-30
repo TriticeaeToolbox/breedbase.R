@@ -2,6 +2,8 @@
 #' 
 #' An S4 Class to represent a breeDBase accession
 #' 
+#' The `accession_name` and `species_name` are required
+#' 
 #' @slot accession_name Accession Name (must be unique)
 #' @slot species_name Species Name (must exist in the database)
 #' @slot population_name (optional) a population is a grouping of accessions. if the population already exists in the database, the accession will be added into it, otherwise, the new population will be created.
