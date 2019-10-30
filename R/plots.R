@@ -153,6 +153,10 @@ createPlots <- function(
 
     # Parse each row and columns
     for ( row in c(1:max_rows) ) {
+
+        # Set blocks for the current row
+        # TODO
+
         for ( col in c(1:max_cols) ) {
             
             # Setup plot
@@ -193,7 +197,8 @@ createPlots <- function(
 
 #' Print Plots
 #' 
-#' Print the Plot layout to the console
+#' Create a tibble mirroring the plot layout of the provided plots 
+#' that can be printed to the console to inspect the plot layout.
 #' 
 #' @param plots The Plots to print
 #' 
@@ -215,16 +220,27 @@ printPlots <- function(plots) {
 
     # Tibble of plot layout to display
     rtn <- tibble()
+
+    # Add Columns
     for ( i in c(1:max_cols) ) {
         rtn <- add_column(rtn, !!(paste0("Col", i)) := NA)
     }
+
+    # Add Rows
+    row_names <- c()
+    headers <- c("Plot #", "Plot Name", "Accession Name", "Block")
     for ( i in c(1:max_rows) ) {
-        rtn <- add_row(rtn)
+        for ( j in c(1:length(headers)) ) {
+            header <- headers[j]
+            rtn <- add_row(rtn)
+            row_names <- c(row_names, paste0("Row", i, ": ", header))
+        }
     }
-    row_names <- lapply(c(1:max_rows), function(x) {paste0("Row", x)})
+    
+    # Set Row Names
     rtn$row_names <- row_names
-    rtn = remove_rownames(rtn)
-    rtn = column_to_rownames(rtn, var = "row_names")
+    rtn <- remove_rownames(rtn)
+    rtn <- column_to_rownames(rtn, var = "row_names")
 
     # Plot Index
     index <- 1
@@ -236,14 +252,19 @@ printPlots <- function(plots) {
         block <- plot@block_number
         plot_number <- plot@plot_number
         plot_name <- plot@plot_name
-        accession <- plot@accession_name
+        accession_name <- plot@accession_name
 
-        info <- paste0("Plot #", plot_number, " (Block ", block, ")", "\n", plot_name, "\n", accession, "\n")
+        # Calculate starting table row
+        table_row_start <- (plot_row * length(headers)) - (length(headers) - 1)
 
-        rtn[plot_row, plot_col] <- info
+        # Add Values to Table
+        rtn[table_row_start, plot_col] <- paste0("==== Plot ", plot_number, " ====")
+        rtn[table_row_start+1, plot_col] <- plot_name
+        rtn[table_row_start+2, plot_col] <- accession_name
+        rtn[table_row_start+3, plot_col] <- block
     }
 
-
+    # Return the tibble
     return(rtn)
 
 }
