@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • breedbase</title>
+<title>Plot Class — Plot-class • breedbase</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,7 +32,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Plot Class — Plot-class" />
+
+<meta property="og:description" content="An S4 Class to represent a breeDBase phenotyping trial plot" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -50,7 +53,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -93,138 +96,69 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Plot Class</h1>
+    
+    <div class="hidden name"><code>Plot-class.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>An S4 Class to represent a breeDBase phenotyping trial plot</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="Accession-class.html">Accession-class</a></code> </p>
-        </td>
-        <td><p>Accession Class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Accession.html">Accession()</a></code> </p>
-        </td>
-        <td><p>Create Accession</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Location-class.html">Location-class</a></code> </p>
-        </td>
-        <td><p>Location Class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Location.html">Location()</a></code> </p>
-        </td>
-        <td><p>Create Location</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Pedigree-class.html">Pedigree-class</a></code> </p>
-        </td>
-        <td><p>Pedigree Class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Pedigree.html">Pedigree()</a></code> </p>
-        </td>
-        <td><p>Create Pedigree</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Plot-class.html">Plot-class</a></code> </p>
-        </td>
-        <td><p>Plot Class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Plot.html">Plot()</a></code> </p>
-        </td>
-        <td><p>Create Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildAccessionTemplate.html">buildAccessionTemplate()</a></code> </p>
-        </td>
-        <td><p>Build Accession Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildLocationTemplate.html">buildLocationTemplate()</a></code> </p>
-        </td>
-        <td><p>Build Location Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildPedigreeTemplate.html">buildPedigreeTemplate()</a></code> </p>
-        </td>
-        <td><p>Build Pedigree Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="createPlots.html">createPlots()</a></code> </p>
-        </td>
-        <td><p>Create Plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geocodeLocation.html">geocodeLocation()</a></code> </p>
-        </td>
-        <td><p>Geocode Location</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="printPlots.html">printPlots()</a></code> </p>
-        </td>
-        <td><p>Print Plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeAccessionTemplate.html">writeAccessionTemplate()</a></code> </p>
-        </td>
-        <td><p>Write Accession Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeLocationTemplate.html">writeLocationTemplate()</a></code> </p>
-        </td>
-        <td><p>Write Location Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writePedigreeTemplate.html">writePedigreeTemplate()</a></code> </p>
-        </td>
-        <td><p>Write Pedigree Template</p></td>
-      </tr>
-    </tbody>
-    </table>
+    <p>The `plot_name`, `accession_name`, `plot_number`, and `block_number` 
+are required, all other fields are optional</p>
+    
+    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+
+    
+
+<dl class='dl-horizontal'>
+<dt><code>plot_name</code></dt><dd><p>The unique name for the plot (must be unique across entire database. this is often a concatenation of the trial name, the accession name, and the plot number.)</p></dd>
+
+<dt><code>accession_name</code></dt><dd><p>The name of the accession being tested in the plot (must exist in the database)</p></dd>
+
+<dt><code>plot_number</code></dt><dd><p>The sequential number for the plot in the field (e.g. 1001, 1002, 2001, 2002). these numbers should be unique for the trial.</p></dd>
+
+<dt><code>block_number</code></dt><dd><p>A design parameter indicating which block the plot is in</p></dd>
+
+<dt><code>is_a_control</code></dt><dd><p>(optional) TRUE if the plot is a control.  Generally, you will have accessions that are controls, so you should indicate the plots that that accession is in as a control.</p></dd>
+
+<dt><code>rep_number</code></dt><dd><p>(optional) replicate number</p></dd>
+
+<dt><code>range_number</code></dt><dd><p>(optional) range number, often synonymous with col_number</p></dd>
+
+<dt><code>row_number</code></dt><dd><p>(optional) row number. if the field is a grid, this represents the y coordinate, required for field map generation. the top left plot should be row 1, column 1</p></dd>
+
+<dt><code>col_number</code></dt><dd><p>(optional) column number. if the field is a grid, this represents the x coordinate. sometimes called range_number, required for field map generation. the top left plot shuold be row 1, column 1</p></dd>
+
+<dt><code>seedlot_name</code></dt><dd><p>(optional) the seedlot from where the planted seed originated. must exist in the database</p></dd>
+
+<dt><code>num_seed_per_plot</code></dt><dd><p>(optional) number seeds per plot. seed is transferred from seedlot mentioned in seedlot_name.</p></dd>
+
+<dt><code>weight_gram_seed_per_plot</code></dt><dd><p>(optional) weight in gram of seeds in plot. seed is transferred from seedlot mentioned in seedlot name.</p></dd>
+
+<dt><code>treatments</code></dt><dd><p>(optional) A named list where the name is the name of a treatment (e.g. inoculated, drought, etc) and the value should be TRUE if the treatment was applied to the plot or FALSE if not.</p></dd>
+
+</dl>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#slots">Slots</a></li>
+          </ul>
+
   </div>
 </div>
 
