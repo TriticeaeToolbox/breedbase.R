@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • breedbase</title>
+<title>Create Pedigree — Pedigree • breedbase</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,7 +32,11 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create Pedigree — Pedigree" />
+
+<meta property="og:description" content="Create a Pedigree for the Accession specified as `progeny` 
+with the given female and male parents." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -50,7 +54,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -93,114 +97,69 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create Pedigree</h1>
+    
+    <div class="hidden name"><code>Pedigree.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Create a Pedigree for the Accession specified as `progeny` 
+with the given female and male parents.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="Accession-class.html">Accession-class</a></code> </p>
-        </td>
-        <td><p>Accession Class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Accession.html">Accession()</a></code> </p>
-        </td>
-        <td><p>Create Accession</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Location-class.html">Location-class</a></code> </p>
-        </td>
-        <td><p>Location Class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Location.html">Location()</a></code> </p>
-        </td>
-        <td><p>Create Location</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Pedigree-class.html">Pedigree-class</a></code> </p>
-        </td>
-        <td><p>Pedigree Class</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Pedigree.html">Pedigree()</a></code> </p>
-        </td>
-        <td><p>Create Pedigree</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildAccessionTemplate.html">buildAccessionTemplate()</a></code> </p>
-        </td>
-        <td><p>Build Accession Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildLocationTemplate.html">buildLocationTemplate()</a></code> </p>
-        </td>
-        <td><p>Build Location Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="buildPedigreeTemplate.html">buildPedigreeTemplate()</a></code> </p>
-        </td>
-        <td><p>Build Pedigree Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geocodeLocation.html">geocodeLocation()</a></code> </p>
-        </td>
-        <td><p>Geocode Location</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeAccessionTemplate.html">writeAccessionTemplate()</a></code> </p>
-        </td>
-        <td><p>Write Accession Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writeLocationTemplate.html">writeLocationTemplate()</a></code> </p>
-        </td>
-        <td><p>Write Location Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="writePedigreeTemplate.html">writePedigreeTemplate()</a></code> </p>
-        </td>
-        <td><p>Write Pedigree Template</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>Pedigree</span>(<span class='kw'>progeny</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>female_parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>male_parent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"biparental"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>progeny</th>
+      <td><p>The progeny Accession or Accession name (or synonym)</p></td>
+    </tr>
+    <tr>
+      <th>female_parent</th>
+      <td><p>The female parent Accession or Accession name</p></td>
+    </tr>
+    <tr>
+      <th>male_parent</th>
+      <td><p>The male parent Accession or Accession name</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>(optional, default = 'biparental') The cross type (biparental, self, open, sib)</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Pedigree</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Create a Pedigree from names</span>
+<span class='no'>pedigree1</span> <span class='kw'>&lt;-</span> <span class='fu'>Pedigree</span>(<span class='st'>'SL18-UCONN-S1'</span>, <span class='st'>'SA18-CB-S10-FG1'</span>, <span class='st'>'SL18-SF-S19-MG2'</span>)
+
+<span class='co'># Create a Pedigree from existing Accessions</span>
+<span class='no'>offspring</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Accession.html'>Accession</a></span>(<span class='st'>'SL18-UCONN-S1'</span>, <span class='st'>'Saccharina latissima'</span>)
+<span class='no'>mother</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Accession.html'>Accession</a></span>(<span class='st'>'SA18-CB-S10-FG1'</span>, <span class='st'>'Saccharina angustissima'</span>)
+<span class='no'>father</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Accession.html'>Accession</a></span>(<span class='st'>'SL18-SF-S19-MG2'</span>, <span class='st'>'Saccharina latissima'</span>)
+<span class='no'>pedigree2</span> <span class='kw'>&lt;-</span> <span class='fu'>Pedigree</span>(<span class='no'>offspring</span>, <span class='no'>mother</span>, <span class='no'>father</span>)</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

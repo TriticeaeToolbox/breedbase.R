@@ -2,7 +2,7 @@
 #' 
 #' An S4 Class to represent a breeDBase accession
 #' 
-#' The `accession_name` and `species_name` are required
+#' The `accession_name` and `species_name` are required, all other fields are optional.
 #' 
 #' @slot accession_name Accession Name (must be unique)
 #' @slot species_name Species Name (must exist in the database)

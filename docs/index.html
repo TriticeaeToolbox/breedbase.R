@@ -67,12 +67,23 @@
 <a href="#an-r-package-for-generating-breedbase-upload-templates" class="anchor"></a>An R package for generating breeDBase upload templates</h3>
 <p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of breeDBase data types (such as an Accession). One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breeDBase website.</p>
 </div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>Currently, the breedbase package can be installed directly from GitHub using <code>devtools</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(devtools)
+<span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"TriticeaeToolbox/breeDBase.R"</span>)</code></pre></div>
+</div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<p>Documentation for all Classes and functions can be found in the package’s R documentation or online at <a href="https://triticeaetoolbox.github.io/breeDBase.R/" class="uri">https://triticeaetoolbox.github.io/breeDBase.R/</a>.</p>
+</div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>Create new accessions, a cross pedigree, and the upload templates to add them to a breeDBase instance</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Create the Accessions</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create the Accessions</span>
 jerry &lt;-<span class="st"> </span><span class="kw"><a href="reference/Accession.html">Accession</a></span>(
      <span class="st">"JERRY"</span>, 
      <span class="st">"Triticum aestivum"</span>,
@@ -105,15 +116,15 @@ my_cross &lt;-<span class="st"> </span><span class="kw"><a href="reference/Acces
 <span class="co"># Create a vector of accessions</span>
 accessions &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(jerry, caledonia, my_cross)
 
-<span class="co"># Set the cross pedigree</span>
-my_cross_pedigree &lt;-<span class="st"> </span><span class="kw"><a href="reference/Progeny.html">Progeny</a></span>(my_cross, jerry, caledonia)
+<span class="co"># Set the pedigree for MY_CROSS</span>
+my_cross_pedigree &lt;-<span class="st"> </span><span class="kw"><a href="reference/Pedigree.html">Pedigree</a></span>(my_cross, jerry, caledonia)
 
 
 <span class="co"># Write the Accession Upload Template to a File</span>
 <span class="kw"><a href="reference/writeAccessionTemplate.html">writeAccessionTemplate</a></span>(accessions, <span class="st">'/path/to/accessions.xls'</span>)
 
 <span class="co"># Write the Pedigree Upload Template to a File</span>
-<span class="kw"><a href="reference/writeProgenyTemplate.html">writeProgenyTemplate</a></span>(my_cross_pedigree, <span class="st">"/path/to/pedigrees.txt"</span>)</code></pre></div>
+<span class="kw"><a href="reference/writePedigreeTemplate.html">writePedigreeTemplate</a></span>(my_cross_pedigree, <span class="st">"/path/to/pedigrees.txt"</span>)</code></pre></div>
 </div>
 <div id="current-status" class="section level2">
 <h2 class="hasAnchor">
@@ -122,7 +133,7 @@ my_cross_pedigree &lt;-<span class="st"> </span><span class="kw"><a href="refere
 <ul>
 <li>Accession</li>
 <li>Location</li>
-<li>Progeny</li>
+<li>Pedigree</li>
 </ul>
 </div>
 </div>

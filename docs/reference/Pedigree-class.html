@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Accession Class — Accession-class • breedbase</title>
+<title>Pedigree Class — Pedigree-class • breedbase</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Accession Class — Accession-class" />
+<meta property="og:title" content="Pedigree Class — Pedigree-class" />
 
-<meta property="og:description" content="An S4 Class to represent a breeDBase accession" />
+<meta property="og:description" content="An S4 Class to represent a breeDBase pedigree" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -98,86 +98,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Accession Class</h1>
+    <h1>Pedigree Class</h1>
     
-    <div class="hidden name"><code>Accession-class.Rd</code></div>
+    <div class="hidden name"><code>Pedigree-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>An S4 Class to represent a breeDBase accession</p>
+    <p>An S4 Class to represent a breeDBase pedigree</p>
     
     </div>
 
         
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The `accession_name` and `species_name` are required, all other fields are optional.</p>
-    
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
     
 
 <dl class='dl-horizontal'>
-<dt><code>accession_name</code></dt><dd><p>Accession Name (must be unique)</p></dd>
+<dt><code>progeny_name</code></dt><dd><p>Name or synonym of the Accession to add pedigree information to (must exist in database)</p></dd>
 
-<dt><code>species_name</code></dt><dd><p>Species Name (must exist in the database)</p></dd>
+<dt><code>female_parent_accession</code></dt><dd><p>Name of female parent Accession</p></dd>
 
-<dt><code>population_name</code></dt><dd><p>(optional) a population is a grouping of accessions. if the population already exists in the database, the accession will be added into it, otherwise, the new population will be created.</p></dd>
+<dt><code>male_parent_accession</code></dt><dd><p>Name of male parent Accession</p></dd>
 
-<dt><code>organization_names</code></dt><dd><p>(optional) the names of the organizations which use this accession.</p></dd>
-
-<dt><code>synonyms</code></dt><dd><p>(optional) an accession can be known by many names including local popular names. a synonym name can be used instead of the accession_name throughout the database; because of this, synonyms must themselves be unique.</p></dd>
-
-<dt><code>location_codes</code></dt><dd><p>(optional) location codes for the accession.</p></dd>
-
-<dt><code>ploidy_levels</code></dt><dd><p>(optional) a number indicating the ploidy (e.g. 2 for diploid, 3 for triploid), numeric.</p></dd>
-
-<dt><code>genome_structures</code></dt><dd><p>(optional) genome structures for accession which take into account ploidy and ancestral genome info e.g. AAA, AB.</p></dd>
-
-<dt><code>varietys</code></dt><dd><p>(optional) variety can be defined as a group of individuals or plants having similar traits that can be reproduced "true to type" from generation to generation.</p></dd>
-
-<dt><code>donors</code></dt><dd><p>(optional) the accession_name of the donor accession.</p></dd>
-
-<dt><code>donor_institutes</code></dt><dd><p>(optional) the institute of the donor accession.</p></dd>
-
-<dt><code>donor_PUIs</code></dt><dd><p>(optional) the permanent unique identifier of the donor accession.</p></dd>
-
-<dt><code>country_of_origins</code></dt><dd><p>(optional) the country of origin.</p></dd>
-
-<dt><code>states</code></dt><dd><p>(optional) the state of origin.</p></dd>
-
-<dt><code>institute_codes</code></dt><dd><p>(optional) the institute code of origin.</p></dd>
-
-<dt><code>institute_names</code></dt><dd><p>(optional) the institute name of origin.</p></dd>
-
-<dt><code>biological_status_of_accession_codes</code></dt><dd><p>(optional) code indicating the state of accession.</p></dd>
-
-<dt><code>notes</code></dt><dd><p>(optional) free text for notes.</p></dd>
-
-<dt><code>accession_numbers</code></dt><dd><p>(optional) accession number for accession from germplasm bank.</p></dd>
-
-<dt><code>PUIs</code></dt><dd><p>(optional) permanent unique identifier of the accession.</p></dd>
-
-<dt><code>seed_sources</code></dt><dd><p>(optional) origin of seed source.</p></dd>
-
-<dt><code>type_of_germplasm_storage_codes</code></dt><dd><p>(optional) code indicating the type of germplasm storage.</p></dd>
-
-<dt><code>acquisition_dates</code></dt><dd><p>(optional) dates of acquisition YYYYMMDD for accession.</p></dd>
-
-<dt><code>transgenic</code></dt><dd><p>(optional) indicates if accession is transgenic. Please indicate 1 if transgenic and empty if otherwise.</p></dd>
-
-<dt><code>introgression_parent</code></dt><dd><p>(optional) if the accession you are adding has an introgression that originated from one of the parents, you can specify the parent here</p></dd>
-
-<dt><code>introgression_backcross_parent</code></dt><dd><p>(optional) the backcross parent for introducing an introgression into the accession being added</p></dd>
-
-<dt><code>introgression_map_version</code></dt><dd><p>(optional) the map version for identifying the start and stop position of the introgression. e.g. AGPv2</p></dd>
-
-<dt><code>introgression_chromosome</code></dt><dd><p>(optional) the chromosome number that the introgression is on.</p></dd>
-
-<dt><code>introgression_start_position_bp</code></dt><dd><p>(optional) the start position of the introgression in base pairs</p></dd>
-
-<dt><code>introgression_end_position_bp</code></dt><dd><p>(optional) the end position of the introgression in base pairs</p></dd>
+<dt><code>type</code></dt><dd><p>Cross type (biparental, self, open, sib)</p></dd>
 
 </dl>
     
@@ -187,8 +131,6 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#slots">Slots</a></li>
           </ul>
 

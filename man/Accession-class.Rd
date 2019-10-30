@@ -8,7 +8,7 @@
 An S4 Class to represent a breeDBase accession
 }
 \details{
-The `accession_name` and `species_name` are required
+The `accession_name` and `species_name` are required, all other fields are optional.
 }
 \section{Slots}{
 
