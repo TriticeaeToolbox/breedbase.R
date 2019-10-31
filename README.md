@@ -120,6 +120,7 @@ loc2 <- Location(
 
 - Alternatively, you can query a more specific location string separately and use 
 the results to build the Location
+
 ```R
 geo <- geocodeLocation("2 Caldwell Drive, Ithaca, NY")
 loc3 <- Location(
