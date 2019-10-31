@@ -174,8 +174,7 @@ alternate the direction of plot numbers.</p>
 <span class='co'>#         ACC_M   ACC_N   ACC_O   ACC_P   ACC_Q   ACC_R</span>
 <span class='co'>#         BLK 1   BLK 1   BLK 1   BLK 2   BLK 2   BLK 2</span>
 <span class='no'>accessions</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>18</span>)], <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='Accession.html'>Accession</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"ACC_"</span>, <span class='no'>x</span>), <span class='st'>"Saccharina latissima"</span>)})
-<span class='no'>plots</span> <span class='kw'>&lt;-</span> <span class='fu'>createPlots</span>(<span class='st'>"TEST_TRIAL"</span>, <span class='no'>accessions</span>, <span class='kw'>max_cols</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>max_cols_per_block</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; [1] "Creating plots in 6 columns and 3 rows"</div><div class='input'>
-</div></pre>
+<span class='no'>plots</span> <span class='kw'>&lt;-</span> <span class='fu'>createPlots</span>(<span class='st'>"TEST_TRIAL"</span>, <span class='no'>accessions</span>, <span class='kw'>max_cols</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>max_cols_per_block</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

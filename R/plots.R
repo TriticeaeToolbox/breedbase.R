@@ -147,7 +147,6 @@ createPlots <- function(
     # Calculate number of rows
     count <- length(accessions)
     max_rows <- ceiling(count/max_cols)
-    print(sprintf("Creating plots in %i columns and %i rows", max_cols, max_rows))
 
     # Calculate the number of blocks per row
     blocks_per_row <- ceiling(max_cols/max_cols_per_block)
@@ -261,7 +260,7 @@ createPlots <- function(
 #' )
 #' 
 #' # Display the layout
-#' printPlots(plots)
+#' display <- printPlots(plots)
 #' # ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====
 #' # Row1: Plot Name         TEST_TRIAL_PLOT1    TEST_TRIAL_PLOT2    TEST_TRIAL_PLOT3    TEST_TRIAL_PLOT4    TEST_TRIAL_PLOT5    TEST_TRIAL_PLOT6
 #' # Row1: Accession Name               ACC_A               ACC_B               ACC_C               ACC_D               ACC_E               ACC_F

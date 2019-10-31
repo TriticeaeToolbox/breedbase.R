@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{printPlots}
 \alias{printPlots}
-\title{Print Plots}
+\title{Print Plot Layout}
 \usage{
 printPlots(plots)
 }
@@ -28,7 +28,7 @@ plots <- createPlots("TEST_TRIAL", accessions,
 )
 
 # Display the layout
-printPlots(plots)
+display <- printPlots(plots)
 # ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====
 # Row1: Plot Name         TEST_TRIAL_PLOT1    TEST_TRIAL_PLOT2    TEST_TRIAL_PLOT3    TEST_TRIAL_PLOT4    TEST_TRIAL_PLOT5    TEST_TRIAL_PLOT6
 # Row1: Accession Name               ACC_A               ACC_B               ACC_C               ACC_D               ACC_E               ACC_F
