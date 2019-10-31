@@ -9,11 +9,11 @@ createPlots(trial_name = NULL, accessions = NULL, max_cols = NULL,
   zig_zag = FALSE, controls = c())
 }
 \arguments{
-\item{trial_name}{The trial name to be used for plot names ({trial_name}_PLOT#)}
+\item{trial_name}{The trial name to be used for plot names (TRIAL_PLOT#)}
 
 \item{accessions}{List of Accessions or Accession names in plot order (moving across rows)}
 
-\item{max_cols}{The maximum number of columns (plots) in a row}
+\item{max_cols}{(optional, default = no max) The maximum number of columns (plots) in a row}
 
 \item{max_cols_per_block}{(optional, default = no max) The maximum number of columns in a block}
 
@@ -27,7 +27,7 @@ createPlots(trial_name = NULL, accessions = NULL, max_cols = NULL,
 vector of Plots
 }
 \description{
-Create a set of plots from a list of ordered Accessions and basic layout properties.
+Create a set of plots from a list of Accessions (ordered by plot) and basic layout properties.
 The plots will start in the top left corner and move across rows and down columns.  Blocks
 will increment in the same order as plots.  If `zig_zag` is set to TRUE then rows will 
 alternate the direction of plot numbers.
@@ -49,6 +49,6 @@ alternate the direction of plot numbers.
 #         ACC_M   ACC_N   ACC_O   ACC_P   ACC_Q   ACC_R
 #         BLK 1   BLK 1   BLK 1   BLK 2   BLK 2   BLK 2
 accessions <- lapply(LETTERS[c(1:18)], function(x) {Accession(paste0("ACC_", x), "Saccharina latissima")})
-plots <- createPlots(accessions, 6, 3)
+plots <- createPlots("TEST_TRIAL", accessions, max_cols = 6, max_cols_per_block = 3)
 
 }

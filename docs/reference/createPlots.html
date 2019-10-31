@@ -34,7 +34,7 @@
 
 <meta property="og:title" content="Create Plots — createPlots" />
 
-<meta property="og:description" content="Create a set of plots from a list of ordered Accessions and basic layout properties.
+<meta property="og:description" content="Create a set of plots from a list of Accessions (ordered by plot) and basic layout properties.
 The plots will start in the top left corner and move across rows and down columns.  Blocks
 will increment in the same order as plots.  If `zig_zag` is set to TRUE then rows will 
 alternate the direction of plot numbers." />
@@ -108,7 +108,7 @@ alternate the direction of plot numbers." />
 
     <div class="ref-description">
     
-    <p>Create a set of plots from a list of ordered Accessions and basic layout properties.
+    <p>Create a set of plots from a list of Accessions (ordered by plot) and basic layout properties.
 The plots will start in the top left corner and move across rows and down columns.  Blocks
 will increment in the same order as plots.  If `zig_zag` is set to TRUE then rows will 
 alternate the direction of plot numbers.</p>
@@ -124,7 +124,7 @@ alternate the direction of plot numbers.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>trial_name</th>
-      <td><p>The trial name to be used for plot names (trial_name_PLOT#)</p></td>
+      <td><p>The trial name to be used for plot names (TRIAL_PLOT#)</p></td>
     </tr>
     <tr>
       <th>accessions</th>
@@ -132,7 +132,7 @@ alternate the direction of plot numbers.</p>
     </tr>
     <tr>
       <th>max_cols</th>
-      <td><p>The maximum number of columns (plots) in a row</p></td>
+      <td><p>(optional, default = no max) The maximum number of columns (plots) in a row</p></td>
     </tr>
     <tr>
       <th>max_cols_per_block</th>
@@ -174,8 +174,7 @@ alternate the direction of plot numbers.</p>
 <span class='co'>#         ACC_M   ACC_N   ACC_O   ACC_P   ACC_Q   ACC_R</span>
 <span class='co'>#         BLK 1   BLK 1   BLK 1   BLK 2   BLK 2   BLK 2</span>
 <span class='no'>accessions</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>18</span>)], <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='Accession.html'>Accession</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"ACC_"</span>, <span class='no'>x</span>), <span class='st'>"Saccharina latissima"</span>)})
-<span class='no'>plots</span> <span class='kw'>&lt;-</span> <span class='fu'>createPlots</span>(<span class='no'>accessions</span>, <span class='fl'>6</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; [1] "Creating plots in 3 columns and 1 rows"
-#&gt; [1] "...Plot 1: Row 1, Col 1"</div><div class='output co'>#&gt; <span class='error'>Error in validObject(.Object): invalid class “Plot” object: invalid object for slot "accession_name" in class "Plot": got class "numeric", should be or extend class "character"</span></div><div class='input'>
+<span class='no'>plots</span> <span class='kw'>&lt;-</span> <span class='fu'>createPlots</span>(<span class='st'>"TEST_TRIAL"</span>, <span class='no'>accessions</span>, <span class='kw'>max_cols</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>max_cols_per_block</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; [1] "Creating plots in 6 columns and 3 rows"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

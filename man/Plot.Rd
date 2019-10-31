@@ -38,7 +38,7 @@ plot2 <- Plot("FARM-2019-UNH_PLOT2", "SL18-UCONN-S31", 2, 1)
 plot3 <- Plot("FARM-2019-UNH_PLOT3", "SL18-UCONN-S105", 3, 1, list(row_number = 1, col_number = 3))
 plot4 <- Plot("FARM-2019-UNH_PLOT4", "SL18-UCONN-S146", 4, 1, list(row_number = 1, col_number = 4))
 
-# Create plots with treatments
+# Create a plot with an applied treatment
 plot5 <- Plot(
      "FARM-2019-UNH_PLOT5", 
      "SL18-UCONN-S110", 

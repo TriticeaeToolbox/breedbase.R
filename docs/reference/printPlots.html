@@ -34,7 +34,9 @@
 
 <meta property="og:title" content="Print Plots — printPlots" />
 
-<meta property="og:description" content="Print the Plot layout to the console" />
+<meta property="og:description" content="Create a tibble mirroring the plot layout of the provided plots 
+that can be printed to the console or saved to a file in order 
+to inspect the basic plot layout." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,7 +107,9 @@
 
     <div class="ref-description">
     
-    <p>Print the Plot layout to the console</p>
+    <p>Create a tibble mirroring the plot layout of the provided plots 
+that can be printed to the console or saved to a file in order 
+to inspect the basic plot layout.</p>
     
     </div>
 
@@ -121,12 +125,92 @@
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Create 18 Accessions to use in the layout</span>
+<span class='no'>accessions</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>18</span>)], <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='Accession.html'>Accession</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"ACC_"</span>, <span class='no'>x</span>), <span class='st'>"Saccharina latissima"</span>)})
+
+<span class='co'># Create the plots with a layout of 6 columns and a block size of 3 cols by 2 rows</span>
+<span class='no'>plots</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createPlots.html'>createPlots</a></span>(<span class='st'>"TEST_TRIAL"</span>, <span class='no'>accessions</span>,
+     <span class='kw'>max_cols</span> <span class='kw'>=</span> <span class='fl'>6</span>,
+     <span class='kw'>max_cols_per_block</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+     <span class='kw'>max_rows_per_block</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+     <span class='kw'>zig_zag</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+     <span class='kw'>controls</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ACC_D"</span>, <span class='st'>"ACC_P"</span>)
+)</div><div class='output co'>#&gt; [1] "Creating plots in 6 columns and 3 rows"</div><div class='input'>
+<span class='co'># Display the layout</span>
+<span class='fu'>printPlots</span>(<span class='no'>plots</span>)</div><div class='output co'>#&gt;                                     Col1                Col2
+#&gt; ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====
+#&gt; Row1: Plot Name         TEST_TRIAL_PLOT1    TEST_TRIAL_PLOT2
+#&gt; Row1: Accession Name               ACC_A               ACC_B
+#&gt; Row1: Block                            1                   1
+#&gt; Row1: Control                      FALSE               FALSE
+#&gt; ===== Row2 =====     ===== Plot 12 ===== ===== Plot 11 =====
+#&gt; Row2: Plot Name        TEST_TRIAL_PLOT12   TEST_TRIAL_PLOT11
+#&gt; Row2: Accession Name               ACC_L               ACC_K
+#&gt; Row2: Block                            1                   1
+#&gt; Row2: Control                      FALSE               FALSE
+#&gt; ===== Row3 =====     ===== Plot 13 ===== ===== Plot 14 =====
+#&gt; Row3: Plot Name        TEST_TRIAL_PLOT13   TEST_TRIAL_PLOT14
+#&gt; Row3: Accession Name               ACC_M               ACC_N
+#&gt; Row3: Block                            3                   3
+#&gt; Row3: Control                      FALSE               FALSE
+#&gt;                                     Col3                Col4
+#&gt; ===== Row1 =====      ===== Plot 3 =====  ===== Plot 4 =====
+#&gt; Row1: Plot Name         TEST_TRIAL_PLOT3    TEST_TRIAL_PLOT4
+#&gt; Row1: Accession Name               ACC_C               ACC_D
+#&gt; Row1: Block                            1                   2
+#&gt; Row1: Control                      FALSE                TRUE
+#&gt; ===== Row2 =====     ===== Plot 10 =====  ===== Plot 9 =====
+#&gt; Row2: Plot Name        TEST_TRIAL_PLOT10    TEST_TRIAL_PLOT9
+#&gt; Row2: Accession Name               ACC_J               ACC_I
+#&gt; Row2: Block                            1                   2
+#&gt; Row2: Control                      FALSE               FALSE
+#&gt; ===== Row3 =====     ===== Plot 15 ===== ===== Plot 16 =====
+#&gt; Row3: Plot Name        TEST_TRIAL_PLOT15   TEST_TRIAL_PLOT16
+#&gt; Row3: Accession Name               ACC_O               ACC_P
+#&gt; Row3: Block                            3                   4
+#&gt; Row3: Control                      FALSE                TRUE
+#&gt;                                     Col5                Col6
+#&gt; ===== Row1 =====      ===== Plot 5 =====  ===== Plot 6 =====
+#&gt; Row1: Plot Name         TEST_TRIAL_PLOT5    TEST_TRIAL_PLOT6
+#&gt; Row1: Accession Name               ACC_E               ACC_F
+#&gt; Row1: Block                            2                   2
+#&gt; Row1: Control                      FALSE               FALSE
+#&gt; ===== Row2 =====      ===== Plot 8 =====  ===== Plot 7 =====
+#&gt; Row2: Plot Name         TEST_TRIAL_PLOT8    TEST_TRIAL_PLOT7
+#&gt; Row2: Accession Name               ACC_H               ACC_G
+#&gt; Row2: Block                            2                   2
+#&gt; Row2: Control                      FALSE               FALSE
+#&gt; ===== Row3 =====     ===== Plot 17 ===== ===== Plot 18 =====
+#&gt; Row3: Plot Name        TEST_TRIAL_PLOT17   TEST_TRIAL_PLOT18
+#&gt; Row3: Accession Name               ACC_Q               ACC_R
+#&gt; Row3: Block                            4                   4
+#&gt; Row3: Control                      FALSE               FALSE</div><div class='input'># ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====
+# Row1: Plot Name         TEST_TRIAL_PLOT1    TEST_TRIAL_PLOT2    TEST_TRIAL_PLOT3    TEST_TRIAL_PLOT4    TEST_TRIAL_PLOT5    TEST_TRIAL_PLOT6
+# Row1: Accession Name               ACC_A               ACC_B               ACC_C               ACC_D               ACC_E               ACC_F
+# Row1: Block                            1                   1                   1                   2                   2                   2
+# Row1: Control                      FALSE               FALSE               FALSE                TRUE               FALSE               FALSE
+# ===== Row2 =====     ===== Plot 12 ===== ===== Plot 11 ===== ===== Plot 10 =====  ===== Plot 9 =====  ===== Plot 8 =====  ===== Plot 7 =====
+# Row2: Plot Name        TEST_TRIAL_PLOT12   TEST_TRIAL_PLOT11   TEST_TRIAL_PLOT10    TEST_TRIAL_PLOT9    TEST_TRIAL_PLOT8    TEST_TRIAL_PLOT7
+# Row2: Accession Name               ACC_L               ACC_K               ACC_J               ACC_I               ACC_H               ACC_G
+# Row2: Block                            1                   1                   1                   2                   2                   2
+# Row2: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE
+# ===== Row3 =====     ===== Plot 13 ===== ===== Plot 14 ===== ===== Plot 15 ===== ===== Plot 16 ===== ===== Plot 17 ===== ===== Plot 18 =====
+# Row3: Plot Name        TEST_TRIAL_PLOT13   TEST_TRIAL_PLOT14   TEST_TRIAL_PLOT15   TEST_TRIAL_PLOT16   TEST_TRIAL_PLOT17   TEST_TRIAL_PLOT18
+# Row3: Accession Name               ACC_M               ACC_N               ACC_O               ACC_P               ACC_Q               ACC_R
+# Row3: Block                            3                   3                   3                   4                   4                   4
+# Row3: Control                      FALSE               FALSE               FALSE                TRUE               FALSE               FALSE
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

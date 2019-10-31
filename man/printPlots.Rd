@@ -10,5 +10,40 @@ printPlots(plots)
 \item{plots}{The Plots to print}
 }
 \description{
-Print the Plot layout to the console
+Create a tibble mirroring the plot layout of the provided plots 
+that can be printed to the console or saved to a file in order 
+to inspect the basic plot layout.
+}
+\examples{
+# Create 18 Accessions to use in the layout
+accessions <- lapply(LETTERS[c(1:18)], function(x) {Accession(paste0("ACC_", x), "Saccharina latissima")})
+
+# Create the plots with a layout of 6 columns and a block size of 3 cols by 2 rows
+plots <- createPlots("TEST_TRIAL", accessions, 
+     max_cols = 6, 
+     max_cols_per_block = 3, 
+     max_rows_per_block = 2, 
+     zig_zag = TRUE,
+     controls = c("ACC_D", "ACC_P")
+)
+
+# Display the layout
+printPlots(plots)
+# ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====
+# Row1: Plot Name         TEST_TRIAL_PLOT1    TEST_TRIAL_PLOT2    TEST_TRIAL_PLOT3    TEST_TRIAL_PLOT4    TEST_TRIAL_PLOT5    TEST_TRIAL_PLOT6
+# Row1: Accession Name               ACC_A               ACC_B               ACC_C               ACC_D               ACC_E               ACC_F
+# Row1: Block                            1                   1                   1                   2                   2                   2
+# Row1: Control                      FALSE               FALSE               FALSE                TRUE               FALSE               FALSE
+# ===== Row2 =====     ===== Plot 12 ===== ===== Plot 11 ===== ===== Plot 10 =====  ===== Plot 9 =====  ===== Plot 8 =====  ===== Plot 7 =====
+# Row2: Plot Name        TEST_TRIAL_PLOT12   TEST_TRIAL_PLOT11   TEST_TRIAL_PLOT10    TEST_TRIAL_PLOT9    TEST_TRIAL_PLOT8    TEST_TRIAL_PLOT7
+# Row2: Accession Name               ACC_L               ACC_K               ACC_J               ACC_I               ACC_H               ACC_G
+# Row2: Block                            1                   1                   1                   2                   2                   2
+# Row2: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE
+# ===== Row3 =====     ===== Plot 13 ===== ===== Plot 14 ===== ===== Plot 15 ===== ===== Plot 16 ===== ===== Plot 17 ===== ===== Plot 18 =====
+# Row3: Plot Name        TEST_TRIAL_PLOT13   TEST_TRIAL_PLOT14   TEST_TRIAL_PLOT15   TEST_TRIAL_PLOT16   TEST_TRIAL_PLOT17   TEST_TRIAL_PLOT18
+# Row3: Accession Name               ACC_M               ACC_N               ACC_O               ACC_P               ACC_Q               ACC_R
+# Row3: Block                            3                   3                   3                   4                   4                   4
+# Row3: Control                      FALSE               FALSE               FALSE                TRUE               FALSE               FALSE
+
+
 }
