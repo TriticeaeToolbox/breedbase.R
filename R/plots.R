@@ -342,3 +342,125 @@ printPlots <- function(plots) {
     return(rtn)
 
 }
+
+
+#' Build Plot Template
+#' 
+#' Create a \code{tibble} representing the breeDBase upload 
+#' template for the provided plots
+#' 
+#' @param plots Vector of Plots to add to the template
+#' 
+#' @return A \code{tibble} representation of the upload template
+#' 
+#' @import dplyr tibble
+#' @export
+buildPlotTemplate <- function(
+    plots = NULL
+) {
+
+    # Set template headers
+    template <- tibble::tibble(
+        "plot_name" = character(),
+        "accession_name" = character(),
+        "plot_number" = numeric(),
+        "block_number" = numeric(),
+        "is_a_control" = logical(),
+        "rep_number" = numeric(),
+        "range_number" = numeric(),
+        "row_number" = numeric(),
+        "col_number" = numeric(),
+        "seedlot_name" = character(),
+        "num_seed_per_plot" = numeric(),
+        "weight_gram_seed_per_plot" = numeric()
+    )
+
+    # Return blank template if no plots provided
+    if ( is.null(plots) ) {
+        return(template)
+    }
+
+    # Ensure a vector
+    plots <- c(plots)
+
+    # Parse each plot
+    for ( plot in plots ) {
+        row <- tibble::tibble(
+            "plot_name" = plot@plot_name,
+            "accession_name" = plot@accession_name,
+            "plot_number" = plot@plot_number,
+            "block_number" = plot@block_number,
+            "is_a_control" = ifelse(plot@is_a_control, 1, NA),
+            "rep_number" = plot@rep_number,
+            "range_number" = plot@range_number,
+            "row_number" = plot@row_number,
+            "col_number" = plot@col_number,
+            "seedlot_name" = plot@seedlot_name,
+            "num_seed_per_plot" = plot@num_seed_per_plot,
+            "weight_gram_seed_per_plot" = plot@weight_gram_seed_per_plot
+        )
+
+        # Add treatments, if provided
+        for ( treatment in names(plot@treatments) ) {
+            if ( plot@treatments[[treatment]] ) {
+                row[[treatment]] <- 1
+            }
+        }
+
+        template <- dplyr::bind_rows(template, row)
+    }
+
+    # Clean template
+    for ( name in names(template) ) {
+        template[name][which(template[name] == ""),] <- NA
+    }
+
+    # Return the template
+    return(template)
+
+}
+
+
+#' Write Plot Template
+#' 
+#' Write a breeDBase upload template (.xls file) for plots
+#' 
+#' @param input Either a vector of Plots to include in the template OR 
+#' a \code{tibble} representation of the upload template
+#' @param output The file path to the output .xls file
+#' 
+#' @import WriteXLS
+#' @export
+writePlotTemplate <- function(
+    input = NULL,
+    output = NULL
+) {
+
+    # Check for required arguments
+    if ( is.null(input) ) {
+        stop("Cannot write Plot Template file: input of a template as a tibble or vector of plots is required")
+    }
+    if ( is.null(output) ) {
+        stop("Cannot write Plot Template file: output of the file path to the .xls file is required")
+    }
+
+    # Create template if not provided one
+    if ( !("tbl_df" %in% is(input)) ) {
+        input <- buildPlotTemplate(input)
+    }
+
+    # Set output extension
+    if ( !grepl("\\.xls$", output) ) {
+        output <- paste(output, ".xls", sep="")
+    }
+
+    # Write the entire file
+    else {
+        print(sprintf("Writing Plot Template: %s", output))
+        WriteXLS::WriteXLS(input, output)
+    }
+
+}
+
+
+

@@ -43,7 +43,7 @@
 #'      geo$altitude
 #' )
 #' 
-#' @return Accession
+#' @return Location
 #' 
 #' @export
 Location <- function(
@@ -198,7 +198,7 @@ buildLocationTemplate <- function(
         "Altitude" = numeric()
     )
 
-    # Return blank template if no accessions provided
+    # Return blank template if no locations provided
     if ( is.null(locations) ) {
         return(template)
     }

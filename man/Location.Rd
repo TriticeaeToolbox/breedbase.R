@@ -28,7 +28,7 @@ Location(name = NULL, abbreviation = NULL, country_code = NULL,
 \item{altitude}{(optional) Location elevation (meters)}
 }
 \value{
-Accession
+Location
 }
 \description{
 Create a Location containing all of the provided properties. 
