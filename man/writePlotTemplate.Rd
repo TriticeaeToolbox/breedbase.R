@@ -4,15 +4,13 @@
 \alias{writePlotTemplate}
 \title{Write Plot Template}
 \usage{
-writePlotTemplate(input = NULL, output = NULL, chunk = NULL)
+writePlotTemplate(input = NULL, output = NULL)
 }
 \arguments{
 \item{input}{Either a vector of Plots to include in the template OR 
 a \code{tibble} representation of the upload template}
 
 \item{output}{The file path to the output .xls file}
-
-\item{chunk}{Chunk the file into parts with up to `chunk` number of lines per file}
 }
 \description{
 Write a breeDBase upload template (.xls file) for plots

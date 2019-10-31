@@ -65,7 +65,8 @@
 <div id="an-r-package-for-generating-breedbase-upload-templates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#an-r-package-for-generating-breedbase-upload-templates" class="anchor"></a>An R package for generating breeDBase upload templates</h3>
-<p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of breeDBase data types (such as an Accession). One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breeDBase website.</p>
+<p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of various breeDBase data types (such as an Accession, a phenotyping trial Plot, etc).<br>
+One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breeDBase website.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -77,17 +78,19 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>Documentation for all Classes and functions can be found in the package’s R documentation or online at <a href="https://triticeaetoolbox.github.io/breeDBase.R/" class="uri">https://triticeaetoolbox.github.io/breeDBase.R/</a>.</p>
+<p>Documentation for all Classes and functions can be found in the package’s R documentation or online at <a href="https://triticeaetoolbox.github.io/breeDBase.R/reference" class="uri">https://triticeaetoolbox.github.io/breeDBase.R/reference</a>.</p>
 </div>
-<div id="example" class="section level2">
+<div id="examples" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>Create new accessions, a cross pedigree, and the upload templates to add them to a breeDBase instance</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create the Accessions</span>
-jerry &lt;-<span class="st"> </span><span class="kw"><a href="reference/Accession.html">Accession</a></span>(
-     <span class="st">"JERRY"</span>, 
-     <span class="st">"Triticum aestivum"</span>,
-     <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+<a href="#examples" class="anchor"></a>Examples</h2>
+<div id="accessions-and-pedigrees" class="section level4">
+<h4 class="hasAnchor">
+<a href="#accessions-and-pedigrees" class="anchor"></a>Accessions and Pedigrees</h4>
+<p>1) Create new Accessions</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jerry &lt;-<span class="st"> </span><span class="kw"><a href="reference/Accession.html">Accession</a></span>(
+     <span class="dt">accession_name =</span> <span class="st">"JERRY"</span>, 
+     <span class="dt">species_name =</span> <span class="st">"Triticum aestivum"</span>,
+     <span class="dt">properties =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
          <span class="dt">synonyms =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ND9257"</span>, <span class="st">"PI632433"</span>),
          <span class="dt">institute_codes =</span> <span class="st">"NDSU"</span>,
          <span class="dt">organization_names =</span> <span class="st">"North Dakota State University"</span>
@@ -95,9 +98,9 @@ jerry &lt;-<span class="st"> </span><span class="kw"><a href="reference/Accessio
 )
 
 caledonia &lt;-<span class="st"> </span><span class="kw"><a href="reference/Accession.html">Accession</a></span>(
-     <span class="st">"CALEDONIA"</span>, 
-     <span class="st">"Triticum aestivum"</span>,
-     <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+     <span class="dt">accession_name =</span> <span class="st">"CALEDONIA"</span>, 
+     <span class="dt">species_name =</span> <span class="st">"Triticum aestivum"</span>,
+     <span class="dt">properties =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
          <span class="dt">synonyms =</span> <span class="st">"PI610188"</span>,
          <span class="dt">institute_codes =</span> <span class="st">"CNL"</span>,
          <span class="dt">organization_names =</span> <span class="st">"Cornell University"</span>
@@ -105,26 +108,179 @@ caledonia &lt;-<span class="st"> </span><span class="kw"><a href="reference/Acce
 )
 
 my_cross &lt;-<span class="st"> </span><span class="kw"><a href="reference/Accession.html">Accession</a></span>(
-    <span class="st">"MY_CROSS"</span>,
-    <span class="st">"Triticum aestivum"</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-        <span class="dt">institude_codes =</span> <span class="st">"CNL"</span>,
+    <span class="dt">accession_name =</span> <span class="st">"MY_CROSS"</span>,
+    <span class="dt">species_name =</span> <span class="st">"Triticum aestivum"</span>,
+    <span class="dt">properties =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+        <span class="dt">institute_codes =</span> <span class="st">"CNL"</span>,
         <span class="dt">organization_names =</span> <span class="st">"Cornell University"</span>
     )
 )
 
-<span class="co"># Create a vector of accessions</span>
-accessions &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(jerry, caledonia, my_cross)
-
-<span class="co"># Set the pedigree for MY_CROSS</span>
-my_cross_pedigree &lt;-<span class="st"> </span><span class="kw"><a href="reference/Pedigree.html">Pedigree</a></span>(my_cross, jerry, caledonia)
-
-
-<span class="co"># Write the Accession Upload Template to a File</span>
-<span class="kw"><a href="reference/writeAccessionTemplate.html">writeAccessionTemplate</a></span>(accessions, <span class="st">'/path/to/accessions.xls'</span>)
-
-<span class="co"># Write the Pedigree Upload Template to a File</span>
+<span class="co"># Add all accessions to a vector</span>
+accessions &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(jerry, caledonia, my_cross)</code></pre></div>
+<p>2) Create a Pedigree for the <code>MY_CROSS</code> Accession</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_cross_pedigree &lt;-<span class="st"> </span><span class="kw"><a href="reference/Pedigree.html">Pedigree</a></span>(my_cross, <span class="dt">female_parent =</span> jerry, <span class="dt">male_parent =</span> caledonia)</code></pre></div>
+<p>3) Write the Accession and Pedigree upload templates to files</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/writeAccessionTemplate.html">writeAccessionTemplate</a></span>(accessions, <span class="st">'/path/to/accessions.xls'</span>)
 <span class="kw"><a href="reference/writePedigreeTemplate.html">writePedigreeTemplate</a></span>(my_cross_pedigree, <span class="st">"/path/to/pedigrees.txt"</span>)</code></pre></div>
+</div>
+<div id="locations" class="section level4">
+<h4 class="hasAnchor">
+<a href="#locations" class="anchor"></a>Locations</h4>
+<p>Locations are required to have latitude and longitude coordinates as well as their elevation. These can be added manually as parameters or geocoded using the <a href="http://www.datasciencetoolkit.org/">DataScienceToolkit</a> API.</p>
+<ul>
+<li>Add location information directly as parameters, if it is already known</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loc1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Location.html">Location</a></span>(
+    <span class="dt">name =</span> <span class="st">"Batavia, NY"</span>,
+    <span class="dt">abbreviation =</span> <span class="st">"BAT"</span>,
+    <span class="dt">country_code =</span> <span class="st">"USA"</span>,
+    <span class="dt">country_name =</span> <span class="st">"United States of America"</span>,
+    <span class="dt">program =</span> <span class="st">"Cornell"</span>,
+    <span class="dt">type =</span> <span class="st">"Field"</span>,
+    <span class="dt">latitude =</span> <span class="fl">42.98054</span>,
+    <span class="dt">longitude =</span> <span class="op">-</span><span class="fl">78.23176</span>,
+    <span class="dt">altitude =</span> <span class="dv">274</span>
+)</code></pre></div>
+<ul>
+<li>If either the <code>latitude</code>, <code>longitude</code> or <code>altitude</code> parameters are not provided, they will be queried using the <code>name</code> as the location.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loc2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Location.html">Location</a></span>(
+    <span class="dt">name =</span> <span class="st">"Batavia, NY"</span>,
+    <span class="dt">abbreviation =</span> <span class="st">"BAT"</span>,
+    <span class="dt">country_code =</span> <span class="st">"USA"</span>,
+    <span class="dt">country_name =</span> <span class="st">"United States of America"</span>,
+    <span class="dt">program =</span> <span class="st">"Cornell"</span>,
+    <span class="dt">type =</span> <span class="st">"Field"</span>
+)</code></pre></div>
+<ul>
+<li>
+<p>Alternatively, you can query a more specific location string separately and use the results to build the Location</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geo &lt;-<span class="st"> </span><span class="kw"><a href="reference/geocodeLocation.html">geocodeLocation</a></span>(<span class="st">"2 Caldwell Drive, Ithaca, NY"</span>)
+loc3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Location.html">Location</a></span>(
+ <span class="dt">name =</span> <span class="st">"Caldwell - Ithaca, NY"</span>, 
+ <span class="dt">abbreviation =</span> <span class="st">"ITH_CALD"</span>,
+ <span class="dt">country_code =</span> <span class="st">"USA"</span>,
+ <span class="dt">country_name =</span> <span class="st">"United States of America"</span>,
+ <span class="dt">program =</span> <span class="st">"Cornell"</span>,
+ <span class="dt">type =</span> <span class="st">"Field"</span>,
+ <span class="dt">latitude =</span> geo<span class="op">$</span>latitude,
+ <span class="dt">longitude =</span> geo<span class="op">$</span>longitude,
+ <span class="dt">altitude =</span> geo<span class="op">$</span>altitude
+)</code></pre></div>
+</li>
+</ul>
+</div>
+<div id="plots" class="section level4">
+<h4 class="hasAnchor">
+<a href="#plots" class="anchor"></a>Plots</h4>
+<p>A series of Plots are used to describe a phenotyping trial layout. Each plot is assigned a unique name, a plot number, the name of the Accession used in the plot, and the block it is located in. If the physical layout of the plots is known, each Plot can be assigned a row and column number.</p>
+<ul>
+<li>A plot layout can be generated by manually creating each Plot with the desired parameters</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create the Plots</span>
+plot1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Plot.html">Plot</a></span>(
+    <span class="dt">plot_name =</span> <span class="st">"FARM-2019-UNH_PLOT1"</span>, 
+    <span class="dt">accession_name =</span> <span class="st">"SL18-UCONN-S131"</span>, 
+    <span class="dt">plot_number =</span> <span class="dv">1</span>, 
+    <span class="dt">block_number =</span> <span class="dv">1</span>,
+    <span class="dt">properties =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+        <span class="dt">row_numer =</span> <span class="dv">1</span>,
+        <span class="dt">col_number =</span> <span class="dv">1</span>
+    )
+)
+plot1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Plot.html">Plot</a></span>(
+    <span class="dt">plot_name =</span> <span class="st">"FARM-2019-UNH_PLOT2"</span>, 
+    <span class="dt">accession_name =</span> <span class="st">"SL18-UCONN-S31"</span>, 
+    <span class="dt">plot_number =</span> <span class="dv">2</span>, 
+    <span class="dt">block_number =</span> <span class="dv">1</span>,
+    <span class="dt">properties =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+        <span class="dt">row_numer =</span> <span class="dv">1</span>,
+        <span class="dt">col_number =</span> <span class="dv">2</span>
+    )
+)
+
+<span class="co"># Combine the Plots for the layout</span>
+plots &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(plot1, plot2)
+
+<span class="co"># Write the Plot layout template</span>
+<span class="kw">writePlotLayout</span>(plots, <span class="st">"/path/to/plots.xls"</span>)</code></pre></div>
+<ul>
+<li>Alternatively, a simple plot layout can be generated automatically when given a list of Accessions and basic layout properties.</li>
+</ul>
+<p><strong>Example</strong>: A trial with 24 plots that has a maximum of 6 columns. The blocks have a dimension of 3 columns by 2 rows. The Plots will start in the top left corner and work across columns and down rows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Generate the list of Accessions</span>
+<span class="co"># here we're using a dummy list of Accessions named ACC_A - ACC_X</span>
+accessions &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(LETTERS[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>)], <span class="cf">function</span>(x) { <span class="kw"><a href="reference/Accession.html">Accession</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"ACC_"</span>, x), <span class="st">"Saccharina latissima"</span>) })
+   
+<span class="co"># Create the Plots</span>
+plots &lt;-<span class="st"> </span><span class="kw"><a href="reference/createPlots.html">createPlots</a></span>(
+    <span class="dt">trial_name =</span> <span class="st">"TEST-TRIAL"</span>, 
+    <span class="dt">accessions =</span> accessions, 
+    <span class="dt">max_cols =</span> <span class="dv">6</span>, 
+    <span class="dt">max_cols_per_block =</span> <span class="dv">3</span>, 
+    <span class="dt">max_rows_per_block =</span> <span class="dv">2</span>
+)
+  
+<span class="co"># The generated layout:</span>
+<span class="co">#                                     Col1                Col2                Col3                Col4                Col5                Col6</span>
+<span class="co"># ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====</span>
+<span class="co"># Row1: Plot Name         </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT1    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT2    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT3    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT4    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT5    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT6</span>
+<span class="co"># Row1: Accession Name               ACC_A               ACC_B               ACC_C               ACC_D               ACC_E               ACC_F</span>
+<span class="co"># Row1: Block                            1                   1                   1                   2                   2                   2</span>
+<span class="co"># Row1: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE</span>
+<span class="co"># ===== Row2 =====      ===== Plot 7 =====  ===== Plot 8 =====  ===== Plot 9 ===== ===== Plot 10 ===== ===== Plot 11 ===== ===== Plot 12 =====</span>
+<span class="co"># Row2: Plot Name         </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT7    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT8    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT9   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT10   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT11   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT12</span>
+<span class="co"># Row2: Accession Name               ACC_G               ACC_H               ACC_I               ACC_J               ACC_K               ACC_L</span>
+<span class="co"># Row2: Block                            1                   1                   1                   2                   2                   2</span>
+<span class="co"># Row2: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE</span>
+<span class="co"># ===== Row3 =====     ===== Plot 13 ===== ===== Plot 14 ===== ===== Plot 15 ===== ===== Plot 16 ===== ===== Plot 17 ===== ===== Plot 18 =====</span>
+<span class="co"># Row3: Plot Name        </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT13   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT14   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT15   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT16   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT17   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT18</span>
+<span class="co"># Row3: Accession Name               ACC_M               ACC_N               ACC_O               ACC_P               ACC_Q               ACC_R</span>
+<span class="co"># Row3: Block                            3                   3                   3                   4                   4                   4</span>
+<span class="co"># Row3: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE</span>
+<span class="co"># ===== Row4 =====     ===== Plot 19 ===== ===== Plot 20 ===== ===== Plot 21 ===== ===== Plot 22 ===== ===== Plot 23 ===== ===== Plot 24 =====</span>
+<span class="co"># Row4: Plot Name        </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT19   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT20   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT21   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT22   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT23   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT24</span>
+<span class="co"># Row4: Accession Name               ACC_S               ACC_T               ACC_U               ACC_V               ACC_W               ACC_X</span>
+<span class="co"># Row4: Block                            3                   3                   3                   4                   4                   4</span>
+<span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE </span></code></pre></div>
+<p><strong>Example:</strong> The same 24 plots, but the plots are assigned using a zig-zag method (ie left to right in the first row, right to left in the second row, etc). Additionally, the controls are specified using the names of the Accessions used as controls.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Generate the list of Accessions</span>
+accessions &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(LETTERS[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>)], <span class="cf">function</span>(x) { <span class="kw"><a href="reference/Accession.html">Accession</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"ACC_"</span>, x), <span class="st">"Saccharina latissima"</span>) })
+
+<span class="co"># Create the Plots</span>
+plots &lt;-<span class="st"> </span><span class="kw"><a href="reference/createPlots.html">createPlots</a></span>(
+    <span class="dt">trial_name =</span> <span class="st">"TEST-TRIAL"</span>, 
+    <span class="dt">accessions =</span> accessions, 
+    <span class="dt">max_cols =</span> <span class="dv">6</span>, 
+    <span class="dt">max_cols_per_block =</span> <span class="dv">3</span>, 
+    <span class="dt">max_rows_per_block =</span> <span class="dv">2</span>,
+    <span class="dt">zig_zag =</span> <span class="ot">TRUE</span>,
+    <span class="dt">controls =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ACC_D"</span>, <span class="st">"ACC_L"</span>, <span class="st">"ACC_O"</span>, <span class="st">"ACC_T"</span>)
+)
+
+<span class="co"># The generated layout:</span>
+<span class="co"># ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====</span>
+<span class="co"># Row1: Plot Name         </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT1    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT2    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT3    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT4    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT5    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT6</span>
+<span class="co"># Row1: Accession Name               ACC_A               ACC_B               ACC_C               ACC_D               ACC_E               ACC_F</span>
+<span class="co"># Row1: Block                            1                   1                   1                   2                   2                   2</span>
+<span class="co"># Row1: Control                      FALSE               FALSE               FALSE                TRUE               FALSE               FALSE</span>
+<span class="co"># ===== Row2 =====     ===== Plot 12 ===== ===== Plot 11 ===== ===== Plot 10 =====  ===== Plot 9 =====  ===== Plot 8 =====  ===== Plot 7 =====</span>
+<span class="co"># Row2: Plot Name        </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT12   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT11   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT10    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT9    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT8    </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT7</span>
+<span class="co"># Row2: Accession Name               ACC_L               ACC_K               ACC_J               ACC_I               ACC_H               ACC_G</span>
+<span class="co"># Row2: Block                            1                   1                   1                   2                   2                   2</span>
+<span class="co"># Row2: Control                       TRUE               FALSE               FALSE               FALSE               FALSE               FALSE</span>
+<span class="co"># ===== Row3 =====     ===== Plot 13 ===== ===== Plot 14 ===== ===== Plot 15 ===== ===== Plot 16 ===== ===== Plot 17 ===== ===== Plot 18 =====</span>
+<span class="co"># Row3: Plot Name        </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT13   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT14   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT15   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT16   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT17   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT18</span>
+<span class="co"># Row3: Accession Name               ACC_M               ACC_N               ACC_O               ACC_P               ACC_Q               ACC_R</span>
+<span class="co"># Row3: Block                            3                   3                   3                   4                   4                   4</span>
+<span class="co"># Row3: Control                      FALSE               FALSE                TRUE               FALSE               FALSE               FALSE</span>
+<span class="co"># ===== Row4 =====     ===== Plot 24 ===== ===== Plot 23 ===== ===== Plot 22 ===== ===== Plot 21 ===== ===== Plot 20 ===== ===== Plot 19 =====</span>
+<span class="co"># Row4: Plot Name        </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT24   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT23   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT22   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT21   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT20   </span><span class="al">TEST</span><span class="co">-TRIAL_PLOT19</span>
+<span class="co"># Row4: Accession Name               ACC_X               ACC_W               ACC_V               ACC_U               ACC_T               ACC_S</span>
+<span class="co"># Row4: Block                            3                   3                   3                   4                   4                   4</span>
+<span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE                TRUE               FALSE</span></code></pre></div>
+</div>
 </div>
 <div id="current-status" class="section level2">
 <h2 class="hasAnchor">
@@ -132,8 +288,9 @@ my_cross_pedigree &lt;-<span class="st"> </span><span class="kw"><a href="refere
 <p>The package currently contains functions for the following data types:</p>
 <ul>
 <li>Accession</li>
-<li>Location</li>
 <li>Pedigree</li>
+<li>Location</li>
+<li>Plot</li>
 </ul>
 </div>
 </div>
