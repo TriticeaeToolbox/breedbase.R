@@ -139,14 +139,24 @@ Location <- function(
 geocodeLocation <- function(location) {
     
     # Encode location for URL
-    location <- utils::URLencode(location)
+    encoded <- utils::URLencode(location)
 
     # Make API Request
-    url <- paste(DSTK_API_COORDS, location, sep="/")
+    url <- paste(DSTK_API_COORDS, encoded, sep="/")
     body <- api(url)
+    values <- body[[names(body)[[1]]]]
+
+    # Location could NOT be geocoded!
+    if ( is.null(values) ) {
+        print(sprintf("ERROR: Could not geocode location [%s]!", location))
+        return(list(
+            latitude = 0,
+            longitude = 0,
+            altitude = 0
+        ))
+    }
 
     # Format return
-    values <- body[[names(body)[[1]]]]
     rtn <- list(
         latitude = values$latitude,
         longitude = values$longitude

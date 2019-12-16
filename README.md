@@ -2,11 +2,10 @@ breeDBase.R
 ===========
 ### An R package for generating breeDBase upload templates
 
-This R package (**currently a work in progress**) can be used to create classes of 
-various breeDBase data types (such as an Accession, a phenotyping trial Plot, etc).  
-One or more instances of a class can be passed to a `buildTemplate` or `writeTemplate` 
-function to create and/or write an upload template to be used for adding data through 
-the breeDBase website.
+This R package (**currently a work in progress**) can be used to create classes of various breeDBase 
+data types (such as an Accession, a phenotyping trial Plot, etc).  One or more instances of a class 
+can be passed to a `buildTemplate` or `writeTemplate` function to create and/or write an upload template 
+to be used for adding data through the breeDBase website.
 
 
 ## Installation
@@ -158,7 +157,7 @@ plot1 <- Plot(
         col_number = 1
     )
 )
-plot1 <- Plot(
+plot2 <- Plot(
     plot_name = "FARM-2019-UNH_PLOT2", 
     accession_name = "SL18-UCONN-S31", 
     plot_number = 2, 
