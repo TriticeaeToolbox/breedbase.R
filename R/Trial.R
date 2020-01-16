@@ -17,6 +17,7 @@
 #' @slot field_size (optional) The field size in hectares
 #' @slot planting_date (optional) The date of planting in YYYY-MM-DD format
 #' @slot harvest_date (optional) The date of harvest in YYYY-MM-DD format
+#' @slot plots (optional) A vector of Plots that are used in the trial
 #' 
 #' @importFrom methods is new slot<-
 #' @export
@@ -35,7 +36,8 @@ setClass(
         plot_length = "numeric",
         field_size = "numeric",
         planting_date = "character",
-        harvest_date = "character"
+        harvest_date = "character",
+        plots = "vector"
     ),
 
     prototype = list(
@@ -50,7 +52,8 @@ setClass(
         plot_length = NA_real_,
         field_size = NA_real_,
         planting_date = NA_character_,
-        harvest_date = NA_character_
+        harvest_date = NA_character_,
+        plots = vector()
     ),
 
     validity = function(object) {
@@ -96,6 +99,13 @@ setClass(
         }
         if ( !is.na(object@harvest_date) && !grepl("^[0-9]{4}-[0-9]{2}-[0-9]{2}$", object@harvest_date) ) {
             return("Invalid harvest date. Required format: YYYY-MM-DD")
+        }
+        if ( !is.na(object@plots) ) {
+            for ( p in plots ) {
+                if ( !is(p, "Plot") ) {
+                    return("All items in the list of plots must be an object of Class Plot")
+                }
+            }
         }
 
         # Passed Validation

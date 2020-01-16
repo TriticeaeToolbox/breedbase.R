@@ -37,5 +37,7 @@ The `trial_name`, `breeding_program`, `location`, `year`, `design_type`, and
 \item{\code{planting_date}}{(optional) The date of planting in YYYY-MM-DD format}
 
 \item{\code{harvest_date}}{(optional) The date of harvest in YYYY-MM-DD format}
+
+\item{\code{plots}}{(optional) A vector of Plots that are used in the trial}
 }}
 
