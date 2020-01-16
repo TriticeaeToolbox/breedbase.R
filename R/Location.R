@@ -71,10 +71,13 @@ setClass(
         }
 
         if ( !(object@country_code %in% COUNTRY_CODES) ) {
-            return("Country code is not recognized")
+            return("Country code is not recognized - must be an ISO Alpha-3 country code.")
         }
         if ( !(object@type %in% LOCATION_TYPES) ) {
-            return("Location type is not recognized")
+            return(paste0(
+                "Location type is not recognized. Supported Location types: ",
+                paste(LOCATION_TYPES, collapse=", ")
+            ))
         }
 
         return(TRUE)
