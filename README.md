@@ -340,6 +340,10 @@ plots <- createPlots(
 # Row4: Control                      FALSE               FALSE               FALSE               FALSE                TRUE               FALSE
 ```
 
+**Creating Plot Templates:** Once you have a vector of `Plot`s for a single trial, a plot upload template can be 
+created.  This upload template can be used to create a single Trial from the **Manage Trials** page ('Upload Existing 
+Trial(s)' > 'Single Trial Design').  Here you will enter the Trial metadata in a form and upload this template for the 
+trial's plot layout.
 
 
 ## Current Status
