@@ -3,9 +3,9 @@ breeDBase.R
 ### An R package for generating breeDBase upload templates
 
 This R package (**currently a work in progress**) can be used to create classes of various breeDBase 
-data types (such as an Accession, a phenotyping trial Plot, etc).  One or more instances of a class 
-can be passed to a `buildTemplate` or `writeTemplate` function to create and/or write an upload template 
-to be used for adding data through the breeDBase website.
+data types (such as an Accession, a phenotyping Trial, a Plot of a phenotyping Trial, etc).  One or 
+more instances of a class can be passed to a `buildTemplate` or `writeTemplate` function to create 
+and/or write an upload template to be used for adding data through the breeDBase website.
 
 
 ## Installation
@@ -15,6 +15,7 @@ Currently, the breedbase package can be installed directly from GitHub using `de
 ```R
 library(devtools)
 install_github("TriticeaeToolbox/breeDBase.R")
+library(breedbase)
 ```
 
 
@@ -27,9 +28,17 @@ or online at [https://triticeaetoolbox.github.io/breeDBase.R/reference](https://
 ## Examples
 
 
-#### Accessions and Pedigrees
+### Accessions and Pedigrees
 
-1) Create new Accessions
+#### Accessions
+
+The `Accession` Class holds all of the information about a single Accession.  The `Accession()` function 
+can be used to create an instance of the `Accession` Class.  The `accession_name` and `species_name` and 
+required parameters.  Additional optional parameters can be provided through a named list passed to the 
+`properties` parameter.  For a list of all of the supported optional parameters, see the 
+[Accession Class Documentation](https://triticeaetoolbox.github.io/breeDBase.R/reference/Accession-class.html)
+
+**Example:** Create new Accessions with some optional properties
 
 ```R
 jerry <- Accession(
@@ -65,15 +74,24 @@ my_cross <- Accession(
 accessions <- c(jerry, caledonia, my_cross)
 ```
 
+#### Pedigrees
 
-2) Create a Pedigree for the `MY_CROSS` Accession
+The `Pedigree()` function can be used to create an object of the `Pedigree` Class which sets the parents (and 
+optionally the cross type) of a single Accession.
+
+**Example:** Create a `Pedigree` object that sets the parents of the `my_cross` Accession as `jerry` and `caledonia`.
 
 ```R
 my_cross_pedigree <- Pedigree(my_cross, female_parent = jerry, male_parent = caledonia)
 ```
 
+#### Creating Upload Templates
 
-3) Write the Accession and Pedigree upload templates to files
+Once you have one or more objects of a particular Class (such as a vector of `Accession`s or a `Pedigree`) you can 
+create the create the upload templates used to add that particular data type to a breeDBase database through 
+its website.
+
+**Example:** Create an upload template for the 3 Accessions and 1 Pedigree.
 
 ```R
 writeAccessionTemplate(accessions, '/path/to/accessions.xls')
@@ -81,9 +99,9 @@ writePedigreeTemplate(my_cross_pedigree, "/path/to/pedigrees.txt")
 ```
 
 
-#### Locations
+### Locations
 
-Locations are required to have latitude and longitude coordinates as well as their elevation. 
+Locations are required to have latitude and longitude coordinates as well as their altitude/elevation. 
 These can be added manually as parameters or geocoded using the 
 [DataScienceToolkit](http://www.datasciencetoolkit.org/) API.
 
@@ -136,7 +154,7 @@ loc3 <- Location(
 ```
 
 
-#### Plots
+### Plots
 
 A series of Plots are used to describe a phenotyping trial layout.  Each plot is assigned 
 a unique name, a plot number, the name of the Accession used in the plot, and the block 
