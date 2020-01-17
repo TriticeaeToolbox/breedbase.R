@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4</span>
       </span>
     </div>
 
@@ -65,15 +65,15 @@
 <div id="an-r-package-for-generating-breedbase-upload-templates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#an-r-package-for-generating-breedbase-upload-templates" class="anchor"></a>An R package for generating breeDBase upload templates</h3>
-<p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of various breeDBase data types (such as an Accession, a phenotyping trial Plot, etc).<br>
-One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breeDBase website.</p>
+<p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of various breeDBase data types (such as an Accession, a phenotyping Trial, a Plot of a phenotyping Trial, etc). One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breeDBase website.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Currently, the breedbase package can be installed directly from GitHub using <code>devtools</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(devtools)
-<span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"TriticeaeToolbox/breeDBase.R"</span>)</code></pre></div>
+<span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"TriticeaeToolbox/breeDBase.R"</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(breedbase)</code></pre></div>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -83,10 +83,14 @@ One or more instances of a class can be passed to a <code>buildTemplate</code> o
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<div id="accessions-and-pedigrees" class="section level4">
+<div id="accessions-and-pedigrees" class="section level3">
+<h3 class="hasAnchor">
+<a href="#accessions-and-pedigrees" class="anchor"></a>Accessions and Pedigrees</h3>
+<div id="accessions" class="section level4">
 <h4 class="hasAnchor">
-<a href="#accessions-and-pedigrees" class="anchor"></a>Accessions and Pedigrees</h4>
-<p>1) Create new Accessions</p>
+<a href="#accessions" class="anchor"></a>Accessions</h4>
+<p>The <code>Accession</code> Class holds all of the information about a single Accession. The <code><a href="reference/Accession.html">Accession()</a></code> function can be used to create an instance of the <code>Accession</code> Class. The <code>accession_name</code> and <code>species_name</code> and required parameters. Additional optional parameters can be provided through a named list passed to the <code>properties</code> parameter. For a list of all of the supported optional parameters, see the <a href="https://triticeaetoolbox.github.io/breeDBase.R/reference/Accession-class.html">Accession Class Documentation</a></p>
+<p><strong>Example:</strong> Create new Accessions with some optional properties</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jerry &lt;-<span class="st"> </span><span class="kw"><a href="reference/Accession.html">Accession</a></span>(
      <span class="dt">accession_name =</span> <span class="st">"JERRY"</span>, 
      <span class="dt">species_name =</span> <span class="st">"Triticum aestivum"</span>,
@@ -118,16 +122,27 @@ my_cross &lt;-<span class="st"> </span><span class="kw"><a href="reference/Acces
 
 <span class="co"># Add all accessions to a vector</span>
 accessions &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(jerry, caledonia, my_cross)</code></pre></div>
-<p>2) Create a Pedigree for the <code>MY_CROSS</code> Accession</p>
+</div>
+<div id="pedigrees" class="section level4">
+<h4 class="hasAnchor">
+<a href="#pedigrees" class="anchor"></a>Pedigrees</h4>
+<p>The <code><a href="reference/Pedigree.html">Pedigree()</a></code> function can be used to create an object of the <code>Pedigree</code> Class which sets the parents (and optionally the cross type) of a single Accession.</p>
+<p><strong>Example:</strong> Create a <code>Pedigree</code> object that sets the parents of the <code>my_cross</code> Accession as <code>jerry</code> and <code>caledonia</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_cross_pedigree &lt;-<span class="st"> </span><span class="kw"><a href="reference/Pedigree.html">Pedigree</a></span>(my_cross, <span class="dt">female_parent =</span> jerry, <span class="dt">male_parent =</span> caledonia)</code></pre></div>
-<p>3) Write the Accession and Pedigree upload templates to files</p>
+</div>
+<div id="creating-upload-templates" class="section level4">
+<h4 class="hasAnchor">
+<a href="#creating-upload-templates" class="anchor"></a>Creating Upload Templates</h4>
+<p>Once you have one or more objects of a particular Class (such as a vector of <code>Accession</code>s or a <code>Pedigree</code>) you can create the create the upload templates used to add that particular data type to a breeDBase database through its website.</p>
+<p><strong>Example:</strong> Create an upload template for the 3 Accessions and 1 Pedigree.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/writeAccessionTemplate.html">writeAccessionTemplate</a></span>(accessions, <span class="st">'/path/to/accessions.xls'</span>)
 <span class="kw"><a href="reference/writePedigreeTemplate.html">writePedigreeTemplate</a></span>(my_cross_pedigree, <span class="st">"/path/to/pedigrees.txt"</span>)</code></pre></div>
 </div>
-<div id="locations" class="section level4">
-<h4 class="hasAnchor">
-<a href="#locations" class="anchor"></a>Locations</h4>
-<p>Locations are required to have latitude and longitude coordinates as well as their elevation. These can be added manually as parameters or geocoded using the <a href="http://www.datasciencetoolkit.org/">DataScienceToolkit</a> API.</p>
+</div>
+<div id="locations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#locations" class="anchor"></a>Locations</h3>
+<p>Locations are required to have latitude and longitude coordinates as well as their altitude/elevation. These can be added manually as parameters or geocoded using the <a href="http://www.datasciencetoolkit.org/">DataScienceToolkit</a> API.</p>
 <ul>
 <li>Add location information directly as parameters, if it is already known</li>
 </ul>
@@ -169,9 +184,41 @@ loc3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Location.
      <span class="dt">altitude =</span> geo<span class="op">$</span>altitude
 )</code></pre></div>
 </div>
-<div id="plots" class="section level4">
-<h4 class="hasAnchor">
-<a href="#plots" class="anchor"></a>Plots</h4>
+<div id="trials" class="section level3">
+<h3 class="hasAnchor">
+<a href="#trials" class="anchor"></a>Trials</h3>
+<p>A <code>Trial</code> includes the metadata about a single phenotyping trial as well as information about the individual plots in the trial (see the <a href="#plots">Plots</a> section below). A trial is assigned a unique name, associated with a breeding program, year and location, and includes the trial design type and a description. Additional information can include the field and plot sizes, planting and harvest dates, and type of trial (greenhouse, phenotyping, advanced yield, etc).</p>
+<p>A <code>Trial</code> object can be created without its plot information (it just contains metadata about the trial). However, the plot information must be added to the <code>Trial</code> before a trial upload template can be created.</p>
+<p><strong>Example:</strong> Create a Trial with just the required parameters</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trial_mad &lt;-<span class="st"> </span><span class="kw"><a href="reference/Trial.html">Trial</a></span>(
+    <span class="dt">trial_name =</span> <span class="st">"UMOPN_2019_Madison"</span>, 
+    <span class="dt">breeding_program =</span> <span class="st">"University of Wisconsin"</span>, 
+    <span class="dt">location =</span> <span class="st">"Madison, WI"</span>, 
+    <span class="dt">year =</span> <span class="dv">2019</span>, 
+    <span class="dt">design_type =</span> <span class="st">"RCBD"</span>, 
+    <span class="dt">description =</span> <span class="st">"UMOPN Nursery Trial"</span>
+)</code></pre></div>
+<p><strong>Example:</strong> Create a Trial with optional parameters</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">planting_date =</span> <span class="st">"2019-04-25"</span>, <span class="dt">harvest_date =</span> <span class="st">"2019-10-05"</span>, <span class="dt">trial_type =</span> <span class="st">"phenotyping_trial"</span>)
+trial_arl &lt;-<span class="st"> </span><span class="kw"><a href="reference/Trial.html">Trial</a></span>(
+    <span class="dt">trial_name =</span> <span class="st">"UMOPN_2019_Arlington"</span>, 
+    <span class="dt">breeding_program =</span> <span class="st">"University of Wisconsin"</span>, 
+    <span class="dt">location =</span> <span class="st">"Arlington, WI"</span>, 
+    <span class="dt">year =</span> <span class="dv">2019</span>, 
+    <span class="dt">design_type =</span> <span class="st">"RCBD"</span>, 
+    <span class="dt">description =</span> <span class="st">"UMOPN Nursery Trial"</span>, 
+    <span class="dt">properties =</span> opts
+) </code></pre></div>
+<p>See the <a href="https://triticeaetoolbox.github.io/breeDBase.R/reference/Trial-class.html">Trial Class Documentation</a> for more information on the optional parameters.</p>
+<p><strong>Adding Plots:</strong> Once the <code>Plot</code>s for the trial have been created, they can be added to the <code>Trial</code> with the <code><a href="reference/setTrialPlots.html">setTrialPlots()</a></code> function. See the <a href="#plots">Plots section below</a> for more information on creating Trial Plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trial_mad &lt;-<span class="st"> </span><span class="kw"><a href="reference/setTrialPlots.html">setTrialPlots</a></span>(trial_mad, plots_mad)
+trial_arl &lt;-<span class="st"> </span><span class="kw"><a href="reference/setTrialPlots.html">setTrialPlots</a></span>(trial_arl, plots_arl)</code></pre></div>
+<p><strong>Creating Trial Templates:</strong> Once you have one or more <code>Trial</code>s (that have <code>Plots</code> set), you can create a trial upload template that can be submitted to a breeDBase website from the <strong>Manage Trials</strong> page (‘Upload Existing Trials’ &gt; ‘Multiple Trial Designs’).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/writeTrialTemplate.html">writeTrialTemplate</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(trial_mad, trial_arl), <span class="st">'/path/to/trials.xls'</span>)</code></pre></div>
+</div>
+<div id="plots" class="section level3">
+<h3 class="hasAnchor">
+<a href="#plots" class="anchor"></a>Plots</h3>
 <p>A series of Plots are used to describe a phenotyping trial layout. Each plot is assigned a unique name, a plot number, the name of the Accession used in the plot, and the block it is located in. If the physical layout of the plots is known, each Plot can be assigned a row and column number.</p>
 <ul>
 <li>A plot layout can be generated by manually creating each Plot with the desired parameters</li>
@@ -184,17 +231,19 @@ plot1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Plot.htm
     <span class="dt">block_number =</span> <span class="dv">1</span>,
     <span class="dt">properties =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
         <span class="dt">row_numer =</span> <span class="dv">1</span>,
-        <span class="dt">col_number =</span> <span class="dv">1</span>
+        <span class="dt">col_number =</span> <span class="dv">1</span>,
+        <span class="dt">rep_number =</span> <span class="dv">1</span>
     )
 )
-plot1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Plot.html">Plot</a></span>(
+plot2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/Plot.html">Plot</a></span>(
     <span class="dt">plot_name =</span> <span class="st">"FARM-2019-UNH_PLOT2"</span>, 
     <span class="dt">accession_name =</span> <span class="st">"SL18-UCONN-S31"</span>, 
     <span class="dt">plot_number =</span> <span class="dv">2</span>, 
     <span class="dt">block_number =</span> <span class="dv">1</span>,
     <span class="dt">properties =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
         <span class="dt">row_numer =</span> <span class="dv">1</span>,
-        <span class="dt">col_number =</span> <span class="dv">2</span>
+        <span class="dt">col_number =</span> <span class="dv">2</span>,
+        <span class="dt">rep_number =</span> <span class="dv">1</span>
     )
 )
 
@@ -288,6 +337,7 @@ plots &lt;-<span class="st"> </span><span class="kw"><a href="reference/createPl
 <li>Accession</li>
 <li>Pedigree</li>
 <li>Location</li>
+<li>Trial</li>
 <li>Plot</li>
 </ul>
 </div>

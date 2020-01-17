@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write Plot Template — writePlotTemplate • breedbase</title>
+<title>Trial Class — Trial-class • breedbase</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Write Plot Template — writePlotTemplate" />
+<meta property="og:title" content="Trial Class — Trial-class" />
 
-<meta property="og:description" content="Write a breeDBase upload template (.xls file) for plots" />
+<meta property="og:description" content="An S4 Class to represent a breeDBase phenotyping trial" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -98,40 +98,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write Plot Template</h1>
+    <h1>Trial Class</h1>
     
-    <div class="hidden name"><code>writePlotTemplate.Rd</code></div>
+    <div class="hidden name"><code>Trial-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Write a breeDBase upload template (.xls file) for plots</p>
+    <p>An S4 Class to represent a breeDBase phenotyping trial</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>writePlotTemplate</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The `trial_name`, `breeding_program`, `location`, `year`, `design_type`, and 
+`description` are all required, all other fields are optional.</p>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>input</th>
-      <td><p>Either a vector of Plots to include in the template OR 
-a <code>tibble</code> representation of the upload template</p></td>
-    </tr>
-    <tr>
-      <th>output</th>
-      <td><p>The file path to the output .xls file</p></td>
-    </tr>
-    </table>
+    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+
+    
+
+<dl class='dl-horizontal'>
+<dt><code>trial_name</code></dt><dd><p>A name for the trial (must be unique across the entire database)</p></dd>
+
+<dt><code>breeding_program</code></dt><dd><p>The name of the breeding program that managed the trial (must exist in database)</p></dd>
+
+<dt><code>location</code></dt><dd><p>The name of the location where the trial was held (must exist in database)</p></dd>
+
+<dt><code>year</code></dt><dd><p>The year the trial was held</p></dd>
+
+<dt><code>design_type</code></dt><dd><p>The shorthand for the design type (CRD, RCBD, Alpha, Augmented, MAD, Westcott, Lattice)</p></dd>
+
+<dt><code>description</code></dt><dd><p>Additional text with any other relevant information about the trial</p></dd>
+
+<dt><code>trial_type</code></dt><dd><p>(optional) The name of the trial type (must exist in the database)</p></dd>
+
+<dt><code>plot_width</code></dt><dd><p>(optional) The plot width in meters</p></dd>
+
+<dt><code>plot_length</code></dt><dd><p>(optional) The plot length in meters</p></dd>
+
+<dt><code>field_size</code></dt><dd><p>(optional) The field size in hectares</p></dd>
+
+<dt><code>planting_date</code></dt><dd><p>(optional) The date of planting in YYYY-MM-DD format</p></dd>
+
+<dt><code>harvest_date</code></dt><dd><p>(optional) The date of harvest in YYYY-MM-DD format</p></dd>
+
+<dt><code>plots</code></dt><dd><p>(optional) A vector of Plots that are used in the trial</p></dd>
+
+</dl>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#slots">Slots</a></li>
+          </ul>
 
   </div>
 </div>

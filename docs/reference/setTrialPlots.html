@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write Plot Template — writePlotTemplate • breedbase</title>
+<title>Set Trial Plots — setTrialPlots • breedbase</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Write Plot Template — writePlotTemplate" />
+<meta property="og:title" content="Set Trial Plots — setTrialPlots" />
 
-<meta property="og:description" content="Write a breeDBase upload template (.xls file) for plots" />
+<meta property="og:description" content="Set the provided vector of Plots as the `plots` property 
+of the provided Trial" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -98,32 +99,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write Plot Template</h1>
+    <h1>Set Trial Plots</h1>
     
-    <div class="hidden name"><code>writePlotTemplate.Rd</code></div>
+    <div class="hidden name"><code>setTrialPlots.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Write a breeDBase upload template (.xls file) for plots</p>
+    <p>Set the provided vector of Plots as the `plots` property 
+of the provided Trial</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>writePlotTemplate</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>setTrialPlots</span>(<span class='kw'>trial</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>plots</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>Either a vector of Plots to include in the template OR 
-a <code>tibble</code> representation of the upload template</p></td>
+      <th>trial</th>
+      <td><p>A Trial to add the plots to</p></td>
     </tr>
     <tr>
-      <th>output</th>
-      <td><p>The file path to the output .xls file</p></td>
+      <th>plots</th>
+      <td><p>A vector of Plots to add to the Trial</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Trial</p>
     
 
   </div>
@@ -131,7 +136,9 @@ a <code>tibble</code> representation of the upload template</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
