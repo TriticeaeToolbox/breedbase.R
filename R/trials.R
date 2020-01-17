@@ -64,15 +64,16 @@ Trial <- function(
         location = location,
         year = year,
         design_type = design_type,
-        description = description
+        description = description,
+        trial_type = if(is.null(properties$trial_type)) NA_character_ else properties$trial_type,
+        plot_width = if(is.null(properties$plot_width)) NA_real_ else properties$plot_width,
+        plot_length = if(is.null(properties$plot_length)) NA_real_ else properties$plot_length,
+        field_size = if(is.null(properties$field_size)) NA_real_ else properties$field_size,
+        planting_date = if(is.null(properties$planting_date)) NA_character_ else properties$planting_date,
+        harvest_date = if(is.null(properties$harvest_date)) NA_character_ else properties$harvest_date,
+        plots = if(is.null(properties$plots)) vector() else properties$plots
     )
-
-    # Add optional properties
-    for ( name in names(properties) ) {
-        value <- unname(properties[name])[[1]]
-        slot(trial, name) <- value
-    }
-
+    
     # Return the Trial
     return(trial)
 

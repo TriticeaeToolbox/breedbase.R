@@ -42,14 +42,36 @@ Accession <- function(
     accession <- new(
         "Accession",
         accession_name = accession_name,
-        species_name = species_name
+        species_name = species_name,
+        population_name = if(is.null(properties$population_name)) NA_character_ else properties$population_name,
+        organization_names = if(is.null(properties$organization_names)) vector() else properties$organization_names,
+        synonyms = if(is.null(properties$synonyms)) vector() else properties$synonyms,
+        location_codes = if(is.null(properties$location_codes)) vector() else properties$location_codes,
+        ploidy_levels = if(is.null(properties$ploidy_levels)) vector() else properties$ploidy_levels,
+        genome_structures = if(is.null(properties$genome_structures)) vector() else properties$genome_structures,
+        varietys = if(is.null(properties$varietys)) vector() else properties$varietys,
+        donors = if(is.null(properties$donors)) vector() else properties$donors,
+        donor_institutes = if(is.null(properties$donor_institutes)) vector() else properties$donor_institutes,
+        donor_PUIs = if(is.null(properties$donor_PUIs)) vector() else properties$donor_PUIs,
+        country_of_origins = if(is.null(properties$country_of_origins)) vector() else properties$country_of_origins,
+        states = if(is.null(properties$states)) vector() else properties$states,
+        institute_codes = if(is.null(properties$institute_codes)) vector() else properties$institute_codes,
+        institute_names = if(is.null(properties$institute_names)) vector() else properties$institute_names,
+        biological_status_of_accession_codes = if(is.null(properties$biological_status_of_accession_codes)) vector() else properties$biological_status_of_accession_codes,
+        notes = if(is.null(properties$notes)) vector() else properties$notes,
+        accession_numbers = if(is.null(properties$accession_numbers)) vector() else properties$accession_numbers,
+        PUIs = if(is.null(properties$PUIs)) vector() else properties$PUIs,
+        seed_sources = if(is.null(properties$seed_sources)) vector() else properties$seed_sources,
+        type_of_germplasm_storage_codes = if(is.null(properties$type_of_germplasm_storage_codes)) vector() else properties$type_of_germplasm_storage_codes,
+        acquisition_dates = if(is.null(properties$acquisition_dates)) vector() else properties$acquisition_dates,
+        transgenic = if(is.null(properties$transgenic)) NA_integer_ else properties$transgenic,
+        introgression_parent = if(is.null(properties$introgression_parent)) NA_character_ else properties$introgression_parent,
+        introgression_backcross_parent = if(is.null(properties$introgression_backcross_parent)) NA_character_ else properties$introgression_backcross_parent,
+        introgression_map_version = if(is.null(properties$introgression_map_version)) NA_character_ else properties$introgression_map_version,
+        introgression_chromosome = if(is.null(properties$introgression_chromosome)) NA_character_ else properties$introgression_chromosome,
+        introgression_start_position_bp = if(is.null(properties$introgression_start_position_bp)) NA_real_ else properties$introgression_start_position_bp,
+        introgression_end_position_bp = if(is.null(properties$introgression_end_position_bp)) NA_real_ else properties$introgression_end_position_bp
     )
-
-    # Add optional properties
-    for ( name in names(properties) ) {
-        value <- unname(properties[name])[[1]]
-        slot(accession, name) <- value
-    }
 
     # Return the Accession
     return(accession)

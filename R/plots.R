@@ -68,14 +68,17 @@ Plot <- function(
         plot_name = plot_name,
         accession_name = accession_name,
         plot_number = plot_number,
-        block_number = block_number
+        block_number = block_number,
+        is_a_control = if(is.null(properties$is_a_control)) FALSE else properties$is_a_control,
+        rep_number = if(is.null(properties$rep_number)) NA_integer_ else properties$rep_number,
+        range_number = if(is.null(properties$range_number)) NA_integer_ else properties$range_number,
+        row_number = if(is.null(properties$row_number)) NA_integer_ else properties$row_number,
+        col_number = if(is.null(properties$col_number)) NA_integer_ else properties$col_number,
+        seedlot_name = if(is.null(properties$seedlot_name)) NA_character_ else properties$seedlot_name,
+        num_seed_per_plot = if(is.null(properties$num_seed_per_plot)) NA_real_ else properties$num_seed_per_plot,
+        weight_gram_seed_per_plot = if(is.null(properties$weight_gram_seed_per_plot)) NA_real_ else properties$weight_gram_seed_per_plot,
+        treatments = if(is.null(properties$treatments)) list() else properties$treatments
     )
-
-    # Add optional properties
-    for ( name in names(properties) ) {
-        value <- unname(properties[name])[[1]]
-        slot(plot, name) <- value
-    }
 
     # Return the Plot
     return(plot)
