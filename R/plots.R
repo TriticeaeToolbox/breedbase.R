@@ -93,7 +93,7 @@ Plot <- function(
 #' will increment in the same order as plots.  If `zig_zag` is set to TRUE then rows will 
 #' alternate the direction of plot numbers.
 #' 
-#' @param trial_name The trial name to be used for plot names (TRIAL_PLOT#)
+#' @param trial_name The trial name or Trial to be used for plot names (TRIAL_PLOT#)
 #' @param accessions List of Accessions or Accession names in plot order (moving across rows)
 #' @param max_cols (optional, default = no max) The maximum number of columns (plots) in a row
 #' @param max_cols_per_block (optional, default = no max) The maximum number of columns in a block
@@ -145,6 +145,11 @@ createPlots <- function(
     }
     if ( is.null(max_cols_per_block) ) {
         max_cols_per_block <- max_cols
+    }
+
+    # Set trial name from Trial
+    if ( is(trial_name, "Trial") ) {
+        trial_name <- trial_name@trial_name
     }
 
     # Calculate number of rows

@@ -9,7 +9,7 @@ createPlots(trial_name = NULL, accessions = NULL, max_cols = NULL,
   zig_zag = FALSE, controls = c())
 }
 \arguments{
-\item{trial_name}{The trial name to be used for plot names (TRIAL_PLOT#)}
+\item{trial_name}{The trial name or Trial to be used for plot names (TRIAL_PLOT#)}
 
 \item{accessions}{List of Accessions or Accession names in plot order (moving across rows)}
 
