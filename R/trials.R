@@ -236,3 +236,46 @@ buildTrialTemplate <- function(
     return(template)
 
 }
+
+
+#' Write Trial Template
+#' 
+#' Write a breeDBase upload template (.xls file) for trials
+#' 
+#' @param input Either a vector of Trials to include in the template OR 
+#' a \code{tibble} representation of the upload template
+#' @param output The file path to the output .xls file
+#' 
+#' @import WriteXLS
+#' @export
+writeTrialTemplate <- function(
+    input = NULL,
+    output = NULL
+) {
+
+    # Check for required arguments
+    if ( is.null(input) ) {
+        stop("Cannot write Trial Template file: input of a template as a tibble or vector of trials is required")
+    }
+    if ( is.null(output) ) {
+        stop("Cannot write Trial Template file: output of the file path to the .xls file is required")
+    }
+
+    # Create template if not provided one
+    if ( !("tbl_df" %in% is(input)) ) {
+        input <- buildTrialTemplate(input)
+    }
+
+    # Set output extension
+    if ( !grepl("\\.xls$", output) ) {
+        output <- paste(output, ".xls", sep="")
+    }
+
+    # Write the entire file
+    else {
+        print(sprintf("Writing Trial Template: %s", output))
+        WriteXLS::WriteXLS(input, output)
+    }
+
+}
+
