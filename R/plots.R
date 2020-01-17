@@ -98,6 +98,8 @@ Plot <- function(
 #' @param max_cols (optional, default = no max) The maximum number of columns (plots) in a row
 #' @param max_cols_per_block (optional, default = no max) The maximum number of columns in a block
 #' @param max_rows_per_block (optional, default = no max) The maximum number of rows in a block
+#' @param rep_equals_block (optional, default = TRUE) When set, the rep number will be set as the block number
+#' @param max_plots_per_rep (optional, default = no max) When set, `rep_equals_block` is FALSE and the rep number will increment after each set of max plots
 #' @param zig_zag (optional, default = FALSE) When TRUE, rows will alternate direction (left to right, right to left, etc)
 #' @param controls (optional, default = none) A vector of plot numbers or accession names that will be used as controls
 #' 
@@ -129,6 +131,8 @@ createPlots <- function(
     max_cols = NULL,
     max_cols_per_block = NULL,
     max_rows_per_block = NULL,
+    rep_equals_block = TRUE,
+    max_plots_per_rep = NULL,
     zig_zag = FALSE,
     controls = c()
 ) {
@@ -165,6 +169,7 @@ createPlots <- function(
     row_block_start <- 1
     row_block_factor <- 1
     col_block_factor <- 0
+    rep_count <- 1
 
     # Parse each row
     for ( row in c(1:max_rows) ) {
@@ -208,6 +213,18 @@ createPlots <- function(
                     }
                 }
 
+                # Set rep
+                rep <- NA_integer_
+                if ( !is.null(max_plots_per_rep) ) {
+                    rep <- rep_count
+                    if ( plot %% max_plots_per_rep == 0 ) {
+                        rep_count <- rep_count + 1
+                    }
+                }
+                else if ( rep_equals_block ) {
+                    rep <- block
+                }
+
                 # Create the plot
                 plots <- c(plots, Plot(
                     plot_name = plot_name,
@@ -217,6 +234,7 @@ createPlots <- function(
                     properties = list(
                         row_number = row,
                         col_number = col_index,
+                        rep_number = rep,
                         is_a_control = is_a_control
                     )
                 ))
@@ -312,7 +330,7 @@ printPlots <- function(plots) {
 
     # Add Rows
     row_names <- c()
-    headers <- c("Plot #", "Plot Name", "Accession Name", "Block", "Control")
+    headers <- c("Plot #", "Plot Name", "Accession Name", "Block", "Rep", "Control")
     for ( i in c(1:max_rows) ) {
         rtn <- add_row(rtn)
         row_names <- c(row_names, paste0("===== Row", i, " ====="))
@@ -342,7 +360,8 @@ printPlots <- function(plots) {
         rtn[table_row_start+1, plot@col_number] <- plot@plot_name
         rtn[table_row_start+2, plot@col_number] <- plot@accession_name
         rtn[table_row_start+3, plot@col_number] <- plot@block_number
-        rtn[table_row_start+4, plot@col_number] <- plot@is_a_control
+        rtn[table_row_start+4, plot@col_number] <- plot@rep_number
+        rtn[table_row_start+5, plot@col_number] <- plot@is_a_control
 
     }
 

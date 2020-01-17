@@ -117,7 +117,8 @@ alternate the direction of plot numbers.</p>
 
     <pre class="usage"><span class='fu'>createPlots</span>(<span class='kw'>trial_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>accessions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>max_cols_per_block</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_rows_per_block</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>zig_zag</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>controls</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>())</pre>
+  <span class='kw'>rep_equals_block</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>max_plots_per_rep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>zig_zag</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>controls</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +142,14 @@ alternate the direction of plot numbers.</p>
     <tr>
       <th>max_rows_per_block</th>
       <td><p>(optional, default = no max) The maximum number of rows in a block</p></td>
+    </tr>
+    <tr>
+      <th>rep_equals_block</th>
+      <td><p>(optional, default = TRUE) When set, the rep number will be set as the block number</p></td>
+    </tr>
+    <tr>
+      <th>max_plots_per_rep</th>
+      <td><p>(optional, default = no max) When set, `rep_equals_block` is FALSE and the rep number will increment after each set of max plots</p></td>
     </tr>
     <tr>
       <th>zig_zag</th>

@@ -6,7 +6,8 @@
 \usage{
 createPlots(trial_name = NULL, accessions = NULL, max_cols = NULL,
   max_cols_per_block = NULL, max_rows_per_block = NULL,
-  zig_zag = FALSE, controls = c())
+  rep_equals_block = TRUE, max_plots_per_rep = NULL, zig_zag = FALSE,
+  controls = c())
 }
 \arguments{
 \item{trial_name}{The trial name or Trial to be used for plot names (TRIAL_PLOT#)}
@@ -18,6 +19,10 @@ createPlots(trial_name = NULL, accessions = NULL, max_cols = NULL,
 \item{max_cols_per_block}{(optional, default = no max) The maximum number of columns in a block}
 
 \item{max_rows_per_block}{(optional, default = no max) The maximum number of rows in a block}
+
+\item{rep_equals_block}{(optional, default = TRUE) When set, the rep number will be set as the block number}
+
+\item{max_plots_per_rep}{(optional, default = no max) When set, `rep_equals_block` is FALSE and the rep number will increment after each set of max plots}
 
 \item{zig_zag}{(optional, default = FALSE) When TRUE, rows will alternate direction (left to right, right to left, etc)}
 
