@@ -153,6 +153,66 @@ loc3 <- Location(
 )
 ```
 
+### Trials
+
+A `Trial` includes the metadata about a single phenotyping trial as well as information about 
+the individual plots in the trial (see the [Plots](#plots) section below). A trial is assigned 
+a unique name, associated with a breeding program, year and location, and includes the trial 
+design type and a description.  Additional information can include the field and plot sizes, 
+planting and harvest dates, and type of trial (greenhouse, phenotyping, advanced yield, etc).
+
+A `Trial` object can be created without its plot information (it just contains metadata about the 
+trial).  However, the plot information must be added to the `Trial` before a trial upload template 
+can be created.
+
+**Example:** Create a Trial with just the required parameters
+
+```R
+trial_mad <- Trial(
+    trial_name = "UMOPN_2019_Madison", 
+    breeding_program = "University of Wisconsin", 
+    location = "Madison, WI", 
+    year = 2019, 
+    design_type = "RCBD", 
+    description = "UMOPN Nursery Trial"
+)
+```
+
+**Example:** Create a Trial with optional parameters
+
+```R
+opts <- list(planting_date = "2019-04-25", harvest_date = "2019-10-05", trial_type = "phenotyping_trial")
+trial_arl <- Trial(
+    trial_name = "UMOPN_2019_Arlington", 
+    breeding_program = "University of Wisconsin", 
+    location = "Arlington, WI", 
+    year = 2019, 
+    design_type = "RCBD", 
+    description = "UMOPN Nursery Trial", 
+    properties = opts
+) 
+```
+
+See the [Trial Class Documentation](https://triticeaetoolbox.github.io/breeDBase.R/reference/Trial-class.html) 
+for more information on the optional parameters.
+
+**Adding Plots:** Once the `Plot`s for the trial have been created, they can be added to the `Trial`
+with the `setTrialPlots()` function.  See the [Plots section below](#plots) for more information on 
+creating Trial Plots.
+
+```R
+trial_mad <- setTrialPlots(trial_mad, plots_mad)
+trial_arl <- setTrialPlots(trial_arl, plots_arl)
+```
+
+**Creating Trial Templates:** Once you have one or more `Trial`s (that have `Plots` set), you can 
+create a trial upload template that can be submitted to a breeDBase website from the **Manage Trials** 
+page ('Upload Existing Trials' > 'Multiple Trial Designs').
+
+```R
+writeTrialTemplate(c(trial_mad, trial_arl), '/path/to/trials.xls')
+```
+
 
 ### Plots
 
@@ -172,7 +232,8 @@ plot1 <- Plot(
     block_number = 1,
     properties = list(
         row_numer = 1,
-        col_number = 1
+        col_number = 1,
+        rep_number = 1
     )
 )
 plot2 <- Plot(
@@ -182,7 +243,8 @@ plot2 <- Plot(
     block_number = 1,
     properties = list(
         row_numer = 1,
-        col_number = 2
+        col_number = 2,
+        rep_number = 1
     )
 )
 
@@ -287,4 +349,5 @@ The package currently contains functions for the following data types:
 - Accession
 - Pedigree
 - Location
+- Trial
 - Plot
