@@ -38,7 +38,10 @@ setClass(
         }
 
         if ( !(object@type %in% CROSS_TYPES) ) {
-            return("Cross Type is not recognized")
+            return(paste0(
+                "Cross Type is not recognized. Supported Cross Types: ",
+                paste(CROSS_TYPES, collapse=", ")
+            ))
         }
 
         return(TRUE)
