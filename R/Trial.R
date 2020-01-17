@@ -100,7 +100,7 @@ setClass(
         if ( !is.na(object@harvest_date) && !grepl("^[0-9]{4}-[0-9]{2}-[0-9]{2}$", object@harvest_date) ) {
             return("Invalid harvest date. Required format: YYYY-MM-DD")
         }
-        for ( p in plots ) {
+        for ( p in object@plots ) {
             if ( !is(p, "Plot") ) {
                 return("All items in the list of plots must be an object of Class Plot")
             }
