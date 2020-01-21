@@ -122,3 +122,25 @@ convert_sqft_m2 <- function(x) {
     y <- x * (1/0.09290304)
     return(y)
 }
+
+
+#' Convert scale
+#' 
+#' Convert a value from an ordinal scale in one range to a
+#' value in a new range (0-->5, 1-->10)
+#' 
+#' @param x the original value
+#' @param oldmin the old range minimum
+#' @param oldmax the old range maximum
+#' @param newmin the new range minimum
+#' @param newmax the new range maximum
+#' 
+#' @return the value in the new range
+#' 
+#' @export
+convert_scale <- function(x, oldmin, oldmax, newmin, newmax) {
+    oldrange <- oldmax - oldmin
+    newrange <- newmax - newmin
+    y <- (((x - oldmin) * newrange) / oldrange) + newmin
+    return(y)
+}
