@@ -345,6 +345,41 @@ created.  This upload template can be used to create a single Trial from the **M
 Trial(s)' > 'Single Trial Design').  Here you will enter the Trial metadata in a form and upload this template for the 
 trial's plot layout.
 
+### Plot Data
+
+The `PlotData` class is used to represent the phenotype observations (one or more traits) of a single Plot from 
+a single Trial.  A vector of `PlotData` objects can be used to represent the observations from an entire Trial 
+and can be used to create a plot data upload template that can be uploaded through a breeDBase website.
+
+A `PlotData` object is created with a `plot_name` and a named list of `observations` (and optionally `notes` for the 
+plot).  
+
+The `plot_name` must match the name of an existing Plot in an existing Trial.
+
+The `observations` must take the form of a named list where the list item name/key is the full trait name 
+of the trait observed and the list item value is the observed trait value.  The trait name must match an 
+existing trait name in the breeDBase database and follow the form {trait name}|{trait id} 
+(ex: `Grain yield kg/ha|CO_321:0001218`).
+
+**Example:** Create two `PlotData` objects representing two plots from the same Trial
+```R
+plotData1 <- PlotData("FARM-2019-UNH_PLOT1", list("Blade length cm|CO_360:0000240" = 24, "Blade width cm|CO_360:0000241" = 5))
+plotData2 <- PlotData("FARM-2019-UNH_PLOT2", list("Blade length cm|CO_360:0000240" = 27, "Blade width cm|CO_360:0000241" = 4, "Blade thickness mm|CO_360:0000248" = 2), notes="This plot showed signs of disturbance")
+trialPlotData <- c(plotData1, plotData2)
+```
+
+**Creating Plot Data Templates:** Once you have a vector of `PlotData` objects for a single trial, a plot data upload 
+template can be created using the `writePlotDataTemplate()` function.  This will create a a phenotyping results 
+spreadsheet in the 'Simple' format with plot-level data. This file can be uploaded from the detail page of a specific 
+Trial (under 'Upload Data Files' > 'Phenotyping Spreadsheets') or from the 'Manage Phenotypic Data' page.
+
+
+## Conversion Functions
+
+A number of helpful conversion functions are included to help convert phenotype observation values between 
+different commonly used units. All of these functions start with `convert_`, such as `convert_buac_kgHa`.  See 
+the package Documentation for more details.
+
 
 ## Current Status
 
@@ -355,3 +390,5 @@ The package currently contains functions for the following data types:
 - Location
 - Trial
 - Plot
+- PlotData
+- Conversions
