@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
       </span>
     </div>
 
@@ -329,6 +329,24 @@ plots &lt;-<span class="st"> </span><span class="kw"><a href="reference/createPl
 <span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE                TRUE               FALSE</span></code></pre></div>
 <p><strong>Creating Plot Templates:</strong> Once you have a vector of <code>Plot</code>s for a single trial, a plot upload template can be created. This upload template can be used to create a single Trial from the <strong>Manage Trials</strong> page (‘Upload Existing Trial(s)’ &gt; ‘Single Trial Design’). Here you will enter the Trial metadata in a form and upload this template for the trial’s plot layout.</p>
 </div>
+<div id="plot-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#plot-data" class="anchor"></a>Plot Data</h3>
+<p>The <code>PlotData</code> class is used to represent the phenotype observations (one or more traits) of a single Plot from a single Trial. A vector of <code>PlotData</code> objects can be used to represent the observations from an entire Trial and can be used to create a plot data upload template that can be uploaded through a breeDBase website.</p>
+<p>A <code>PlotData</code> object is created with a <code>plot_name</code> and a named list of <code>observations</code> (and optionally <code>notes</code> for the plot).</p>
+<p>The <code>plot_name</code> must match the name of an existing Plot in an existing Trial.</p>
+<p>The <code>observations</code> must take the form of a named list where the list item name/key is the full trait name of the trait observed and the list item value is the observed trait value. The trait name must match an existing trait name in the breeDBase database and follow the form {trait name}|{trait id} (ex: <code>Grain yield kg/ha|CO_321:0001218</code>).</p>
+<p><strong>Example:</strong> Create two <code>PlotData</code> objects representing two plots from the same Trial</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotData1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/PlotData.html">PlotData</a></span>(<span class="st">"FARM-2019-UNH_PLOT1"</span>, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"Blade length cm|CO_360:0000240"</span> =<span class="st"> </span><span class="dv">24</span>, <span class="st">"Blade width cm|CO_360:0000241"</span> =<span class="st"> </span><span class="dv">5</span>))
+plotData2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/PlotData.html">PlotData</a></span>(<span class="st">"FARM-2019-UNH_PLOT2"</span>, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"Blade length cm|CO_360:0000240"</span> =<span class="st"> </span><span class="dv">27</span>, <span class="st">"Blade width cm|CO_360:0000241"</span> =<span class="st"> </span><span class="dv">4</span>, <span class="st">"Blade thickness mm|CO_360:0000248"</span> =<span class="st"> </span><span class="dv">2</span>), <span class="dt">notes=</span><span class="st">"This plot showed signs of disturbance"</span>)
+trialPlotData &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(plotData1, plotData2)</code></pre></div>
+<p><strong>Creating Plot Data Templates:</strong> Once you have a vector of <code>PlotData</code> objects for a single trial, a plot data upload template can be created using the <code><a href="reference/writePlotDataTemplate.html">writePlotDataTemplate()</a></code> function. This will create a a phenotyping results spreadsheet in the ‘Simple’ format with plot-level data. This file can be uploaded from the detail page of a specific Trial (under ‘Upload Data Files’ &gt; ‘Phenotyping Spreadsheets’) or from the ‘Manage Phenotypic Data’ page.</p>
+</div>
+</div>
+<div id="conversion-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#conversion-functions" class="anchor"></a>Conversion Functions</h2>
+<p>A number of helpful conversion functions are included to help convert phenotype observation values between different commonly used units. All of these functions start with <code>convert_</code>, such as <code>convert_buac_kgHa</code>. See the package Documentation for more details.</p>
 </div>
 <div id="current-status" class="section level2">
 <h2 class="hasAnchor">
@@ -340,6 +358,8 @@ plots &lt;-<span class="st"> </span><span class="kw"><a href="reference/createPl
 <li>Location</li>
 <li>Trial</li>
 <li>Plot</li>
+<li>PlotData</li>
+<li>Conversions</li>
 </ul>
 </div>
 </div>
