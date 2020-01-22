@@ -72,5 +72,9 @@ The `accession_name` and `species_name` are required, all other fields are optio
 \item{\code{introgression_start_position_bp}}{(optional) the start position of the introgression in base pairs}
 
 \item{\code{introgression_end_position_bp}}{(optional) the end position of the introgression in base pairs}
+
+\item{\code{purdy_pedigree}}{(optional, experimental) the purdy pedigree string}
+
+\item{\code{filial_generation}}{(optional, experimental) the filial generation number}
 }}
 

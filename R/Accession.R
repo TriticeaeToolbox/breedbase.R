@@ -34,6 +34,8 @@
 #' @slot introgression_chromosome (optional) the chromosome number that the introgression is on.
 #' @slot introgression_start_position_bp (optional) the start position of the introgression in base pairs
 #' @slot introgression_end_position_bp (optional) the end position of the introgression in base pairs
+#' @slot purdy_pedigree (optional, experimental) the purdy pedigree string
+#' @slot filial_generation (optional, experimental) the filial generation number
 #' 
 #' @importFrom methods is new slot<-
 #' @export
@@ -70,7 +72,9 @@ setClass(
         introgression_map_version = "character",
         introgression_chromosome = "character",
         introgression_start_position_bp = "numeric",
-        introgression_end_position_bp = "numeric"
+        introgression_end_position_bp = "numeric",
+        purdy_pedigree = "character",
+        filial_generation = "character"
     ),
 
     prototype = list(
@@ -103,7 +107,9 @@ setClass(
         introgression_map_version = NA_character_,
         introgression_chromosome = NA_character_,
         introgression_start_position_bp = NA_real_,
-        introgression_end_position_bp = NA_real_
+        introgression_end_position_bp = NA_real_,
+        purdy_pedigree = NA_character_,
+        filial_generation = NA_character_
     ),
     
     validity = function(object) {

@@ -70,7 +70,9 @@ Accession <- function(
         introgression_map_version = if(is.null(properties$introgression_map_version)) NA_character_ else properties$introgression_map_version,
         introgression_chromosome = if(is.null(properties$introgression_chromosome)) NA_character_ else properties$introgression_chromosome,
         introgression_start_position_bp = if(is.null(properties$introgression_start_position_bp)) NA_real_ else properties$introgression_start_position_bp,
-        introgression_end_position_bp = if(is.null(properties$introgression_end_position_bp)) NA_real_ else properties$introgression_end_position_bp
+        introgression_end_position_bp = if(is.null(properties$introgression_end_position_bp)) NA_real_ else properties$introgression_end_position_bp,
+        purdy_pedigree = if(is.null(properties$purdy_pedigree)) NA_character_ else properties$purdy_pedigree,
+        filial_generation = if(is.null(properties$filial_generation)) NA_character_ else properties$filial_generation
     )
 
     # Return the Accession
@@ -126,7 +128,9 @@ buildAccessionTemplate <- function(
         "introgression_map_version" = character(),
         "introgression_chromosome" = character(),
         "introgression_start_position_bp" = numeric(),
-        "introgression_end_position_bp" = numeric()
+        "introgression_end_position_bp" = numeric(),
+        "purdy_pedigree" = character(),
+        "filial_generation" = character()
     )
 
     # Return blank template if no accessions provided
@@ -169,7 +173,9 @@ buildAccessionTemplate <- function(
             "introgression_map_version" = accession@introgression_map_version,
             "introgression_chromosome" = accession@introgression_chromosome,
             "introgression_start_position_bp" = accession@introgression_start_position_bp,
-            "introgression_end_position_bp" = accession@introgression_end_position_bp
+            "introgression_end_position_bp" = accession@introgression_end_position_bp,
+            "purdy_pedigree" = accession@purdy_pedigree,
+            "filial_generation" = accession@filial_generation
         )
         template <- dplyr::bind_rows(template, row)
     }
