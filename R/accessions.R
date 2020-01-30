@@ -200,7 +200,7 @@ buildAccessionTemplate <- function(
 #' @param output The file path to the output .xls file
 #' @param chunk Chunk the file into parts with up to `chunk` number of lines per file
 #' 
-#' @import WriteXLS
+#' @import dplyr WriteXLS
 #' @export
 writeAccessionTemplate <- function(
     input = NULL,
@@ -226,16 +226,33 @@ writeAccessionTemplate <- function(
         output <- paste(output, ".xls", sep="")
     }
 
+    # Filter input with only used variables
+    cols_to_remove <- c()
+    for ( col in names(input) ) {
+        if ( col %in% EDITABLE_STOCK_PROPS ) {
+            values <- unique(input[[col]])
+            if ( length(values) == 1 && is.na(values) ) {
+                cols_to_remove <- c(cols_to_remove, col)
+            }
+        }
+    }
+    if ( length(cols_to_remove) > 0 ) {
+        filtered_input <- dplyr::select(input, -cols_to_remove)
+    }
+    else {
+        filtered_input <- input
+    }
+
     # Split the input file, if chunk is provided
     if ( !is.null(chunk) ) {
-        max <- nrow(input)
+        max <- nrow(filtered_input)
         index <- 1
         start <- 1
         end <- ifelse(max < chunk, max, chunk)
         while ( end <= max ) {
             
             # Subset data and write the subset
-            subset <- input[c(start:end),]
+            subset <- filtered_input[c(start:end),]
             subset_output <- gsub("\\.xls$", paste0("_part", index, ".xls"), output)
             writeAccessionTemplate(subset, subset_output)
 
@@ -254,8 +271,11 @@ writeAccessionTemplate <- function(
     # Write the entire file
     else {
         print(sprintf("Writing Accession Template: %s", output))
-        WriteXLS::WriteXLS(input, output)
+        WriteXLS::WriteXLS(filtered_input, output)
     }
 
 }
 
+
+# List of optional stock properties used for Accessions
+EDITABLE_STOCK_PROPS <- c("variety(s)", "donor(s)", "donor_institute(s)", "donor_PUI(s)", "country_of_origin(s)", "state(s)", "institute_code(s)", "institute_name(s)", "biological_status_of_accession_code(s)", "notes(s)", "accession_number(s)", "PUI(s)", "seed_source(s)", "type_of_germplasm_storage_code(s)", "acquisition_date(s)", "transgenic", "introgression_parent", "introgression_backcross_parent", "introgression_map_version", "introgression_chromosome", "introgression_start_position_bp", "introgression_end_position_bp", "purdy_pedigree", "filial_generation")
