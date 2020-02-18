@@ -85,6 +85,11 @@ optionally the cross type) of a single Accession.
 my_cross_pedigree <- Pedigree(my_cross, female_parent = jerry, male_parent = caledonia)
 ```
 
+**Note:** The **T3/Wheat** breedbase instance is planning on keeping pedigree information stored as an unparsed 
+purdy pedigree string (at least until we have time to try to parse purdy pedigrees into parents).  The purdy 
+pedigree string will be stored as an optional property (`purdy_pedigree`) of the Accession and can be added to 
+the Accession upload template.
+
 #### Creating Upload Templates
 
 Once you have one or more objects of a particular Class (such as a vector of `Accession`s or a `Pedigree`) you can 
