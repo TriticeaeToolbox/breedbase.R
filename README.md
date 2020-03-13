@@ -368,8 +368,22 @@ existing trait name in the breeDBase database and follow the form {trait name}|{
 
 **Example:** Create two `PlotData` objects representing two plots from the same Trial
 ```R
-plotData1 <- PlotData("FARM-2019-UNH_PLOT1", list("Blade length cm|CO_360:0000240" = 24, "Blade width cm|CO_360:0000241" = 5))
-plotData2 <- PlotData("FARM-2019-UNH_PLOT2", list("Blade length cm|CO_360:0000240" = 27, "Blade width cm|CO_360:0000241" = 4, "Blade thickness mm|CO_360:0000248" = 2), notes="This plot showed signs of disturbance")
+plotData1 <- PlotData(
+    "FARM-2019-UNH_PLOT1", 
+    list(
+        "Blade length cm|CO_360:0000240" = 24, 
+        "Blade width cm|CO_360:0000241" = 5
+    )
+)
+plotData2 <- PlotData(
+    "FARM-2019-UNH_PLOT2", 
+    list(
+        "Blade length cm|CO_360:0000240" = 27, 
+        "Blade width cm|CO_360:0000241" = 4, 
+        "Blade thickness mm|CO_360:0000248" = 2
+    ), 
+    notes="This plot showed signs of disturbance"
+)
 trialPlotData <- c(plotData1, plotData2)
 ```
 
