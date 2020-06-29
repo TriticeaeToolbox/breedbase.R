@@ -11,6 +11,7 @@
 #' @slot latitude Location latitude (decimal degrees)
 #' @slot longitude Location longitude (decimal degrees)
 #' @slot altitude Location elevation (meters)
+#' @slot noaa_station_id The NOAA Station ID that is nearest and most relevant to the location (ex: GHCND:US1NYTM0042)
 #' 
 #' @importFrom methods is new slot<-
 #' @export
@@ -26,7 +27,8 @@ setClass(
         type = "character",
         latitude = "numeric",
         longitude = "numeric",
-        altitude = "numeric"
+        altitude = "numeric",
+        noaa_station_id = "character"
     ),
 
     prototype = list(
@@ -38,7 +40,8 @@ setClass(
         type = NA_character_,
         latitude = NA_real_,
         longitude = NA_real_,
-        altitude = NA_real_
+        altitude = NA_real_,
+        noaa_station_id = NA_character_
     ),
 
     validity = function(object) {
@@ -68,6 +71,9 @@ setClass(
         }
         if ( is.na(object@altitude) ) {
             return("Location altitude is required")
+        }
+        if ( is.na(object@noaa_station_id) ) {
+            return("NOAA Station ID is required")
         }
 
         if ( !(object@country_code %in% COUNTRY_CODES) ) {
