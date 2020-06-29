@@ -4,8 +4,7 @@
 \alias{Accession}
 \title{Create Accession}
 \usage{
-Accession(accession_name = NULL, species_name = NULL,
-  properties = list())
+Accession(accession_name = NULL, species_name = NULL, properties = list())
 }
 \arguments{
 \item{accession_name}{Accession Name}

@@ -4,8 +4,13 @@
 \alias{Plot}
 \title{Create Plot}
 \usage{
-Plot(plot_name = NULL, accession_name = NULL, plot_number = NULL,
-  block_number = NULL, properties = list())
+Plot(
+  plot_name = NULL,
+  accession_name = NULL,
+  plot_number = NULL,
+  block_number = NULL,
+  properties = list()
+)
 }
 \arguments{
 \item{plot_name}{The unique name for the plot (must be unique across entire database. this is often a concatenation of the trial name, the accession name, and the plot number.)}

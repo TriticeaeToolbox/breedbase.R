@@ -4,9 +4,18 @@
 \alias{Location}
 \title{Create Location}
 \usage{
-Location(name = NULL, abbreviation = NULL, country_code = NULL,
-  country_name = NULL, program = NULL, type = NULL,
-  latitude = NULL, longitude = NULL, altitude = NULL)
+Location(
+  name = NULL,
+  abbreviation = NULL,
+  country_code = NULL,
+  country_name = NULL,
+  program = NULL,
+  type = NULL,
+  latitude = NULL,
+  longitude = NULL,
+  altitude = NULL,
+  noaa_station_id = NULL
+)
 }
 \arguments{
 \item{name}{Unique location name (must not conflict with an existing location name)}
@@ -26,6 +35,8 @@ Location(name = NULL, abbreviation = NULL, country_code = NULL,
 \item{longitude}{(optional) Location longitude (decimal degrees)}
 
 \item{altitude}{(optional) Location elevation (meters)}
+
+\item{noaa_station_id}{(optional) NOAA Station ID (ex: GHCND:US1NYTM0042)}
 }
 \value{
 Location
@@ -39,6 +50,9 @@ will be queried from the DataScienceToolkit API using the Location name.
 The \code{\link{geocodeLocation}} function can be used to obtain lat/lon/alt 
 properties from a more specific location name (such as a street address), the 
 results of which can be used to create the Location.
+
+The \code{\link{lookupNOAAStationId}} function can be used to obtain the NOAA
+Station ID of the location (using its lat and lon) if it is unknown.
 }
 \examples{
 # Use the Location name to query lat/lon/alt properties
@@ -53,6 +67,7 @@ location <- Location(
 
 # Geocode an address to use as lat/lon/alt properties
 geo <- geocodeLocation("2 Caldwell Drive, Ithaca, NY")
+noaa_station_id <- lookupNOAAStationId(geo$latitude, geo$longitude)
 location <- Location(
      "Caldwell - Ithaca, NY", 
      "ITH_CALD",
@@ -62,7 +77,8 @@ location <- Location(
      "Field",
      geo$latitude,
      geo$longitude,
-     geo$altitude
+     geo$altitude,
+     noaa_station_id
 )
 
 }

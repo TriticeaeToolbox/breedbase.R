@@ -4,8 +4,7 @@
 \alias{PlotData}
 \title{Create PlotData}
 \usage{
-PlotData(plot_name = NULL, observations = list(),
-  notes = NA_character_)
+PlotData(plot_name = NULL, observations = list(), notes = NA_character_)
 }
 \arguments{
 \item{plot_name}{The unique name for the plot (must already exist as a Plot in a Trial)}

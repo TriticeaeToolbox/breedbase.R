@@ -4,8 +4,12 @@
 \alias{Pedigree}
 \title{Create Pedigree}
 \usage{
-Pedigree(progeny = NULL, female_parent = NULL, male_parent = NULL,
-  type = "biparental")
+Pedigree(
+  progeny = NULL,
+  female_parent = NULL,
+  male_parent = NULL,
+  type = "biparental"
+)
 }
 \arguments{
 \item{progeny}{The progeny Accession or Accession name (or synonym)}

@@ -1,5 +1,5 @@
 Package: breedbase
-Version: 0.6
+Version: 0.7
 Date: 2019-10-31
 Title: breeDBase
 Description: Helper functions for generating breeDBase upload templates.
@@ -16,4 +16,4 @@ Imports:
     WriteXLS
 Suggests:
     utils
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

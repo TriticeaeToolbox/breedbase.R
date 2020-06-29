@@ -4,9 +4,15 @@
 \alias{Trial}
 \title{Create Trial}
 \usage{
-Trial(trial_name = NULL, breeding_program = NULL, location = NULL,
-  year = NULL, design_type = NULL, description = NULL,
-  properties = list())
+Trial(
+  trial_name = NULL,
+  breeding_program = NULL,
+  location = NULL,
+  year = NULL,
+  design_type = NULL,
+  description = NULL,
+  properties = list()
+)
 }
 \arguments{
 \item{trial_name}{A name for the trial (must be unique across the entire database)}

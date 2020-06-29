@@ -27,5 +27,7 @@ An S4 Class to represent a breeDBase Location
 \item{\code{longitude}}{Location longitude (decimal degrees)}
 
 \item{\code{altitude}}{Location elevation (meters)}
+
+\item{\code{noaa_station_id}}{The NOAA Station ID that is nearest and most relevant to the location (ex: GHCND:US1NYTM0042)}
 }}
 

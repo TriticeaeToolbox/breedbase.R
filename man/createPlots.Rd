@@ -4,10 +4,17 @@
 \alias{createPlots}
 \title{Create Plots}
 \usage{
-createPlots(trial_name = NULL, accessions = NULL, max_cols = NULL,
-  max_cols_per_block = NULL, max_rows_per_block = NULL,
-  rep_equals_block = TRUE, max_plots_per_rep = NULL, zig_zag = FALSE,
-  controls = c())
+createPlots(
+  trial_name = NULL,
+  accessions = NULL,
+  max_cols = NULL,
+  max_cols_per_block = NULL,
+  max_rows_per_block = NULL,
+  rep_equals_block = TRUE,
+  max_plots_per_rep = NULL,
+  zig_zag = FALSE,
+  controls = c()
+)
 }
 \arguments{
 \item{trial_name}{The trial name or Trial to be used for plot names (TRIAL_PLOT#)}
