@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pedigree Class — Pedigree-class • breedbase</title>
+<title>Lookup NOAA Station ID — lookupNOAAStationID • breedbase</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,12 @@
 
 
 
-<meta property="og:title" content="Pedigree Class — Pedigree-class" />
-<meta property="og:description" content="An S4 Class to represent a breeDBase pedigree" />
+<meta property="og:title" content="Lookup NOAA Station ID — lookupNOAAStationID" />
+<meta property="og:description" content="Lookup the NOAA Station ID for the specified location.  The 
+Location must be specified by its latitude and longitude 
+(as decimal degrees) - if these are unknown the geocodeLocation 
+function can be used to get the coordinates of a location by 
+address, town, etc." />
 
 
 
@@ -103,31 +107,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pedigree Class</h1>
+    <h1>Lookup NOAA Station ID</h1>
     
-    <div class="hidden name"><code>Pedigree-class.Rd</code></div>
+    <div class="hidden name"><code>lookupNOAAStationID.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An S4 Class to represent a breeDBase pedigree</p>
+    <p>Lookup the NOAA Station ID for the specified location.  The 
+Location must be specified by its latitude and longitude 
+(as decimal degrees) - if these are unknown the <code><a href='geocodeLocation.html'>geocodeLocation</a></code> 
+function can be used to get the coordinates of a location by 
+address, town, etc.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>lookupNOAAStationID</span>(<span class='no'>lat</span>, <span class='no'>lon</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>lat</th>
+      <td><p>Location latitiude (decimal degrees)</p></td>
+    </tr>
+    <tr>
+      <th>lon</th>
+      <td><p>Location longitude (decimal degrees)</p></td>
+    </tr>
+    <tr>
+      <th>radius</th>
+      <td><p>Search radius (miles, default=10)</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-<dl'>
-<dt><code>progeny_name</code></dt><dd><p>Name or synonym of the Accession to add pedigree information to (must exist in database)</p></dd>
-
-<dt><code>female_parent_accession</code></dt><dd><p>Name of female parent Accession</p></dd>
-
-<dt><code>male_parent_accession</code></dt><dd><p>Name of male parent Accession</p></dd>
-
-<dt><code>type</code></dt><dd><p>Cross type (biparental, self, open, sib)</p></dd>
-
-</dl>
+    <p>The query will search for NOAA stations within the specified radius 
+centered around the location position.  If multiple stations are found,
+the ID of the first/closest station is returned.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
