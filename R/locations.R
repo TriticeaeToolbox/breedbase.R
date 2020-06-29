@@ -8,6 +8,9 @@
 #' properties from a more specific location name (such as a street address), the 
 #' results of which can be used to create the Location.
 #' 
+#' The \code{\link{lookupNOAAStationId}} function can be used to obtain the NOAA
+#' Station ID of the location (using its lat and lon) if it is unknown.
+#' 
 #' @param name Unique location name (must not conflict with an existing location name)
 #' @param abbreviation Location abbreviation
 #' @param country_code ISO Alpha-3 country code
@@ -17,6 +20,7 @@
 #' @param latitude (optional) Location latitude (decimal degrees)
 #' @param longitude (optional) Location longitude (decimal degrees)
 #' @param altitude (optional) Location elevation (meters)
+#' @param noaa_station_id (optional) NOAA Station ID (ex: GHCND:US1NYTM0042)
 #' 
 #' @examples
 #' # Use the Location name to query lat/lon/alt properties
@@ -31,6 +35,7 @@
 #' 
 #' # Geocode an address to use as lat/lon/alt properties
 #' geo <- geocodeLocation("2 Caldwell Drive, Ithaca, NY")
+#' noaa_station_id <- lookupNOAAStationId(geo$latitude, geo$longitude)
 #' location <- Location(
 #'      "Caldwell - Ithaca, NY", 
 #'      "ITH_CALD",
@@ -40,7 +45,8 @@
 #'      "Field",
 #'      geo$latitude,
 #'      geo$longitude,
-#'      geo$altitude
+#'      geo$altitude,
+#'      noaa_station_id
 #' )
 #' 
 #' @return Location
@@ -55,7 +61,8 @@ Location <- function(
     type = NULL,
     latitude = NULL,
     longitude = NULL,
-    altitude = NULL
+    altitude = NULL,
+    noaa_station_id = NULL
 ) {
 
     # Check for required properties
@@ -92,6 +99,11 @@ Location <- function(
         }
     }
 
+    # Get NOAA station id, if missing
+    if ( is.null(noaa_station_id) ) {
+        noaa_station_id <- lookupNOAAStationID(latitude, longitude)
+    }
+
     # Create Location
     location <- new(
         "Location",
@@ -103,7 +115,8 @@ Location <- function(
         type = type,
         latitude = latitude,
         longitude = longitude,
-        altitude = altitude
+        altitude = altitude,
+        noaa_station_id = noaa_station_id
     )
 
     # Return the Location
@@ -180,6 +193,69 @@ geocodeLocation <- function(location) {
 }
 
 
+#' Lookup NOAA Station ID
+#' 
+#' Lookup the NOAA Station ID for the specified location.  The 
+#' Location must be specified by its latitude and longitude 
+#' (as decimal degrees) - if these are unknown the \code{\link{geocodeLocation}} 
+#' function can be used to get the coordinates of a location by 
+#' address, town, etc.
+#' 
+#' The query will search for NOAA stations within the specified radius 
+#' centered around the location position.  If multiple stations are found,
+#' the ID of the first/closest station is returned.
+#'
+#' @param lat Location latitiude (decimal degrees)
+#' @param lon Location longitude (decimal degrees)
+#' @param radius Search radius (miles, default=10)
+#' 
+#' @import httr rjson
+#' @export
+lookupNOAAStationID <- function(lat, lon, radius=10) {
+    
+    # Calculate bounding box coordinates with geodetic approximation (WGS84)
+    a <- 6378137            # Radius of earth at equator (m)
+    e2 <- 0.00669437999014  # eccentricity squared
+    m <- 1609.344           # mile to meters converstion factor
+    r <- pi / 180           # degrees to radians conversion factor
+
+    # Distance of latitude in miles
+    d1 <- r*a*(1-e2) / (1-e2*sin(lat*r)^2)^(3/2) / m
+
+    # Distane of longitude in miles
+    d2 <- r*a*cos(lat*r) / sqrt(1-e2*sin(lat*r)^2) / m
+
+    # Bounding Box Coords
+    minlat = lat - radius / d1
+    maxlat = lat + radius / d1
+    minlon = lon - radius / d2
+    maxlon = lon + radius / d2
+
+    # Set extent
+    extent = paste(minlat, minlon, maxlat, maxlon, sep=",")
+
+    # Set URL with extent
+    url <- paste0(NOAA_STATIONS, "?extent=", extent)
+
+    # Make API Request
+    body <- api(url, NOAA_TOKEN)
+
+    # Get result count
+    count <- body$metadata$resultset$count
+
+    # No results returned...
+    if ( is.null(count) || is.na(count) || count == 0 ) {
+        print(sprintf("ERROR: Could not lookup NOAA stations for location: %f, %f", lat, lon))
+        return("NULL")
+    }
+
+    # Return the first result
+    station <- body$results[[1]]
+    return(station$id)
+
+}
+
+
 #' Build Location Template
 #' 
 #' Create a \code{tibble} representing the breeDBase upload 
@@ -205,7 +281,8 @@ buildLocationTemplate <- function(
         "Type" = character(),
         "Latitude" = numeric(),
         "Longitude" = numeric(),
-        "Altitude" = numeric()
+        "Altitude" = numeric(),
+        "NOAA Station ID" = character()
     )
 
     # Return blank template if no locations provided
@@ -227,7 +304,8 @@ buildLocationTemplate <- function(
             "Type" = location@type,
             "Latitude" = location@latitude,
             "Longitude" = location@longitude,
-            "Altitude" = location@altitude
+            "Altitude" = location@altitude,
+            "NOAA Station ID" = location@noaa_station_id
         )
         template <- dplyr::bind_rows(template, row)
     }
@@ -322,8 +400,8 @@ writeLocationTemplate <- function(
 
 # Make an API request to the specified URL
 # Return the parsed JSON body
-api <- function(url) {
-    resp <- httr::GET(url, add_headers("Content-Type" = "application/json"))
+api <- function(url, token=NULL) {
+    resp <- httr::GET(url, add_headers("Content-Type" = "application/json", "token" = token))
     body <- httr::content(resp, "text", encoding="UTF-8")
     body <- rjson::fromJSON(body)
     return(body)
@@ -338,3 +416,9 @@ DSTK_API_COORDS <- paste(DSTK_API, "street2coordinates", sep="/")
 
 # Data Science Toolkit API coordinates2statistics URL
 DSTK_API_STATS <- paste(DSTK_API, "coordinates2statistics", sep="/")
+
+# NOAA Web Services Token
+NOAA_TOKEN <- "UbRtMRShXhSSqHLWfpUpbeOoPiksgpLM"
+
+# NOAA Stations API Endpoint
+NOAA_STATIONS <- "https://www.ncdc.noaa.gov/cdo-web/api/v2/stations"
