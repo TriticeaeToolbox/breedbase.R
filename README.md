@@ -110,6 +110,10 @@ Locations are required to have latitude and longitude coordinates as well as the
 These can be added manually as parameters or geocoded using the 
 [DataScienceToolkit](http://www.datasciencetoolkit.org/) API.
 
+Additionally, Locations are required to have a NOAA Station ID, which is used to get historical 
+weather records.  The `lookupNOAAStationId` function can be used to lookup a weather station 
+close to the Location.
+
 - Add location information directly as parameters, if it is already known
 
 ```R
@@ -122,12 +126,15 @@ loc1 <- Location(
     type = "Field",
     latitude = 42.98054,
     longitude = -78.23176,
-    altitude = 274
+    altitude = 274,
+    noaa_station_id = "GHCND:US1NYGN0013"
 )
 ```
 
 - If either the `latitude`, `longitude` or `altitude` parameters are not provided, 
 they will be queried using the `name` as the location.
+- If the `noaa_station_id` is not provided, it will be queried using the provided 
+or queried lat and lon coordinates of the location.
 
 ```R
 loc2 <- Location(
@@ -157,6 +164,13 @@ loc3 <- Location(
      altitude = geo$altitude
 )
 ```
+
+- You can use the location's coordinates to lookup a nearby NOAA weather station.
+
+```R
+stationId <- lookupNOAAStationId(geo$latitude, geo$longitude)
+```
+
 
 ### Trials
 
