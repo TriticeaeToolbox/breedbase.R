@@ -201,18 +201,40 @@ geocodeLocation <- function(location) {
 #' function can be used to get the coordinates of a location by 
 #' address, town, etc.
 #' 
-#' The query will search for NOAA stations within the specified radius 
+#' The query will search for NOAA stations within the specified max radius 
 #' centered around the location position.  If multiple stations are found,
-#' the ID of the first/closest station is returned.
+#' the ID of the first station is returned.
 #'
 #' @param lat Location latitiude (decimal degrees)
 #' @param lon Location longitude (decimal degrees)
-#' @param radius Search radius (miles, default=10)
+#' @param radius Max Search radius (miles, default=25)
+#' 
+#' @return The NOAA Station ID
 #' 
 #' @import httr rjson
 #' @export
-lookupNOAAStationID <- function(lat, lon, radius=10) {
-    
+lookupNOAAStationID <- function(lat, lon, max_radius=25) {
+    station = NULL
+    radius = 1
+    while ( radius <= max_radius ) {
+        station = queryNOAAStations(lat, lon, radius)
+        if ( !is.null(station) ) {
+            return(station$id)
+        }
+        else {
+            radius = ifelse(radius == 1, 5, radius+5)
+        }
+    }
+    return("none")
+}
+
+
+# Query the NOAA Stations API for GHCND Stations located within the 
+# specified radius of the search location.  Return the full Station
+# object for the first GHCND station returned by the API.  If no 
+# matching Station is found, NULL is returned.
+queryNOAAStations <- function(lat, lon, radius) {
+
     # Calculate bounding box coordinates with geodetic approximation (WGS84)
     a <- 6378137            # Radius of earth at equator (m)
     e2 <- 0.00669437999014  # eccentricity squared
@@ -240,19 +262,17 @@ lookupNOAAStationID <- function(lat, lon, radius=10) {
     # Make API Request
     body <- api(url, NOAA_TOKEN)
 
-    # Get result count
-    count <- body$metadata$resultset$count
-
-    # No results returned...
-    if ( is.null(count) || is.na(count) || count == 0 ) {
-        print(sprintf("ERROR: Could not lookup NOAA stations for location: %f, %f", lat, lon))
-        return("NULL")
+    # Parse Stations
+    stations <- body$results
+    if ( !is.na(stations) && !is.null(stations) ) {
+        for ( station in stations ) {
+            if ( grepl("^GHCND", station$id) ) {
+                return(station)
+            }
+        }
     }
 
-    # Return the first result
-    station <- body$results[[1]]
-    return(station$id)
-
+    return(NULL)
 }
 
 

@@ -4,14 +4,17 @@
 \alias{lookupNOAAStationID}
 \title{Lookup NOAA Station ID}
 \usage{
-lookupNOAAStationID(lat, lon, radius = 10)
+lookupNOAAStationID(lat, lon, max_radius = 25)
 }
 \arguments{
 \item{lat}{Location latitiude (decimal degrees)}
 
 \item{lon}{Location longitude (decimal degrees)}
 
-\item{radius}{Search radius (miles, default=10)}
+\item{radius}{Max Search radius (miles, default=25)}
+}
+\value{
+The NOAA Station ID
 }
 \description{
 Lookup the NOAA Station ID for the specified location.  The 
@@ -21,7 +24,7 @@ function can be used to get the coordinates of a location by
 address, town, etc.
 }
 \details{
-The query will search for NOAA stations within the specified radius 
+The query will search for NOAA stations within the specified max radius 
 centered around the location position.  If multiple stations are found,
-the ID of the first/closest station is returned.
+the ID of the first station is returned.
 }
