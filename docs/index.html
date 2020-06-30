@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -144,6 +144,7 @@
 <h3 class="hasAnchor">
 <a href="#locations" class="anchor"></a>Locations</h3>
 <p>Locations are required to have latitude and longitude coordinates as well as their altitude/elevation. These can be added manually as parameters or geocoded using the <a href="http://www.datasciencetoolkit.org/">DataScienceToolkit</a> API.</p>
+<p>Additionally, Locations are required to have a NOAA Station ID, which is used to get historical weather records. The <code>lookupNOAAStationId</code> function can be used to lookup a weather station close to the Location.</p>
 <ul>
 <li>Add location information directly as parameters, if it is already known</li>
 </ul>
@@ -156,10 +157,12 @@
     <span class="kw">type</span> <span class="kw">=</span> <span class="st">"Field"</span>,
     <span class="kw">latitude</span> <span class="kw">=</span> <span class="fl">42.98054</span>,
     <span class="kw">longitude</span> <span class="kw">=</span> -<span class="fl">78.23176</span>,
-    <span class="kw">altitude</span> <span class="kw">=</span> <span class="fl">274</span>
+    <span class="kw">altitude</span> <span class="kw">=</span> <span class="fl">274</span>,
+    <span class="kw">noaa_station_id</span> <span class="kw">=</span> <span class="st">"GHCND:US1NYGN0013"</span>
 )</pre></div>
 <ul>
 <li>If either the <code>latitude</code>, <code>longitude</code> or <code>altitude</code> parameters are not provided, they will be queried using the <code>name</code> as the location.</li>
+<li>If the <code>noaa_station_id</code> is not provided, it will be queried using the provided or queried lat and lon coordinates of the location.</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">loc2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span>(
     <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Batavia, NY"</span>,
@@ -184,6 +187,10 @@
      <span class="kw">longitude</span> <span class="kw">=</span> <span class="no">geo</span>$<span class="no">longitude</span>,
      <span class="kw">altitude</span> <span class="kw">=</span> <span class="no">geo</span>$<span class="no">altitude</span>
 )</pre></div>
+<ul>
+<li>You can use the location’s coordinates to lookup a nearby NOAA weather station.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="no">stationId</span> <span class="kw">&lt;-</span> <span class="fu">lookupNOAAStationId</span>(<span class="no">geo</span>$<span class="no">latitude</span>, <span class="no">geo</span>$<span class="no">longitude</span>)</pre></div>
 </div>
 <div id="trials" class="section level3">
 <h3 class="hasAnchor">
@@ -191,7 +198,7 @@
 <p>A <code>Trial</code> includes the metadata about a single phenotyping trial as well as information about the individual plots in the trial (see the <a href="#plots">Plots</a> section below). A trial is assigned a unique name, associated with a breeding program, year and location, and includes the trial design type and a description. Additional information can include the field and plot sizes, planting and harvest dates, and type of trial (greenhouse, phenotyping, advanced yield, etc).</p>
 <p>A <code>Trial</code> object can be created without its plot information (it just contains metadata about the trial). However, the plot information must be added to the <code>Trial</code> before a trial upload template can be created.</p>
 <p><strong>Example:</strong> Create a Trial with just the required parameters</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">trial_mad</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span>(
+<div class="sourceCode" id="cb9"><pre class="r"><span class="no">trial_mad</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span>(
     <span class="kw">trial_name</span> <span class="kw">=</span> <span class="st">"UMOPN_2019_Madison"</span>,
     <span class="kw">breeding_program</span> <span class="kw">=</span> <span class="st">"University of Wisconsin"</span>,
     <span class="kw">location</span> <span class="kw">=</span> <span class="st">"Madison, WI"</span>,
@@ -200,7 +207,7 @@
     <span class="kw">description</span> <span class="kw">=</span> <span class="st">"UMOPN Nursery Trial"</span>
 )</pre></div>
 <p><strong>Example:</strong> Create a Trial with optional parameters</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="no">opts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">planting_date</span> <span class="kw">=</span> <span class="st">"2019-04-25"</span>, <span class="kw">harvest_date</span> <span class="kw">=</span> <span class="st">"2019-10-05"</span>, <span class="kw">trial_type</span> <span class="kw">=</span> <span class="st">"phenotyping_trial"</span>)
+<div class="sourceCode" id="cb10"><pre class="r"><span class="no">opts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">planting_date</span> <span class="kw">=</span> <span class="st">"2019-04-25"</span>, <span class="kw">harvest_date</span> <span class="kw">=</span> <span class="st">"2019-10-05"</span>, <span class="kw">trial_type</span> <span class="kw">=</span> <span class="st">"phenotyping_trial"</span>)
 <span class="no">trial_arl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span>(
     <span class="kw">trial_name</span> <span class="kw">=</span> <span class="st">"UMOPN_2019_Arlington"</span>,
     <span class="kw">breeding_program</span> <span class="kw">=</span> <span class="st">"University of Wisconsin"</span>,
@@ -212,10 +219,10 @@
 )</pre></div>
 <p>See the <a href="https://triticeaetoolbox.github.io/breeDBase.R/reference/Trial-class.html">Trial Class Documentation</a> for more information on the optional parameters.</p>
 <p><strong>Adding Plots:</strong> Once the <code>Plot</code>s for the trial have been created, they can be added to the <code>Trial</code> with the <code><a href="reference/setTrialPlots.html">setTrialPlots()</a></code> function. See the <a href="#plots">Plots section below</a> for more information on creating Trial Plots.</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">trial_mad</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span>(<span class="no">trial_mad</span>, <span class="no">plots_mad</span>)
+<div class="sourceCode" id="cb11"><pre class="r"><span class="no">trial_mad</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span>(<span class="no">trial_mad</span>, <span class="no">plots_mad</span>)
 <span class="no">trial_arl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span>(<span class="no">trial_arl</span>, <span class="no">plots_arl</span>)</pre></div>
 <p><strong>Creating Trial Templates:</strong> Once you have one or more <code>Trial</code>s (that have <code>Plots</code> set), you can create a trial upload template that can be submitted to a breeDBase website from the <strong>Manage Trials</strong> page (‘Upload Existing Trials’ &gt; ‘Multiple Trial Designs’).</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="fu"><a href="reference/writeTrialTemplate.html">writeTrialTemplate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">trial_mad</span>, <span class="no">trial_arl</span>), <span class="st">'/path/to/trials.xls'</span>)</pre></div>
+<div class="sourceCode" id="cb12"><pre class="r"><span class="fu"><a href="reference/writeTrialTemplate.html">writeTrialTemplate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">trial_mad</span>, <span class="no">trial_arl</span>), <span class="st">'/path/to/trials.xls'</span>)</pre></div>
 </div>
 <div id="plots" class="section level3">
 <h3 class="hasAnchor">
@@ -224,7 +231,7 @@
 <ul>
 <li>A plot layout can be generated by manually creating each Plot with the desired parameters</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="co"># Create the Plots</span>
+<div class="sourceCode" id="cb13"><pre class="r"><span class="co"># Create the Plots</span>
 <span class="no">plot1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Plot.html">Plot</a></span>(
     <span class="kw">plot_name</span> <span class="kw">=</span> <span class="st">"FARM-2019-UNH_PLOT1"</span>,
     <span class="kw">accession_name</span> <span class="kw">=</span> <span class="st">"SL18-UCONN-S131"</span>,
@@ -257,7 +264,7 @@
 <li>Alternatively, a simple plot layout can be generated automatically when given a list of Accessions and basic layout properties.</li>
 </ul>
 <p><strong>Example</strong>: A trial with 24 plots that has a maximum of 6 columns. The blocks have a dimension of 3 columns by 2 rows. The Plots will start in the top left corner and work across columns and down rows.</p>
-<div class="sourceCode" id="cb13"><pre class="r"><span class="co"># Generate the list of Accessions</span>
+<div class="sourceCode" id="cb14"><pre class="r"><span class="co"># Generate the list of Accessions</span>
 <span class="co"># here we're using a dummy list of Accessions named ACC_A - ACC_X</span>
 <span class="no">accessions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="no">LETTERS</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="fl">24</span>)], <span class="kw">function</span>(<span class="no">x</span>) { <span class="fu"><a href="reference/Accession.html">Accession</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"ACC_"</span>, <span class="no">x</span>), <span class="st">"Saccharina latissima"</span>) })
 
@@ -293,7 +300,7 @@
 <span class="co"># Row4: Block                            3                   3                   3                   4                   4                   4</span>
 <span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE </span></pre></div>
 <p><strong>Example:</strong> The same 24 plots, but the plots are assigned using a zig-zag method (ie left to right in the first row, right to left in the second row, etc). Additionally, the controls are specified using the names of the Accessions used as controls.</p>
-<div class="sourceCode" id="cb14"><pre class="r"><span class="co"># Generate the list of Accessions</span>
+<div class="sourceCode" id="cb15"><pre class="r"><span class="co"># Generate the list of Accessions</span>
 <span class="no">accessions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="no">LETTERS</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="fl">24</span>)], <span class="kw">function</span>(<span class="no">x</span>) { <span class="fu"><a href="reference/Accession.html">Accession</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"ACC_"</span>, <span class="no">x</span>), <span class="st">"Saccharina latissima"</span>) })
 
 <span class="co"># Create the Plots</span>
@@ -338,7 +345,7 @@
 <p>The <code>plot_name</code> must match the name of an existing Plot in an existing Trial.</p>
 <p>The <code>observations</code> must take the form of a named list where the list item name/key is the full trait name of the trait observed and the list item value is the observed trait value. The trait name must match an existing trait name in the breeDBase database and follow the form {trait name}|{trait id} (ex: <code>Grain yield kg/ha|CO_321:0001218</code>).</p>
 <p><strong>Example:</strong> Create two <code>PlotData</code> objects representing two plots from the same Trial</p>
-<div class="sourceCode" id="cb15"><pre class="r"><span class="no">plotData1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/PlotData.html">PlotData</a></span>(
+<div class="sourceCode" id="cb16"><pre class="r"><span class="no">plotData1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/PlotData.html">PlotData</a></span>(
     <span class="st">"FARM-2019-UNH_PLOT1"</span>,
     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
         <span class="st">"Blade length cm|CO_360:0000240"</span> <span class="kw">=</span> <span class="fl">24</span>,

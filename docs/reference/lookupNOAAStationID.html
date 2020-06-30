@@ -76,7 +76,7 @@ address, town, etc." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@ function can be used to get the coordinates of a location by
 address, town, etc.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lookupNOAAStationID</span>(<span class='no'>lat</span>, <span class='no'>lon</span>, <span class='kw'>radius</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
+    <pre class="usage"><span class='fu'>lookupNOAAStationID</span>(<span class='no'>lat</span>, <span class='no'>lon</span>, <span class='kw'>max_radius</span> <span class='kw'>=</span> <span class='fl'>25</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,15 +135,18 @@ address, town, etc.</p>
     </tr>
     <tr>
       <th>radius</th>
-      <td><p>Search radius (miles, default=10)</p></td>
+      <td><p>Max Search radius (miles, default=25)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The NOAA Station ID</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The query will search for NOAA stations within the specified radius 
+    <p>The query will search for NOAA stations within the specified max radius 
 centered around the location position.  If multiple stations are found,
-the ID of the first/closest station is returned.</p>
+the ID of the first station is returned.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
