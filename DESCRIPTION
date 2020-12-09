@@ -1,6 +1,6 @@
 Package: breedbase
-Version: 0.7.1
-Date: 2020-06-30
+Version: 0.8.0
+Date: 2020-12-09
 Title: breeDBase
 Description: Helper functions for generating breeDBase upload templates.
 Author: David Waring <djw64@cornell.edu>
@@ -14,7 +14,9 @@ Imports:
     httr,
     rjson,
     WriteXLS,
-    readxl
+    readxl    
 Suggests:
-    utils
+    utils,
+    readr,
+    digest
 RoxygenNote: 7.1.1

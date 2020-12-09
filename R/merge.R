@@ -12,9 +12,7 @@ mergeAccessions <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE)
     mergeData(
         dir, 
         "accessions.xls", 
-        buildAccessionTemplate(), 
         "accession_name", 
-        writeAccessionTemplate, 
         useMostRecent,
         keepUniqueDuplicates
     )
@@ -35,9 +33,7 @@ mergeLocations <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) 
     mergeData(
         dir, 
         "locations.xls", 
-        buildLocationTemplate(), 
         "Name", 
-        writeLocationTemplate, 
         useMostRecent,
         keepUniqueDuplicates
     )
@@ -58,9 +54,7 @@ mergeTrials <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
     mergeData(
         dir, 
         "trial_layout.xls", 
-        buildTrialTemplate(), 
         "plot_name", 
-        writeTrialTemplate, 
         useMostRecent,
         keepUniqueDuplicates
     )
@@ -78,17 +72,13 @@ mergeTrials <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 #' @import readxl WriteXLS tibble dplyr readr digest
 #' @export
 mergePlots <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
-    # mergeData(
-    #     dir, 
-    #     "trial_observations.xls", 
-    #     buildPlotDataTemplate(), 
-    #     "observationunit_name", 
-    #     writePlotDataTemplate, 
-    #     useMostRecent,
-    #     keepUniqueDuplicates
-    # )
-    # PLOT DATA WILL HAVE TO BE HANDLED SEPARATELY:
-    # Each file could have different columns
+    mergeData(
+        dir, 
+        "trial_observations.xls", 
+        "observationunit_name", 
+        useMostRecent,
+        keepUniqueDuplicates
+    )
 }
 
 
@@ -116,24 +106,38 @@ mergeAll <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 #' 
 #' @param dir path to parent directory of the submissions
 #' @param filename name of the file to merge
-#' @param template blank template to hold the merged data
 #' @param key the name of the key column for finding duplicates
-#' @writeTemplate the write template function
 #' @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
 #' @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
-mergeData <- function(dir, filename, template, key, writeTemplate, useMostRecent, keepUniqueDuplicates) {
+mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
     print(sprintf("Merging %s files from submissions in %s", filename, dir))
 
     # Get directories to parse
     dirs <- getSubmissionDirectories(dir, useMostRecent)
 
-    # Merged table
-    merged <- template
+    # Get all of the unique column names
+    cols <- c()
+    for ( sub_dir in dirs ) {
+        f <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"))
+        fc <- colnames(f)
+        for ( c in fc ) {
+            if ( ! c %in% cols ) {
+                cols <- c(cols, c)
+            }
+        }
+    }
+
+    # Create an empty to template to merge into
+    merged <- as_tibble(data.frame(matrix(ncol = length(cols), nrow = 0)))
+    colnames(merged) <- cols
+    for ( c in cols ) {
+        merged[,c] <- as.character(merged[,c])
+    }
 
     # Parse each directory
     for ( sub_dir in dirs ) {
-        a <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"))
-        merged <- rbind(merged, a)
+        f <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"), col_types="text")
+        merged <- dplyr::bind_rows(merged, f)
     }
 
     # Filter out duplicates
@@ -141,7 +145,7 @@ mergeData <- function(dir, filename, template, key, writeTemplate, useMostRecent
 
     # Write the filtered table
     dir.create(file.path(dir, "merged"), showWarnings=FALSE)
-    writeTemplate(filtered, paste(dir, "merged", filename, sep="/"))
+    WriteXLS::WriteXLS(filtered, paste(dir, "merged", filename, sep="/"))
 }
 
 

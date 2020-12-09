@@ -4,22 +4,12 @@
 \alias{mergeData}
 \title{Merge Data}
 \usage{
-mergeData(
-  dir,
-  filename,
-  template,
-  key,
-  writeTemplate,
-  useMostRecent,
-  keepUniqueDuplicates
-)
+mergeData(dir, filename, key, useMostRecent, keepUniqueDuplicates)
 }
 \arguments{
 \item{dir}{path to parent directory of the submissions}
 
 \item{filename}{name of the file to merge}
-
-\item{template}{blank template to hold the merged data}
 
 \item{key}{the name of the key column for finding duplicates}
 
