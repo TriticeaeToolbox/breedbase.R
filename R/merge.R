@@ -100,15 +100,15 @@ mergeAll <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 }
 
 
-#' Merge Data
-#' 
-#' Perform the actual merging of the data with the provided properties
-#' 
-#' @param dir path to parent directory of the submissions
-#' @param filename name of the file to merge
-#' @param key the name of the key column for finding duplicates
-#' @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
-#' @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
+# Merge Data
+# 
+# Perform the actual merging of the data with the provided properties
+# 
+# @param dir path to parent directory of the submissions
+# @param filename name of the file to merge
+# @param key the name of the key column for finding duplicates
+# @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
+# @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
 mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
     print(sprintf("Merging %s files from submissions in %s", filename, dir))
 
@@ -150,15 +150,15 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
 
 
 
-#' Remove Duplicates
-#' 
-#' Remove duplicate rows that have the same value in the specified key column
-#' 
-#' @param merged The merged tibble that contains all of the rows
-#' @param key_column The name of the column that will be used to find unique values
-#' @param keepUniqueDuplicates When TRUE, the script will not prompt to pick a unique duplicate row, but will keep all of them
-#' 
-#' @return a tibble with the duplicate rows removed
+# Remove Duplicates
+# 
+# Remove duplicate rows that have the same value in the specified key column
+# 
+# @param merged The merged tibble that contains all of the rows
+# @param key_column The name of the column that will be used to find unique values
+# @param keepUniqueDuplicates When TRUE, the script will not prompt to pick a unique duplicate row, but will keep all of them
+# 
+# @return a tibble with the duplicate rows removed
 removeDuplicates <- function(merged, key_column, keepUniqueDuplicates) {
     
     # Get unique keys of the key column
@@ -242,14 +242,14 @@ removeDuplicates <- function(merged, key_column, keepUniqueDuplicates) {
 
 
 
-#' Get Submission Directories
-#' 
-#' Get the list of submission directories from the parent directory
-#' 
-#' @param dir The path to the parent directory that contains the submission directores
-#' @param useMostRecent When set to TRUE, only include the most recent submission directory for each trial
-#' 
-#' @return vector of submission directories to parse
+# Get Submission Directories
+# 
+# Get the list of submission directories from the parent directory
+# 
+# @param dir The path to the parent directory that contains the submission directores
+# @param useMostRecent When set to TRUE, only include the most recent submission directory for each trial
+# 
+# @return vector of submission directories to parse
 getSubmissionDirectories <- function(dir, useMostRecent=TRUE) {
     
     # Get the submission directories from the provided directory
