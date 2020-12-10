@@ -75,7 +75,7 @@ alternate the direction of plot numbers." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
       </span>
     </div>
 
@@ -118,17 +118,17 @@ will increment in the same order as plots.  If `zig_zag` is set to TRUE then row
 alternate the direction of plot numbers.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createPlots</span>(
-  <span class='kw'>trial_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>accessions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_cols_per_block</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_rows_per_block</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>rep_equals_block</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>max_plots_per_rep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>zig_zag</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>controls</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>()
-)</pre>
+    <pre class="usage"><span class='fu'>createPlots</span><span class='op'>(</span>
+  trial_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  accessions <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_cols <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_cols_per_block <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_rows_per_block <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rep_equals_block <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  max_plots_per_rep <span class='op'>=</span> <span class='cn'>NULL</span>,
+  zig_zag <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  controls <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,8 +191,10 @@ alternate the direction of plot numbers.</p>
 <span class='co'># ROW 3   #13     #14     #15     #16     #17     #18</span>
 <span class='co'>#         ACC_M   ACC_N   ACC_O   ACC_P   ACC_Q   ACC_R</span>
 <span class='co'>#         BLK 1   BLK 1   BLK 1   BLK 2   BLK 2   BLK 2</span>
-<span class='no'>accessions</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>18</span>)], <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='fu'><a href='Accession.html'>Accession</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"ACC_"</span>, <span class='no'>x</span>), <span class='st'>"Saccharina latissima"</span>)})
-<span class='no'>plots</span> <span class='kw'>&lt;-</span> <span class='fu'>createPlots</span>(<span class='st'>"TEST_TRIAL"</span>, <span class='no'>accessions</span>, <span class='kw'>max_cols</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>max_cols_per_block</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div></pre>
+<span class='va'>accessions</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>LETTERS</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>18</span><span class='op'>)</span><span class='op'>]</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='Accession.html'>Accession</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"ACC_"</span>, <span class='va'>x</span><span class='op'>)</span>, <span class='st'>"Saccharina latissima"</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
+<span class='va'>plots</span> <span class='op'>&lt;-</span> <span class='fu'>createPlots</span><span class='op'>(</span><span class='st'>"TEST_TRIAL"</span>, <span class='va'>accessions</span>, max_cols <span class='op'>=</span> <span class='fl'>6</span>, max_cols_per_block <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -208,7 +210,7 @@ alternate the direction of plot numbers.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
       </span>
     </div>
 
@@ -61,24 +61,25 @@
   <div class="contents col-md-9">
 <div id="breedbaser" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#breedbaser" class="anchor"></a>breeDBase.R</h1></div>
+<a href="#breedbaser" class="anchor"></a>breedbase.R</h1></div>
 <div id="an-r-package-for-generating-breedbase-upload-templates" class="section level3">
 <h3 class="hasAnchor">
-<a href="#an-r-package-for-generating-breedbase-upload-templates" class="anchor"></a>An R package for generating breeDBase upload templates</h3>
-<p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of various breeDBase data types (such as an Accession, a phenotyping Trial, a Plot of a phenotyping Trial, etc). One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breeDBase website.</p>
+<a href="#an-r-package-for-generating-breedbase-upload-templates" class="anchor"></a>An R package for generating breedbase upload templates</h3>
+<p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of various breedbase data types (such as an Accession, a phenotyping Trial, a Plot of a phenotyping Trial, etc). One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breedbase website.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Currently, the breedbase package can be installed directly from GitHub using <code>devtools</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
-<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"TriticeaeToolbox/breeDBase.R"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">breedbase</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
+<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"TriticeaeToolbox/breedbase.R"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">breedbase</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>Documentation for all Classes and functions can be found in the package’s R documentation or online at <a href="https://triticeaetoolbox.github.io/breeDBase.R/reference">https://triticeaetoolbox.github.io/breeDBase.R/reference</a>.</p>
+<p>Documentation for all Classes and functions can be found in the package’s R documentation or online at <a href="https://triticeaetoolbox.github.io/breedbase.R/reference">https://triticeaetoolbox.github.io/breedbase.R/reference</a>.</p>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -89,55 +90,58 @@
 <div id="accessions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#accessions" class="anchor"></a>Accessions</h4>
-<p>The <code>Accession</code> Class holds all of the information about a single Accession. The <code><a href="reference/Accession.html">Accession()</a></code> function can be used to create an instance of the <code>Accession</code> Class. The <code>accession_name</code> and <code>species_name</code> and required parameters. Additional optional parameters can be provided through a named list passed to the <code>properties</code> parameter. For a list of all of the supported optional parameters, see the <a href="https://triticeaetoolbox.github.io/breeDBase.R/reference/Accession-class.html">Accession Class Documentation</a></p>
+<p>The <code>Accession</code> Class holds all of the information about a single Accession. The <code><a href="reference/Accession.html">Accession()</a></code> function can be used to create an instance of the <code>Accession</code> Class. The <code>accession_name</code> and <code>species_name</code> and required parameters. Additional optional parameters can be provided through a named list passed to the <code>properties</code> parameter. For a list of all of the supported optional parameters, see the <a href="https://triticeaetoolbox.github.io/breedbase.R/reference/Accession-class.html">Accession Class Documentation</a></p>
 <p><strong>Example:</strong> Create new Accessions with some optional properties</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="no">jerry</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span>(
-     <span class="kw">accession_name</span> <span class="kw">=</span> <span class="st">"JERRY"</span>,
-     <span class="kw">species_name</span> <span class="kw">=</span> <span class="st">"Triticum aestivum"</span>,
-     <span class="kw">properties</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-         <span class="kw">synonyms</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ND9257"</span>, <span class="st">"PI632433"</span>),
-         <span class="kw">institute_codes</span> <span class="kw">=</span> <span class="st">"NDSU"</span>,
-         <span class="kw">organization_names</span> <span class="kw">=</span> <span class="st">"North Dakota State University"</span>
-     )
-)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">jerry</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span>
+     accession_name <span class="op">=</span> <span class="st">"JERRY"</span>, 
+     species_name <span class="op">=</span> <span class="st">"Triticum aestivum"</span>,
+     properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+         synonyms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ND9257"</span>, <span class="st">"PI632433"</span><span class="op">)</span>,
+         institute_codes <span class="op">=</span> <span class="st">"NDSU"</span>,
+         organization_names <span class="op">=</span> <span class="st">"North Dakota State University"</span>
+     <span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">caledonia</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span>(
-     <span class="kw">accession_name</span> <span class="kw">=</span> <span class="st">"CALEDONIA"</span>,
-     <span class="kw">species_name</span> <span class="kw">=</span> <span class="st">"Triticum aestivum"</span>,
-     <span class="kw">properties</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-         <span class="kw">synonyms</span> <span class="kw">=</span> <span class="st">"PI610188"</span>,
-         <span class="kw">institute_codes</span> <span class="kw">=</span> <span class="st">"CNL"</span>,
-         <span class="kw">organization_names</span> <span class="kw">=</span> <span class="st">"Cornell University"</span>
-     )
-)
+<span class="va">caledonia</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span>
+     accession_name <span class="op">=</span> <span class="st">"CALEDONIA"</span>, 
+     species_name <span class="op">=</span> <span class="st">"Triticum aestivum"</span>,
+     properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+         synonyms <span class="op">=</span> <span class="st">"PI610188"</span>,
+         institute_codes <span class="op">=</span> <span class="st">"CNL"</span>,
+         organization_names <span class="op">=</span> <span class="st">"Cornell University"</span>
+     <span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">my_cross</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span>(
-    <span class="kw">accession_name</span> <span class="kw">=</span> <span class="st">"MY_CROSS"</span>,
-    <span class="kw">species_name</span> <span class="kw">=</span> <span class="st">"Triticum aestivum"</span>,
-    <span class="kw">properties</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-        <span class="kw">institute_codes</span> <span class="kw">=</span> <span class="st">"CNL"</span>,
-        <span class="kw">organization_names</span> <span class="kw">=</span> <span class="st">"Cornell University"</span>
-    )
-)
+<span class="va">my_cross</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span>
+    accession_name <span class="op">=</span> <span class="st">"MY_CROSS"</span>,
+    species_name <span class="op">=</span> <span class="st">"Triticum aestivum"</span>,
+    properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        institute_codes <span class="op">=</span> <span class="st">"CNL"</span>,
+        organization_names <span class="op">=</span> <span class="st">"Cornell University"</span>
+    <span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Add all accessions to a vector</span>
-<span class="no">accessions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">jerry</span>, <span class="no">caledonia</span>, <span class="no">my_cross</span>)</pre></div>
+<span class="va">accessions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">jerry</span>, <span class="va">caledonia</span>, <span class="va">my_cross</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="pedigrees" class="section level4">
 <h4 class="hasAnchor">
 <a href="#pedigrees" class="anchor"></a>Pedigrees</h4>
 <p>The <code><a href="reference/Pedigree.html">Pedigree()</a></code> function can be used to create an object of the <code>Pedigree</code> Class which sets the parents (and optionally the cross type) of a single Accession.</p>
 <p><strong>Example:</strong> Create a <code>Pedigree</code> object that sets the parents of the <code>my_cross</code> Accession as <code>jerry</code> and <code>caledonia</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="no">my_cross_pedigree</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Pedigree.html">Pedigree</a></span>(<span class="no">my_cross</span>, <span class="kw">female_parent</span> <span class="kw">=</span> <span class="no">jerry</span>, <span class="kw">male_parent</span> <span class="kw">=</span> <span class="no">caledonia</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_cross_pedigree</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Pedigree.html">Pedigree</a></span><span class="op">(</span><span class="va">my_cross</span>, female_parent <span class="op">=</span> <span class="va">jerry</span>, male_parent <span class="op">=</span> <span class="va">caledonia</span><span class="op">)</span></code></pre></div>
 <p><strong>Note:</strong> The <strong>T3/Wheat</strong> breedbase instance is planning on keeping pedigree information stored as an unparsed purdy pedigree string (at least until we have time to try to parse purdy pedigrees into parents). The purdy pedigree string will be stored as an optional property (<code>purdy_pedigree</code>) of the Accession and can be added to the Accession upload template.</p>
 </div>
 <div id="creating-upload-templates" class="section level4">
 <h4 class="hasAnchor">
 <a href="#creating-upload-templates" class="anchor"></a>Creating Upload Templates</h4>
-<p>Once you have one or more objects of a particular Class (such as a vector of <code>Accession</code>s or a <code>Pedigree</code>) you can create the create the upload templates used to add that particular data type to a breeDBase database through its website.</p>
+<p>Once you have one or more objects of a particular Class (such as a vector of <code>Accession</code>s or a <code>Pedigree</code>) you can create the create the upload templates used to add that particular data type to a breedbase database through its website.</p>
 <p><strong>Example:</strong> Create an upload template for the 3 Accessions and 1 Pedigree.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="reference/writeAccessionTemplate.html">writeAccessionTemplate</a></span>(<span class="no">accessions</span>, <span class="st">'/path/to/accessions.xls'</span>)
-<span class="fu"><a href="reference/writePedigreeTemplate.html">writePedigreeTemplate</a></span>(<span class="no">my_cross_pedigree</span>, <span class="st">"/path/to/pedigrees.txt"</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/writeAccessionTemplate.html">writeAccessionTemplate</a></span><span class="op">(</span><span class="va">accessions</span>, <span class="st">'/path/to/accessions.xls'</span><span class="op">)</span>
+<span class="fu"><a href="reference/writePedigreeTemplate.html">writePedigreeTemplate</a></span><span class="op">(</span><span class="va">my_cross_pedigree</span>, <span class="st">"/path/to/pedigrees.txt"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="locations" class="section level3">
@@ -148,49 +152,53 @@
 <ul>
 <li>Add location information directly as parameters, if it is already known</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="no">loc1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span>(
-    <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Batavia, NY"</span>,
-    <span class="kw">abbreviation</span> <span class="kw">=</span> <span class="st">"BAT"</span>,
-    <span class="kw">country_code</span> <span class="kw">=</span> <span class="st">"USA"</span>,
-    <span class="kw">country_name</span> <span class="kw">=</span> <span class="st">"United States of America"</span>,
-    <span class="kw">program</span> <span class="kw">=</span> <span class="st">"Cornell"</span>,
-    <span class="kw">type</span> <span class="kw">=</span> <span class="st">"Field"</span>,
-    <span class="kw">latitude</span> <span class="kw">=</span> <span class="fl">42.98054</span>,
-    <span class="kw">longitude</span> <span class="kw">=</span> -<span class="fl">78.23176</span>,
-    <span class="kw">altitude</span> <span class="kw">=</span> <span class="fl">274</span>,
-    <span class="kw">noaa_station_id</span> <span class="kw">=</span> <span class="st">"GHCND:US1NYGN0013"</span>
-)</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">loc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span><span class="op">(</span>
+    name <span class="op">=</span> <span class="st">"Batavia, NY"</span>,
+    abbreviation <span class="op">=</span> <span class="st">"BAT"</span>,
+    country_code <span class="op">=</span> <span class="st">"USA"</span>,
+    country_name <span class="op">=</span> <span class="st">"United States of America"</span>,
+    program <span class="op">=</span> <span class="st">"Cornell"</span>,
+    type <span class="op">=</span> <span class="st">"Field"</span>,
+    latitude <span class="op">=</span> <span class="fl">42.98054</span>,
+    longitude <span class="op">=</span> <span class="op">-</span><span class="fl">78.23176</span>,
+    altitude <span class="op">=</span> <span class="fl">274</span>,
+    noaa_station_id <span class="op">=</span> <span class="st">"GHCND:US1NYGN0013"</span>
+<span class="op">)</span></code></pre></div>
 <ul>
 <li>If either the <code>latitude</code>, <code>longitude</code> or <code>altitude</code> parameters are not provided, they will be queried using the <code>name</code> as the location.</li>
 <li>If the <code>noaa_station_id</code> is not provided, it will be queried using the provided or queried lat and lon coordinates of the location.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">loc2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span>(
-    <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Batavia, NY"</span>,
-    <span class="kw">abbreviation</span> <span class="kw">=</span> <span class="st">"BAT"</span>,
-    <span class="kw">country_code</span> <span class="kw">=</span> <span class="st">"USA"</span>,
-    <span class="kw">country_name</span> <span class="kw">=</span> <span class="st">"United States of America"</span>,
-    <span class="kw">program</span> <span class="kw">=</span> <span class="st">"Cornell"</span>,
-    <span class="kw">type</span> <span class="kw">=</span> <span class="st">"Field"</span>
-)</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">loc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span><span class="op">(</span>
+    name <span class="op">=</span> <span class="st">"Batavia, NY"</span>,
+    abbreviation <span class="op">=</span> <span class="st">"BAT"</span>,
+    country_code <span class="op">=</span> <span class="st">"USA"</span>,
+    country_name <span class="op">=</span> <span class="st">"United States of America"</span>,
+    program <span class="op">=</span> <span class="st">"Cornell"</span>,
+    type <span class="op">=</span> <span class="st">"Field"</span>
+<span class="op">)</span></code></pre></div>
 <ul>
 <li>Alternatively, you can query a more specific location string separately and use the results to build the Location</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="no">geo</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/geocodeLocation.html">geocodeLocation</a></span>(<span class="st">"2 Caldwell Drive, Ithaca, NY"</span>)
-<span class="no">loc3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span>(
-     <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Caldwell - Ithaca, NY"</span>,
-     <span class="kw">abbreviation</span> <span class="kw">=</span> <span class="st">"ITH_CALD"</span>,
-     <span class="kw">country_code</span> <span class="kw">=</span> <span class="st">"USA"</span>,
-     <span class="kw">country_name</span> <span class="kw">=</span> <span class="st">"United States of America"</span>,
-     <span class="kw">program</span> <span class="kw">=</span> <span class="st">"Cornell"</span>,
-     <span class="kw">type</span> <span class="kw">=</span> <span class="st">"Field"</span>,
-     <span class="kw">latitude</span> <span class="kw">=</span> <span class="no">geo</span>$<span class="no">latitude</span>,
-     <span class="kw">longitude</span> <span class="kw">=</span> <span class="no">geo</span>$<span class="no">longitude</span>,
-     <span class="kw">altitude</span> <span class="kw">=</span> <span class="no">geo</span>$<span class="no">altitude</span>
-)</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/geocodeLocation.html">geocodeLocation</a></span><span class="op">(</span><span class="st">"2 Caldwell Drive, Ithaca, NY"</span><span class="op">)</span>
+<span class="va">loc3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span><span class="op">(</span>
+     name <span class="op">=</span> <span class="st">"Caldwell - Ithaca, NY"</span>, 
+     abbreviation <span class="op">=</span> <span class="st">"ITH_CALD"</span>,
+     country_code <span class="op">=</span> <span class="st">"USA"</span>,
+     country_name <span class="op">=</span> <span class="st">"United States of America"</span>,
+     program <span class="op">=</span> <span class="st">"Cornell"</span>,
+     type <span class="op">=</span> <span class="st">"Field"</span>,
+     latitude <span class="op">=</span> <span class="va">geo</span><span class="op">$</span><span class="va">latitude</span>,
+     longitude <span class="op">=</span> <span class="va">geo</span><span class="op">$</span><span class="va">longitude</span>,
+     altitude <span class="op">=</span> <span class="va">geo</span><span class="op">$</span><span class="va">altitude</span>
+<span class="op">)</span></code></pre></div>
 <ul>
 <li>You can use the location’s coordinates to lookup a nearby NOAA weather station.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">stationId</span> <span class="kw">&lt;-</span> <span class="fu">lookupNOAAStationId</span>(<span class="no">geo</span>$<span class="no">latitude</span>, <span class="no">geo</span>$<span class="no">longitude</span>)</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">stationId</span> <span class="op">&lt;-</span> <span class="fu">lookupNOAAStationId</span><span class="op">(</span><span class="va">geo</span><span class="op">$</span><span class="va">latitude</span>, <span class="va">geo</span><span class="op">$</span><span class="va">longitude</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="trials" class="section level3">
 <h3 class="hasAnchor">
@@ -198,31 +206,35 @@
 <p>A <code>Trial</code> includes the metadata about a single phenotyping trial as well as information about the individual plots in the trial (see the <a href="#plots">Plots</a> section below). A trial is assigned a unique name, associated with a breeding program, year and location, and includes the trial design type and a description. Additional information can include the field and plot sizes, planting and harvest dates, and type of trial (greenhouse, phenotyping, advanced yield, etc).</p>
 <p>A <code>Trial</code> object can be created without its plot information (it just contains metadata about the trial). However, the plot information must be added to the <code>Trial</code> before a trial upload template can be created.</p>
 <p><strong>Example:</strong> Create a Trial with just the required parameters</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="no">trial_mad</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span>(
-    <span class="kw">trial_name</span> <span class="kw">=</span> <span class="st">"UMOPN_2019_Madison"</span>,
-    <span class="kw">breeding_program</span> <span class="kw">=</span> <span class="st">"University of Wisconsin"</span>,
-    <span class="kw">location</span> <span class="kw">=</span> <span class="st">"Madison, WI"</span>,
-    <span class="kw">year</span> <span class="kw">=</span> <span class="fl">2019</span>,
-    <span class="kw">design_type</span> <span class="kw">=</span> <span class="st">"RCBD"</span>,
-    <span class="kw">description</span> <span class="kw">=</span> <span class="st">"UMOPN Nursery Trial"</span>
-)</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trial_mad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span><span class="op">(</span>
+    trial_name <span class="op">=</span> <span class="st">"UMOPN_2019_Madison"</span>, 
+    breeding_program <span class="op">=</span> <span class="st">"University of Wisconsin"</span>, 
+    location <span class="op">=</span> <span class="st">"Madison, WI"</span>, 
+    year <span class="op">=</span> <span class="fl">2019</span>, 
+    design_type <span class="op">=</span> <span class="st">"RCBD"</span>, 
+    description <span class="op">=</span> <span class="st">"UMOPN Nursery Trial"</span>
+<span class="op">)</span></code></pre></div>
 <p><strong>Example:</strong> Create a Trial with optional parameters</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">opts</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">planting_date</span> <span class="kw">=</span> <span class="st">"2019-04-25"</span>, <span class="kw">harvest_date</span> <span class="kw">=</span> <span class="st">"2019-10-05"</span>, <span class="kw">trial_type</span> <span class="kw">=</span> <span class="st">"phenotyping_trial"</span>)
-<span class="no">trial_arl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span>(
-    <span class="kw">trial_name</span> <span class="kw">=</span> <span class="st">"UMOPN_2019_Arlington"</span>,
-    <span class="kw">breeding_program</span> <span class="kw">=</span> <span class="st">"University of Wisconsin"</span>,
-    <span class="kw">location</span> <span class="kw">=</span> <span class="st">"Arlington, WI"</span>,
-    <span class="kw">year</span> <span class="kw">=</span> <span class="fl">2019</span>,
-    <span class="kw">design_type</span> <span class="kw">=</span> <span class="st">"RCBD"</span>,
-    <span class="kw">description</span> <span class="kw">=</span> <span class="st">"UMOPN Nursery Trial"</span>,
-    <span class="kw">properties</span> <span class="kw">=</span> <span class="no">opts</span>
-)</pre></div>
-<p>See the <a href="https://triticeaetoolbox.github.io/breeDBase.R/reference/Trial-class.html">Trial Class Documentation</a> for more information on the optional parameters.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>planting_date <span class="op">=</span> <span class="st">"2019-04-25"</span>, harvest_date <span class="op">=</span> <span class="st">"2019-10-05"</span>, trial_type <span class="op">=</span> <span class="st">"phenotyping_trial"</span><span class="op">)</span>
+<span class="va">trial_arl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span><span class="op">(</span>
+    trial_name <span class="op">=</span> <span class="st">"UMOPN_2019_Arlington"</span>, 
+    breeding_program <span class="op">=</span> <span class="st">"University of Wisconsin"</span>, 
+    location <span class="op">=</span> <span class="st">"Arlington, WI"</span>, 
+    year <span class="op">=</span> <span class="fl">2019</span>, 
+    design_type <span class="op">=</span> <span class="st">"RCBD"</span>, 
+    description <span class="op">=</span> <span class="st">"UMOPN Nursery Trial"</span>, 
+    properties <span class="op">=</span> <span class="va">opts</span>
+<span class="op">)</span> </code></pre></div>
+<p>See the <a href="https://triticeaetoolbox.github.io/breedbase.R/reference/Trial-class.html">Trial Class Documentation</a> for more information on the optional parameters.</p>
 <p><strong>Adding Plots:</strong> Once the <code>Plot</code>s for the trial have been created, they can be added to the <code>Trial</code> with the <code><a href="reference/setTrialPlots.html">setTrialPlots()</a></code> function. See the <a href="#plots">Plots section below</a> for more information on creating Trial Plots.</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="no">trial_mad</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span>(<span class="no">trial_mad</span>, <span class="no">plots_mad</span>)
-<span class="no">trial_arl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span>(<span class="no">trial_arl</span>, <span class="no">plots_arl</span>)</pre></div>
-<p><strong>Creating Trial Templates:</strong> Once you have one or more <code>Trial</code>s (that have <code>Plots</code> set), you can create a trial upload template that can be submitted to a breeDBase website from the <strong>Manage Trials</strong> page (‘Upload Existing Trials’ &gt; ‘Multiple Trial Designs’).</p>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="fu"><a href="reference/writeTrialTemplate.html">writeTrialTemplate</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">trial_mad</span>, <span class="no">trial_arl</span>), <span class="st">'/path/to/trials.xls'</span>)</pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trial_mad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span><span class="op">(</span><span class="va">trial_mad</span>, <span class="va">plots_mad</span><span class="op">)</span>
+<span class="va">trial_arl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span><span class="op">(</span><span class="va">trial_arl</span>, <span class="va">plots_arl</span><span class="op">)</span></code></pre></div>
+<p><strong>Creating Trial Templates:</strong> Once you have one or more <code>Trial</code>s (that have <code>Plots</code> set), you can create a trial upload template that can be submitted to a breedbase website from the <strong>Manage Trials</strong> page (‘Upload Existing Trials’ &gt; ‘Multiple Trial Designs’).</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/writeTrialTemplate.html">writeTrialTemplate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">trial_mad</span>, <span class="va">trial_arl</span><span class="op">)</span>, <span class="st">'/path/to/trials.xls'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="plots" class="section level3">
 <h3 class="hasAnchor">
@@ -231,52 +243,54 @@
 <ul>
 <li>A plot layout can be generated by manually creating each Plot with the desired parameters</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="r"><span class="co"># Create the Plots</span>
-<span class="no">plot1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Plot.html">Plot</a></span>(
-    <span class="kw">plot_name</span> <span class="kw">=</span> <span class="st">"FARM-2019-UNH_PLOT1"</span>,
-    <span class="kw">accession_name</span> <span class="kw">=</span> <span class="st">"SL18-UCONN-S131"</span>,
-    <span class="kw">plot_number</span> <span class="kw">=</span> <span class="fl">1</span>,
-    <span class="kw">block_number</span> <span class="kw">=</span> <span class="fl">1</span>,
-    <span class="kw">properties</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-        <span class="kw">row_numer</span> <span class="kw">=</span> <span class="fl">1</span>,
-        <span class="kw">col_number</span> <span class="kw">=</span> <span class="fl">1</span>,
-        <span class="kw">rep_number</span> <span class="kw">=</span> <span class="fl">1</span>
-    )
-)
-<span class="no">plot2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/Plot.html">Plot</a></span>(
-    <span class="kw">plot_name</span> <span class="kw">=</span> <span class="st">"FARM-2019-UNH_PLOT2"</span>,
-    <span class="kw">accession_name</span> <span class="kw">=</span> <span class="st">"SL18-UCONN-S31"</span>,
-    <span class="kw">plot_number</span> <span class="kw">=</span> <span class="fl">2</span>,
-    <span class="kw">block_number</span> <span class="kw">=</span> <span class="fl">1</span>,
-    <span class="kw">properties</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-        <span class="kw">row_numer</span> <span class="kw">=</span> <span class="fl">1</span>,
-        <span class="kw">col_number</span> <span class="kw">=</span> <span class="fl">2</span>,
-        <span class="kw">rep_number</span> <span class="kw">=</span> <span class="fl">1</span>
-    )
-)
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create the Plots</span>
+<span class="va">plot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Plot.html">Plot</a></span><span class="op">(</span>
+    plot_name <span class="op">=</span> <span class="st">"FARM-2019-UNH_PLOT1"</span>, 
+    accession_name <span class="op">=</span> <span class="st">"SL18-UCONN-S131"</span>, 
+    plot_number <span class="op">=</span> <span class="fl">1</span>, 
+    block_number <span class="op">=</span> <span class="fl">1</span>,
+    properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        row_numer <span class="op">=</span> <span class="fl">1</span>,
+        col_number <span class="op">=</span> <span class="fl">1</span>,
+        rep_number <span class="op">=</span> <span class="fl">1</span>
+    <span class="op">)</span>
+<span class="op">)</span>
+<span class="va">plot2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Plot.html">Plot</a></span><span class="op">(</span>
+    plot_name <span class="op">=</span> <span class="st">"FARM-2019-UNH_PLOT2"</span>, 
+    accession_name <span class="op">=</span> <span class="st">"SL18-UCONN-S31"</span>, 
+    plot_number <span class="op">=</span> <span class="fl">2</span>, 
+    block_number <span class="op">=</span> <span class="fl">1</span>,
+    properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        row_numer <span class="op">=</span> <span class="fl">1</span>,
+        col_number <span class="op">=</span> <span class="fl">2</span>,
+        rep_number <span class="op">=</span> <span class="fl">1</span>
+    <span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># Combine the Plots for the layout</span>
-<span class="no">plots</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">plot1</span>, <span class="no">plot2</span>)
+<span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">plot1</span>, <span class="va">plot2</span><span class="op">)</span>
 
 <span class="co"># Write the Plot layout template</span>
-<span class="fu">writePlotLayout</span>(<span class="no">plots</span>, <span class="st">"/path/to/plots.xls"</span>)</pre></div>
+<span class="fu">writePlotLayout</span><span class="op">(</span><span class="va">plots</span>, <span class="st">"/path/to/plots.xls"</span><span class="op">)</span></code></pre></div>
 <ul>
 <li>Alternatively, a simple plot layout can be generated automatically when given a list of Accessions and basic layout properties.</li>
 </ul>
 <p><strong>Example</strong>: A trial with 24 plots that has a maximum of 6 columns. The blocks have a dimension of 3 columns by 2 rows. The Plots will start in the top left corner and work across columns and down rows.</p>
-<div class="sourceCode" id="cb14"><pre class="r"><span class="co"># Generate the list of Accessions</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Generate the list of Accessions</span>
 <span class="co"># here we're using a dummy list of Accessions named ACC_A - ACC_X</span>
-<span class="no">accessions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="no">LETTERS</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="fl">24</span>)], <span class="kw">function</span>(<span class="no">x</span>) { <span class="fu"><a href="reference/Accession.html">Accession</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"ACC_"</span>, <span class="no">x</span>), <span class="st">"Saccharina latissima"</span>) })
-
+<span class="va">accessions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ACC_"</span>, <span class="va">x</span><span class="op">)</span>, <span class="st">"Saccharina latissima"</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
+   
 <span class="co"># Create the Plots</span>
-<span class="no">plots</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/createPlots.html">createPlots</a></span>(
-    <span class="kw">trial_name</span> <span class="kw">=</span> <span class="st">"TEST-TRIAL"</span>,
-    <span class="kw">accessions</span> <span class="kw">=</span> <span class="no">accessions</span>,
-    <span class="kw">max_cols</span> <span class="kw">=</span> <span class="fl">6</span>,
-    <span class="kw">max_cols_per_block</span> <span class="kw">=</span> <span class="fl">3</span>,
-    <span class="kw">max_rows_per_block</span> <span class="kw">=</span> <span class="fl">2</span>
-)
-
+<span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/createPlots.html">createPlots</a></span><span class="op">(</span>
+    trial_name <span class="op">=</span> <span class="st">"TEST-TRIAL"</span>, 
+    accessions <span class="op">=</span> <span class="va">accessions</span>, 
+    max_cols <span class="op">=</span> <span class="fl">6</span>, 
+    max_cols_per_block <span class="op">=</span> <span class="fl">3</span>, 
+    max_rows_per_block <span class="op">=</span> <span class="fl">2</span>
+<span class="op">)</span>
+  
 <span class="co"># The generated layout:</span>
 <span class="co">#                                     Col1                Col2                Col3                Col4                Col5                Col6</span>
 <span class="co"># ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====</span>
@@ -298,21 +312,22 @@
 <span class="co"># Row4: Plot Name        TEST-TRIAL_PLOT19   TEST-TRIAL_PLOT20   TEST-TRIAL_PLOT21   TEST-TRIAL_PLOT22   TEST-TRIAL_PLOT23   TEST-TRIAL_PLOT24</span>
 <span class="co"># Row4: Accession Name               ACC_S               ACC_T               ACC_U               ACC_V               ACC_W               ACC_X</span>
 <span class="co"># Row4: Block                            3                   3                   3                   4                   4                   4</span>
-<span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE </span></pre></div>
+<span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE </span></code></pre></div>
 <p><strong>Example:</strong> The same 24 plots, but the plots are assigned using a zig-zag method (ie left to right in the first row, right to left in the second row, etc). Additionally, the controls are specified using the names of the Accessions used as controls.</p>
-<div class="sourceCode" id="cb15"><pre class="r"><span class="co"># Generate the list of Accessions</span>
-<span class="no">accessions</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="no">LETTERS</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>:<span class="fl">24</span>)], <span class="kw">function</span>(<span class="no">x</span>) { <span class="fu"><a href="reference/Accession.html">Accession</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"ACC_"</span>, <span class="no">x</span>), <span class="st">"Saccharina latissima"</span>) })
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Generate the list of Accessions</span>
+<span class="va">accessions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ACC_"</span>, <span class="va">x</span><span class="op">)</span>, <span class="st">"Saccharina latissima"</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
 
 <span class="co"># Create the Plots</span>
-<span class="no">plots</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/createPlots.html">createPlots</a></span>(
-    <span class="kw">trial_name</span> <span class="kw">=</span> <span class="st">"TEST-TRIAL"</span>,
-    <span class="kw">accessions</span> <span class="kw">=</span> <span class="no">accessions</span>,
-    <span class="kw">max_cols</span> <span class="kw">=</span> <span class="fl">6</span>,
-    <span class="kw">max_cols_per_block</span> <span class="kw">=</span> <span class="fl">3</span>,
-    <span class="kw">max_rows_per_block</span> <span class="kw">=</span> <span class="fl">2</span>,
-    <span class="kw">zig_zag</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-    <span class="kw">controls</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ACC_D"</span>, <span class="st">"ACC_L"</span>, <span class="st">"ACC_O"</span>, <span class="st">"ACC_T"</span>)
-)
+<span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/createPlots.html">createPlots</a></span><span class="op">(</span>
+    trial_name <span class="op">=</span> <span class="st">"TEST-TRIAL"</span>, 
+    accessions <span class="op">=</span> <span class="va">accessions</span>, 
+    max_cols <span class="op">=</span> <span class="fl">6</span>, 
+    max_cols_per_block <span class="op">=</span> <span class="fl">3</span>, 
+    max_rows_per_block <span class="op">=</span> <span class="fl">2</span>,
+    zig_zag <span class="op">=</span> <span class="cn">TRUE</span>,
+    controls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ACC_D"</span>, <span class="st">"ACC_L"</span>, <span class="st">"ACC_O"</span>, <span class="st">"ACC_T"</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co"># The generated layout:</span>
 <span class="co"># ===== Row1 =====      ===== Plot 1 =====  ===== Plot 2 =====  ===== Plot 3 =====  ===== Plot 4 =====  ===== Plot 5 =====  ===== Plot 6 =====</span>
@@ -334,34 +349,35 @@
 <span class="co"># Row4: Plot Name        TEST-TRIAL_PLOT24   TEST-TRIAL_PLOT23   TEST-TRIAL_PLOT22   TEST-TRIAL_PLOT21   TEST-TRIAL_PLOT20   TEST-TRIAL_PLOT19</span>
 <span class="co"># Row4: Accession Name               ACC_X               ACC_W               ACC_V               ACC_U               ACC_T               ACC_S</span>
 <span class="co"># Row4: Block                            3                   3                   3                   4                   4                   4</span>
-<span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE                TRUE               FALSE</span></pre></div>
+<span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE                TRUE               FALSE</span></code></pre></div>
 <p><strong>Creating Plot Templates:</strong> Once you have a vector of <code>Plot</code>s for a single trial, a plot upload template can be created. This upload template can be used to create a single Trial from the <strong>Manage Trials</strong> page (‘Upload Existing Trial(s)’ &gt; ‘Single Trial Design’). Here you will enter the Trial metadata in a form and upload this template for the trial’s plot layout.</p>
 </div>
 <div id="plot-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#plot-data" class="anchor"></a>Plot Data</h3>
-<p>The <code>PlotData</code> class is used to represent the phenotype observations (one or more traits) of a single Plot from a single Trial. A vector of <code>PlotData</code> objects can be used to represent the observations from an entire Trial and can be used to create a plot data upload template that can be uploaded through a breeDBase website.</p>
+<p>The <code>PlotData</code> class is used to represent the phenotype observations (one or more traits) of a single Plot from a single Trial. A vector of <code>PlotData</code> objects can be used to represent the observations from an entire Trial and can be used to create a plot data upload template that can be uploaded through a breedbase website.</p>
 <p>A <code>PlotData</code> object is created with a <code>plot_name</code> and a named list of <code>observations</code> (and optionally <code>notes</code> for the plot).</p>
 <p>The <code>plot_name</code> must match the name of an existing Plot in an existing Trial.</p>
-<p>The <code>observations</code> must take the form of a named list where the list item name/key is the full trait name of the trait observed and the list item value is the observed trait value. The trait name must match an existing trait name in the breeDBase database and follow the form {trait name}|{trait id} (ex: <code>Grain yield kg/ha|CO_321:0001218</code>).</p>
+<p>The <code>observations</code> must take the form of a named list where the list item name/key is the full trait name of the trait observed and the list item value is the observed trait value. The trait name must match an existing trait name in the breedbase database and follow the form {trait name}|{trait id} (ex: <code>Grain yield kg/ha|CO_321:0001218</code>).</p>
 <p><strong>Example:</strong> Create two <code>PlotData</code> objects representing two plots from the same Trial</p>
-<div class="sourceCode" id="cb16"><pre class="r"><span class="no">plotData1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/PlotData.html">PlotData</a></span>(
-    <span class="st">"FARM-2019-UNH_PLOT1"</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-        <span class="st">"Blade length cm|CO_360:0000240"</span> <span class="kw">=</span> <span class="fl">24</span>,
-        <span class="st">"Blade width cm|CO_360:0000241"</span> <span class="kw">=</span> <span class="fl">5</span>
-    )
-)
-<span class="no">plotData2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/PlotData.html">PlotData</a></span>(
-    <span class="st">"FARM-2019-UNH_PLOT2"</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-        <span class="st">"Blade length cm|CO_360:0000240"</span> <span class="kw">=</span> <span class="fl">27</span>,
-        <span class="st">"Blade width cm|CO_360:0000241"</span> <span class="kw">=</span> <span class="fl">4</span>,
-        <span class="st">"Blade thickness mm|CO_360:0000248"</span> <span class="kw">=</span> <span class="fl">2</span>
-    ),
-    <span class="kw">notes</span><span class="kw">=</span><span class="st">"This plot showed signs of disturbance"</span>
-)
-<span class="no">trialPlotData</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">plotData1</span>, <span class="no">plotData2</span>)</pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">plotData1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/PlotData.html">PlotData</a></span><span class="op">(</span>
+    <span class="st">"FARM-2019-UNH_PLOT1"</span>, 
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        <span class="st">"Blade length cm|CO_360:0000240"</span> <span class="op">=</span> <span class="fl">24</span>, 
+        <span class="st">"Blade width cm|CO_360:0000241"</span> <span class="op">=</span> <span class="fl">5</span>
+    <span class="op">)</span>
+<span class="op">)</span>
+<span class="va">plotData2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/PlotData.html">PlotData</a></span><span class="op">(</span>
+    <span class="st">"FARM-2019-UNH_PLOT2"</span>, 
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+        <span class="st">"Blade length cm|CO_360:0000240"</span> <span class="op">=</span> <span class="fl">27</span>, 
+        <span class="st">"Blade width cm|CO_360:0000241"</span> <span class="op">=</span> <span class="fl">4</span>, 
+        <span class="st">"Blade thickness mm|CO_360:0000248"</span> <span class="op">=</span> <span class="fl">2</span>
+    <span class="op">)</span>, 
+    notes<span class="op">=</span><span class="st">"This plot showed signs of disturbance"</span>
+<span class="op">)</span>
+<span class="va">trialPlotData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">plotData1</span>, <span class="va">plotData2</span><span class="op">)</span></code></pre></div>
 <p><strong>Creating Plot Data Templates:</strong> Once you have a vector of <code>PlotData</code> objects for a single trial, a plot data upload template can be created using the <code><a href="reference/writePlotDataTemplate.html">writePlotDataTemplate()</a></code> function. This will create a a phenotyping results spreadsheet in the ‘Simple’ format with plot-level data. This file can be uploaded from the detail page of a specific Trial (under ‘Upload Data Files’ &gt; ‘Phenotyping Spreadsheets’) or from the ‘Manage Phenotypic Data’ page.</p>
 </div>
 </div>
@@ -412,7 +428,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -75,7 +75,7 @@ in the properties list." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0</span>
       </span>
     </div>
 
@@ -118,13 +118,13 @@ are required.  All optional properties can be added as a named value
 in the properties list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Plot</span>(
-  <span class='kw'>plot_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>accession_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>plot_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>block_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>properties</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>()
-)</pre>
+    <pre class="usage"><span class='fu'>Plot</span><span class='op'>(</span>
+  plot_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  accession_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  plot_number <span class='op'>=</span> <span class='cn'>NULL</span>,
+  block_number <span class='op'>=</span> <span class='cn'>NULL</span>,
+  properties <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,27 +158,29 @@ in the properties list.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Create plots with just the required parameters</span>
-<span class='no'>plot1</span> <span class='kw'>&lt;-</span> <span class='fu'>Plot</span>(<span class='st'>"FARM-2019-UNH_PLOT1"</span>, <span class='st'>"SL18-UCONN-S131"</span>, <span class='fl'>1</span>, <span class='fl'>1</span>)
-<span class='no'>plot2</span> <span class='kw'>&lt;-</span> <span class='fu'>Plot</span>(<span class='st'>"FARM-2019-UNH_PLOT2"</span>, <span class='st'>"SL18-UCONN-S31"</span>, <span class='fl'>2</span>, <span class='fl'>1</span>)
+<span class='va'>plot1</span> <span class='op'>&lt;-</span> <span class='fu'>Plot</span><span class='op'>(</span><span class='st'>"FARM-2019-UNH_PLOT1"</span>, <span class='st'>"SL18-UCONN-S131"</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>plot2</span> <span class='op'>&lt;-</span> <span class='fu'>Plot</span><span class='op'>(</span><span class='st'>"FARM-2019-UNH_PLOT2"</span>, <span class='st'>"SL18-UCONN-S31"</span>, <span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># Create plots with optional parameters</span>
-<span class='no'>plot3</span> <span class='kw'>&lt;-</span> <span class='fu'>Plot</span>(<span class='st'>"FARM-2019-UNH_PLOT3"</span>, <span class='st'>"SL18-UCONN-S105"</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>row_number</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>col_number</span> <span class='kw'>=</span> <span class='fl'>3</span>))
-<span class='no'>plot4</span> <span class='kw'>&lt;-</span> <span class='fu'>Plot</span>(<span class='st'>"FARM-2019-UNH_PLOT4"</span>, <span class='st'>"SL18-UCONN-S146"</span>, <span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>row_number</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>col_number</span> <span class='kw'>=</span> <span class='fl'>4</span>))
+<span class='va'>plot3</span> <span class='op'>&lt;-</span> <span class='fu'>Plot</span><span class='op'>(</span><span class='st'>"FARM-2019-UNH_PLOT3"</span>, <span class='st'>"SL18-UCONN-S105"</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>row_number <span class='op'>=</span> <span class='fl'>1</span>, col_number <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>plot4</span> <span class='op'>&lt;-</span> <span class='fu'>Plot</span><span class='op'>(</span><span class='st'>"FARM-2019-UNH_PLOT4"</span>, <span class='st'>"SL18-UCONN-S146"</span>, <span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>row_number <span class='op'>=</span> <span class='fl'>1</span>, col_number <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Create a plot with an applied treatment</span>
-<span class='no'>plot5</span> <span class='kw'>&lt;-</span> <span class='fu'>Plot</span>(
-     <span class='st'>"FARM-2019-UNH_PLOT5"</span>,
-     <span class='st'>"SL18-UCONN-S110"</span>,
-     <span class='fl'>5</span>,
-     <span class='fl'>1</span>,
-     <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-         <span class='kw'>row_number</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-         <span class='kw'>col_number</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-         <span class='kw'>treatments</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-             <span class='kw'>inoculated</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-         )
-     )
-)</div></pre>
+<span class='va'>plot5</span> <span class='op'>&lt;-</span> <span class='fu'>Plot</span><span class='op'>(</span>
+     <span class='st'>"FARM-2019-UNH_PLOT5"</span>, 
+     <span class='st'>"SL18-UCONN-S110"</span>, 
+     <span class='fl'>5</span>, 
+     <span class='fl'>1</span>, 
+     <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+         row_number <span class='op'>=</span> <span class='fl'>1</span>, 
+         col_number <span class='op'>=</span> <span class='fl'>5</span>, 
+         treatments <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+             inoculated <span class='op'>=</span> <span class='cn'>TRUE</span>
+         <span class='op'>)</span>
+     <span class='op'>)</span>
+<span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -194,7 +196,7 @@ in the properties list.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

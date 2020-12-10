@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build PlotData Template — buildPlotDataTemplate • breedbase</title>
+<title>Remove Duplicates — removeDuplicates • breedbase</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Build PlotData Template — buildPlotDataTemplate" />
-<meta property="og:description" content="Create a tibble representing the breeDBasae upload
-template for the provided plotdata.  This will be a 'Simple' 
-spreadsheet format with data recorded at the plot-level." />
+<meta property="og:title" content="Remove Duplicates — removeDuplicates" />
+<meta property="og:description" content="Remove duplicate rows that have the same value in the specified key column" />
 
 
 
@@ -105,31 +103,37 @@ spreadsheet format with data recorded at the plot-level." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build PlotData Template</h1>
+    <h1>Remove Duplicates</h1>
     
-    <div class="hidden name"><code>buildPlotDataTemplate.Rd</code></div>
+    <div class="hidden name"><code>removeDuplicates.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a <code>tibble</code> representing the breeDBasae upload
-template for the provided plotdata.  This will be a 'Simple' 
-spreadsheet format with data recorded at the plot-level.</p>
+    <p>Remove duplicate rows that have the same value in the specified key column</p>
     </div>
 
-    <pre class="usage"><span class='fu'>buildPlotDataTemplate</span><span class='op'>(</span>plotdata <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>removeDuplicates</span><span class='op'>(</span><span class='va'>merged</span>, <span class='va'>key_column</span>, <span class='va'>keepUniqueDuplicates</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>plotdata</th>
-      <td><p>Vector of PlotData to add to the template</p></td>
+      <th>merged</th>
+      <td><p>The merged tibble that contains all of the rows</p></td>
+    </tr>
+    <tr>
+      <th>key_column</th>
+      <td><p>The name of the column that will be used to find unique values</p></td>
+    </tr>
+    <tr>
+      <th>keepUniqueDuplicates</th>
+      <td><p>When TRUE, the script will not prompt to pick a unique duplicate row, but will keep all of them</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>tibble</code> representation of the upload template</p>
+    <p>a tibble with the duplicate rows removed</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

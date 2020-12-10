@@ -1,11 +1,11 @@
-breeDBase.R
+breedbase.R
 ===========
-### An R package for generating breeDBase upload templates
+### An R package for generating breedbase upload templates
 
-This R package (**currently a work in progress**) can be used to create classes of various breeDBase 
+This R package (**currently a work in progress**) can be used to create classes of various breedbase 
 data types (such as an Accession, a phenotyping Trial, a Plot of a phenotyping Trial, etc).  One or 
 more instances of a class can be passed to a `buildTemplate` or `writeTemplate` function to create 
-and/or write an upload template to be used for adding data through the breeDBase website.
+and/or write an upload template to be used for adding data through the breedbase website.
 
 
 ## Installation
@@ -14,7 +14,7 @@ Currently, the breedbase package can be installed directly from GitHub using `de
 
 ```R
 library(devtools)
-install_github("TriticeaeToolbox/breeDBase.R")
+install_github("TriticeaeToolbox/breedbase.R")
 library(breedbase)
 ```
 
@@ -22,7 +22,7 @@ library(breedbase)
 ## Documentation
 
 Documentation for all Classes and functions can be found in the package's R documentation 
-or online at [https://triticeaetoolbox.github.io/breeDBase.R/reference](https://triticeaetoolbox.github.io/breeDBase.R/reference).
+or online at [https://triticeaetoolbox.github.io/breedbase.R/reference](https://triticeaetoolbox.github.io/breedbase.R/reference).
 
 
 ## Examples
@@ -36,7 +36,7 @@ The `Accession` Class holds all of the information about a single Accession.  Th
 can be used to create an instance of the `Accession` Class.  The `accession_name` and `species_name` and 
 required parameters.  Additional optional parameters can be provided through a named list passed to the 
 `properties` parameter.  For a list of all of the supported optional parameters, see the 
-[Accession Class Documentation](https://triticeaetoolbox.github.io/breeDBase.R/reference/Accession-class.html)
+[Accession Class Documentation](https://triticeaetoolbox.github.io/breedbase.R/reference/Accession-class.html)
 
 **Example:** Create new Accessions with some optional properties
 
@@ -93,7 +93,7 @@ the Accession upload template.
 #### Creating Upload Templates
 
 Once you have one or more objects of a particular Class (such as a vector of `Accession`s or a `Pedigree`) you can 
-create the create the upload templates used to add that particular data type to a breeDBase database through 
+create the create the upload templates used to add that particular data type to a breedbase database through 
 its website.
 
 **Example:** Create an upload template for the 3 Accessions and 1 Pedigree.
@@ -212,7 +212,7 @@ trial_arl <- Trial(
 ) 
 ```
 
-See the [Trial Class Documentation](https://triticeaetoolbox.github.io/breeDBase.R/reference/Trial-class.html) 
+See the [Trial Class Documentation](https://triticeaetoolbox.github.io/breedbase.R/reference/Trial-class.html) 
 for more information on the optional parameters.
 
 **Adding Plots:** Once the `Plot`s for the trial have been created, they can be added to the `Trial`
@@ -225,7 +225,7 @@ trial_arl <- setTrialPlots(trial_arl, plots_arl)
 ```
 
 **Creating Trial Templates:** Once you have one or more `Trial`s (that have `Plots` set), you can 
-create a trial upload template that can be submitted to a breeDBase website from the **Manage Trials** 
+create a trial upload template that can be submitted to a breedbase website from the **Manage Trials** 
 page ('Upload Existing Trials' > 'Multiple Trial Designs').
 
 ```R
@@ -368,7 +368,7 @@ trial's plot layout.
 
 The `PlotData` class is used to represent the phenotype observations (one or more traits) of a single Plot from 
 a single Trial.  A vector of `PlotData` objects can be used to represent the observations from an entire Trial 
-and can be used to create a plot data upload template that can be uploaded through a breeDBase website.
+and can be used to create a plot data upload template that can be uploaded through a breedbase website.
 
 A `PlotData` object is created with a `plot_name` and a named list of `observations` (and optionally `notes` for the 
 plot).  
@@ -377,7 +377,7 @@ The `plot_name` must match the name of an existing Plot in an existing Trial.
 
 The `observations` must take the form of a named list where the list item name/key is the full trait name 
 of the trait observed and the list item value is the observed trait value.  The trait name must match an 
-existing trait name in the breeDBase database and follow the form {trait name}|{trait id} 
+existing trait name in the breedbase database and follow the form {trait name}|{trait id} 
 (ex: `Grain yield kg/ha|CO_321:0001218`).
 
 **Example:** Create two `PlotData` objects representing two plots from the same Trial

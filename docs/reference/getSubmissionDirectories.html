@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build PlotData Template — buildPlotDataTemplate • breedbase</title>
+<title>Get Submission Directories — getSubmissionDirectories • breedbase</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Build PlotData Template — buildPlotDataTemplate" />
-<meta property="og:description" content="Create a tibble representing the breeDBasae upload
-template for the provided plotdata.  This will be a 'Simple' 
-spreadsheet format with data recorded at the plot-level." />
+<meta property="og:title" content="Get Submission Directories — getSubmissionDirectories" />
+<meta property="og:description" content="Get the list of submission directories from the parent directory" />
 
 
 
@@ -105,31 +103,33 @@ spreadsheet format with data recorded at the plot-level." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build PlotData Template</h1>
+    <h1>Get Submission Directories</h1>
     
-    <div class="hidden name"><code>buildPlotDataTemplate.Rd</code></div>
+    <div class="hidden name"><code>getSubmissionDirectories.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a <code>tibble</code> representing the breeDBasae upload
-template for the provided plotdata.  This will be a 'Simple' 
-spreadsheet format with data recorded at the plot-level.</p>
+    <p>Get the list of submission directories from the parent directory</p>
     </div>
 
-    <pre class="usage"><span class='fu'>buildPlotDataTemplate</span><span class='op'>(</span>plotdata <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getSubmissionDirectories</span><span class='op'>(</span><span class='va'>dir</span>, useMostRecent <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>plotdata</th>
-      <td><p>Vector of PlotData to add to the template</p></td>
+      <th>dir</th>
+      <td><p>The path to the parent directory that contains the submission directores</p></td>
+    </tr>
+    <tr>
+      <th>useMostRecent</th>
+      <td><p>When set to TRUE, only include the most recent submission directory for each trial</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>tibble</code> representation of the upload template</p>
+    <p>vector of submission directories to parse</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
