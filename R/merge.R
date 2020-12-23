@@ -112,14 +112,31 @@ mergeAll <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
     print(sprintf("Merging %s files from submissions in %s", filename, dir))
 
+    # Subset plot data with these columns
+    col_oun <- 23
+    col_start_traits <- 40
+    is_plot_data <- grepl("^trial_observations", filename)
+
     # Get directories to parse
     dirs <- getSubmissionDirectories(dir, useMostRecent)
 
+    # Read the Excel files
+    tables <- list()
+    for ( sub_dir in dirs ) {
+        skip <- ifelse(is_plot_data, 3, 0)
+        table <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"), skip=skip, col_types="text")
+        if ( is_plot_data ) {
+            cols <- c(23, col_start_traits:ncol(table))
+            table <- table[, cols]
+        }
+        tables[[sub_dir]] <- table
+    }
+
     # Get all of the unique column names
     cols <- c()
-    for ( sub_dir in dirs ) {
-        f <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"))
-        fc <- colnames(f)
+    for ( sub_dir in names(tables) ) {
+        table <- tables[[sub_dir]]
+        fc <- colnames(table)
         for ( c in fc ) {
             if ( ! c %in% cols ) {
                 cols <- c(cols, c)
@@ -134,10 +151,16 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
         merged[,c] <- as.character(merged[,c])
     }
 
-    # Parse each directory
-    for ( sub_dir in dirs ) {
-        f <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"), col_types="text")
-        merged <- dplyr::bind_rows(merged, f)
+    # Parse each table
+    for ( sub_dir in names(tables) ) {
+        table <- tables[[sub_dir]]
+        merged <- dplyr::bind_rows(merged, table)
+    }
+
+    # Fix plot data (rename observationunit and move notes to end)
+    if ( is_plot_data ) {
+        colnames(merged)[which(colnames(merged) == "observationUnitName")] <- "observationunit_name"
+        merged <- relocate(merged, notes, .after = last_col())
     }
 
     # Filter out duplicates
@@ -203,10 +226,10 @@ removeDuplicates <- function(merged, key_column, keepUniqueDuplicates) {
 
             # There were multiple unique rows, the user needs to choose one or keep all
             else {
-                
+                print(sprintf("WARNING: There were multiple rows for %s that are different!", key))
+
                 # Display the unique rows and prompt user to pick one (or all) to keep
                 if ( !keepUniqueDuplicates ) {
-                    print(sprintf("WARNING: There were multiple rows for %s that are different!", key))
                     for ( i in c(1:length(names(unique_rows))) ) {
                         print(sprintf("ROW #%i", i))
                         print(unique_rows[[names(unique_rows)[[i]]]])
