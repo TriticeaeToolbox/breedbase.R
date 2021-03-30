@@ -150,17 +150,13 @@ Location <- function(
 #' @import utils httr rjson
 #' @export
 geocodeLocation <- function(location) {
-    
-    # Encode location for URL
-    encoded <- utils::URLencode(location)
 
-    # Make API Request
-    url <- paste(DSTK_API_COORDS, encoded, sep="/")
-    body <- api(url)
-    values <- body[[names(body)[[1]]]]
+    # Make OSM API Request
+    params = list(q = location, format = "json")
+    body <- api(OSM_API_SEARCH, params)
 
     # Location could NOT be geocoded!
-    if ( is.null(values) ) {
+    if ( is.null(body) || length(body) == 0 ) {
         print(sprintf("ERROR: Could not geocode location [%s]!", location))
         return(list(
             latitude = 0,
@@ -169,23 +165,23 @@ geocodeLocation <- function(location) {
         ))
     }
 
+    # Get first location
+    location = body[[1]]
+
     # Format return
     rtn <- list(
-        latitude = values$latitude,
-        longitude = values$longitude
+        latitude = as.double(location$lat),
+        longitude = as.double(location$lon)
     )
 
-    # Encode coordinates for URL
-    coords <- paste(rtn$latitude, rtn$longitude, sep=",")
-    coords <- utils::URLencode(coords)
-
-    # Make API Request
-    url <- paste(DSTK_API_STATS, coords, sep="/")
-    body <- api(url)
+    # Make GMRT API Request
+    params <- list(latitude = location$lat, longitude = location$lon, format = "json")
+    body <- api(GMRT_API_PS, params)
 
     # Add elevation to return
-    statistics <- body[[1]]$statistics
-    rtn$altitude <- statistics$elevation$value
+    if ( !is.null(body) && exists("elevation", body) ) {
+        rtn$altitude <- as.double(body$elevation)
+    }
 
     # Return the list
     return(rtn)
@@ -256,11 +252,9 @@ queryNOAAStations <- function(lat, lon, radius) {
     # Set extent
     extent = paste(minlat, minlon, maxlat, maxlon, sep=",")
 
-    # Set URL with extent
-    url <- paste0(NOAA_STATIONS, "?extent=", extent)
-
     # Make API Request
-    body <- api(url, NOAA_TOKEN)
+    params <- list(extent = extent)
+    body <- api(NOAA_STATIONS, params, NOAA_TOKEN)
 
     # Parse Stations
     stations <- body$results
@@ -419,23 +413,28 @@ writeLocationTemplate <- function(
 
 
 # Make an API request to the specified URL
+# url = request URL
+# params = (optional) query parameters, as a list
+# token = (optional) token header value
 # Return the parsed JSON body
-api <- function(url, token=NULL) {
-    resp <- httr::GET(url, add_headers("Content-Type" = "application/json", "token" = token))
+api <- function(url, params=NULL, token=NULL) {
+    ua = paste0("breedbase.R/", utils::packageVersion("breedbase"), " (httr/", utils::packageVersion("httr"), ")")
+    resp <- httr::GET(
+        url, 
+        add_headers("Content-Type" = "application/json", "token" = token, "User-Agent" = ua), 
+        query=params
+    )
     body <- httr::content(resp, "text", encoding="UTF-8")
     body <- rjson::fromJSON(body)
     return(body)
 }
 
 
-# Data Science Toolkit API Root URL
-DSTK_API <- "http://www.datasciencetoolkit.org"
+# OSM Search API
+OSM_API_SEARCH <- "https://nominatim.openstreetmap.org/search"
 
-# Data Science Toolkit API street2coordinates URL
-DSTK_API_COORDS <- paste(DSTK_API, "street2coordinates", sep="/")
-
-# Data Science Toolkit API coordinates2statistics URL
-DSTK_API_STATS <- paste(DSTK_API, "coordinates2statistics", sep="/")
+# GMRT Elevation PointServer API
+GMRT_API_PS <- "https://www.gmrt.org/services/PointServer"
 
 # NOAA Web Services Token
 NOAA_TOKEN <- "UbRtMRShXhSSqHLWfpUpbeOoPiksgpLM"
