@@ -419,7 +419,7 @@ writeLocationTemplate <- function(
 # Return the parsed JSON body
 api <- function(url, params=NULL, token=NULL) {
     body <- tryCatch({
-        ua = paste0("breedbase.R/", utils::packageVersion("breedbase"), " (httr/", utils::packageVersion("httr"), ")")
+        ua <- paste0("breedbase.R/", utils::packageVersion("breedbase"), " (httr/", utils::packageVersion("httr"), ")")
         resp <- httr::GET(
             url, 
             add_headers("Content-Type" = "application/json", "token" = token, "User-Agent" = ua), 
