@@ -418,15 +418,19 @@ writeLocationTemplate <- function(
 # token = (optional) token header value
 # Return the parsed JSON body
 api <- function(url, params=NULL, token=NULL) {
-    ua = paste0("breedbase.R/", utils::packageVersion("breedbase"), " (httr/", utils::packageVersion("httr"), ")")
-    resp <- httr::GET(
-        url, 
-        add_headers("Content-Type" = "application/json", "token" = token, "User-Agent" = ua), 
-        query=params
-    )
-    body <- httr::content(resp, "text", encoding="UTF-8")
-    body <- rjson::fromJSON(body)
-    return(body)
+    body <- tryCatch({
+        ua = paste0("breedbase.R/", utils::packageVersion("breedbase"), " (httr/", utils::packageVersion("httr"), ")")
+        resp <- httr::GET(
+            url, 
+            add_headers("Content-Type" = "application/json", "token" = token, "User-Agent" = ua), 
+            query=params
+        )
+        body <- httr::content(resp, "text", encoding="UTF-8")
+        body <- rjson::fromJSON(body)
+        return(body)
+    }, error = function(e) {
+        stop(sprintf("Could not make API request [%s]", url))
+    })
 }
 
 
