@@ -8,16 +8,18 @@
 #' @param species_name Species Name
 #' @param properties (optional) Additional accession properties (as a named list)
 #' 
-#' See Class \linkS4class{Accession} for all optional accession properties
+#' See function \code{\link{getSupportedAccessionProperties}} for all supported accession property names
+#' 
+#' @seealso \link{getSupportedAccessionProperties}
 #' 
 #' @examples
 #' accession <- Accession(
 #'      "JERRY", 
 #'      "Triticum aestivum",
 #'      list(
-#'          synonyms = c("ND9257", "PI632433"),
-#'          institute_codes = "NDSU",
-#'          organization_names = "North Dakota State University"
+#'          synonym = c("ND9257", "PI632433"),
+#'          "institute code" = "NDSU",
+#'          organization_name = "North Dakota State University"
 #'      )
 #' )
 #' 
@@ -43,36 +45,7 @@ Accession <- function(
         "Accession",
         accession_name = accession_name,
         species_name = species_name,
-        population_name = if(is.null(properties$population_name)) NA_character_ else properties$population_name,
-        organization_names = if(is.null(properties$organization_names)) vector() else properties$organization_names,
-        synonyms = if(is.null(properties$synonyms)) vector() else properties$synonyms,
-        location_codes = if(is.null(properties$location_codes)) vector() else properties$location_codes,
-        ploidy_levels = if(is.null(properties$ploidy_levels)) vector() else properties$ploidy_levels,
-        genome_structures = if(is.null(properties$genome_structures)) vector() else properties$genome_structures,
-        varietys = if(is.null(properties$varietys)) vector() else properties$varietys,
-        donors = if(is.null(properties$donors)) vector() else properties$donors,
-        donor_institutes = if(is.null(properties$donor_institutes)) vector() else properties$donor_institutes,
-        donor_PUIs = if(is.null(properties$donor_PUIs)) vector() else properties$donor_PUIs,
-        country_of_origins = if(is.null(properties$country_of_origins)) vector() else properties$country_of_origins,
-        states = if(is.null(properties$states)) vector() else properties$states,
-        institute_codes = if(is.null(properties$institute_codes)) vector() else properties$institute_codes,
-        institute_names = if(is.null(properties$institute_names)) vector() else properties$institute_names,
-        biological_status_of_accession_codes = if(is.null(properties$biological_status_of_accession_codes)) vector() else properties$biological_status_of_accession_codes,
-        notes = if(is.null(properties$notes)) vector() else properties$notes,
-        accession_numbers = if(is.null(properties$accession_numbers)) vector() else properties$accession_numbers,
-        PUIs = if(is.null(properties$PUIs)) vector() else properties$PUIs,
-        seed_sources = if(is.null(properties$seed_sources)) vector() else properties$seed_sources,
-        type_of_germplasm_storage_codes = if(is.null(properties$type_of_germplasm_storage_codes)) vector() else properties$type_of_germplasm_storage_codes,
-        acquisition_dates = if(is.null(properties$acquisition_dates)) vector() else properties$acquisition_dates,
-        transgenic = if(is.null(properties$transgenic)) NA_integer_ else properties$transgenic,
-        introgression_parent = if(is.null(properties$introgression_parent)) NA_character_ else properties$introgression_parent,
-        introgression_backcross_parent = if(is.null(properties$introgression_backcross_parent)) NA_character_ else properties$introgression_backcross_parent,
-        introgression_map_version = if(is.null(properties$introgression_map_version)) NA_character_ else properties$introgression_map_version,
-        introgression_chromosome = if(is.null(properties$introgression_chromosome)) NA_character_ else properties$introgression_chromosome,
-        introgression_start_position_bp = if(is.null(properties$introgression_start_position_bp)) NA_real_ else properties$introgression_start_position_bp,
-        introgression_end_position_bp = if(is.null(properties$introgression_end_position_bp)) NA_real_ else properties$introgression_end_position_bp,
-        purdy_pedigree = if(is.null(properties$purdy_pedigree)) NA_character_ else properties$purdy_pedigree,
-        filial_generation = if(is.null(properties$filial_generation)) NA_character_ else properties$filial_generation
+        properties = properties
     )
 
     # Return the Accession
@@ -80,6 +53,19 @@ Accession <- function(
 
 }
 
+#' Get Supported Accession Properties
+#' 
+#' Get a vector of accession property names that can be used by the Accession class
+#' 
+#' @return A vector of supported accession property names
+#' 
+#' @export
+getSupportedAccessionProperties <- function() {
+    return(c(
+        getOption("breedbase.standard_stock_props"), 
+        getOption("breedbase.editable_stock_props")
+    ))
+}
 
 
 #' Build Accession Template
@@ -97,41 +83,17 @@ buildAccessionTemplate <- function(
     accessions = NULL
 ) {
     
+    # Get supported accession properties
+    supported_props = getSupportedAccessionProperties()
+
     # Set template headers
     template <- tibble::tibble(
         "accession_name" = character(),
-        "species_name" = character(),
-        "population_name" = character(),
-        "organization_name(s)" = character(),
-        "synonym(s)" = character(),
-        "location_code(s)" = character(),
-        "ploidy_level(s)" = character(),
-        "genome_structure(s)" = character(),
-        "variety(s)" = character(),
-        "donor(s)" = character(),
-        "donor_institute(s)" = character(),
-        "donor_PUI(s)" = character(),
-        "country_of_origin(s)" = character(),
-        "state(s)" = character(),
-        "institute_code(s)" = character(),
-        "institute_name(s)" = character(),
-        "biological_status_of_accession_code(s)" = character(),
-        "notes(s)" = character(),
-        "accession_number(s)" = character(),
-        "PUI(s)" = character(),
-        "seed_source(s)" = character(),
-        "type_of_germplasm_storage_code(s)" = character(),
-        "acquisition_date(s)" = character(),
-        "transgenic" = numeric(),
-        "introgression_parent" = character(),
-        "introgression_backcross_parent" = character(),
-        "introgression_map_version" = character(),
-        "introgression_chromosome" = character(),
-        "introgression_start_position_bp" = numeric(),
-        "introgression_end_position_bp" = numeric(),
-        "purdy_pedigree" = character(),
-        "filial_generation" = character()
+        "species_name" = character()
     )
+    for ( prop in supported_props ) {
+        template <- tibble::add_column(template, !!(prop) := NA_character_)
+    }
 
     # Return blank template if no accessions provided
     if ( is.null(accessions) ) {
@@ -143,50 +105,54 @@ buildAccessionTemplate <- function(
 
     # Add each of the Accessions
     for ( accession in accessions ) {
+
+        # Create new row, with accession and species names set, empty columns for all stock props
         row <- tibble::tibble(
             "accession_name" = accession@accession_name,
-            "species_name" = accession@species_name,
-            "population_name" = accession@population_name,
-            "organization_name(s)" = paste(accession@organization_names, collapse=","),
-            "synonym(s)" = paste(accession@synonyms, collapse=","),
-            "location_code(s)" = paste(accession@location_codes, collapse=","),
-            "ploidy_level(s)" = paste(accession@ploidy_levels, collapse=","),
-            "genome_structure(s)" = paste(accession@genome_structures, collapse=","),
-            "variety(s)" = paste(accession@varietys, collapse=","),
-            "donor(s)" = paste(accession@donors, collapse=","),
-            "donor_institute(s)" = paste(accession@donor_institutes, collapse=","),
-            "donor_PUI(s)" = paste(accession@donor_PUIs, collapse=","),
-            "country_of_origin(s)" = paste(accession@country_of_origins, collapse=","),
-            "state(s)" = paste(accession@states, collapse=","),
-            "institute_code(s)" = paste(accession@institute_codes, collapse=","),
-            "institute_name(s)" = paste(accession@institute_names, collapse=","),
-            "biological_status_of_accession_code(s)" = paste(accession@biological_status_of_accession_codes, collapse=","),
-            "notes(s)" = paste(accession@notes, collapse=","),
-            "accession_number(s)" = paste(accession@accession_numbers, collapse=","),
-            "PUI(s)" = paste(accession@PUIs, collapse=","),
-            "seed_source(s)" = paste(accession@seed_sources, collapse=","),
-            "type_of_germplasm_storage_code(s)" = paste(accession@type_of_germplasm_storage_codes, collapse=","),
-            "acquisition_date(s)" = paste(accession@acquisition_dates, collapse=","),
-            "transgenic" = accession@transgenic,
-            "introgression_parent" = accession@introgression_parent,
-            "introgression_backcross_parent" = accession@introgression_backcross_parent,
-            "introgression_map_version" = accession@introgression_map_version,
-            "introgression_chromosome" = accession@introgression_chromosome,
-            "introgression_start_position_bp" = accession@introgression_start_position_bp,
-            "introgression_end_position_bp" = accession@introgression_end_position_bp,
-            "purdy_pedigree" = accession@purdy_pedigree,
-            "filial_generation" = accession@filial_generation
+            "species_name" = accession@species_name
         )
+        for ( prop in supported_props ) {
+            row <- tibble::add_column(row, !!(prop) := NA_character_)
+        }
+
+        # Set the stock prop values
+        for ( prop in supported_props ) {
+            value <- accession@properties[[prop]]
+            if ( !is.null(value) ) {
+                if ( is.vector(value) ) {
+                    row[prop] <- paste(value, collapse=",")
+                }
+                else {
+                    row[prop] <- value
+                }
+            }
+            else {
+                row[prop] <- NA
+            }
+        }
+
+        # Add row to template
         template <- dplyr::bind_rows(template, row)
+
     }
 
-    # Clean template
-    for ( name in names(template) ) {
-        template[name][which(template[name] == ""),] <- NA
+    # Remove any unused editable stock props from the final template
+    cols_to_remove <- c()
+    for ( col in names(template) ) {
+        if ( col %in% getOption("breedbase.editable_stock_props") ) {
+            values <- unique(template[[col]])
+            if ( length(values) == 1 && is.na(values) ) {
+                cols_to_remove <- c(cols_to_remove, col)
+            }
+        }
+    }
+    filtered_template <- template
+    if ( length(cols_to_remove) > 0 ) {
+        filtered_template <- dplyr::select(template, -cols_to_remove)
     }
 
     # Return the template
-    return(template)
+    return(filtered_template)
 
 }
 
@@ -226,33 +192,16 @@ writeAccessionTemplate <- function(
         output <- paste(output, ".xls", sep="")
     }
 
-    # Filter input with only used variables
-    cols_to_remove <- c()
-    for ( col in names(input) ) {
-        if ( col %in% EDITABLE_STOCK_PROPS ) {
-            values <- unique(input[[col]])
-            if ( length(values) == 1 && is.na(values) ) {
-                cols_to_remove <- c(cols_to_remove, col)
-            }
-        }
-    }
-    if ( length(cols_to_remove) > 0 ) {
-        filtered_input <- dplyr::select(input, -cols_to_remove)
-    }
-    else {
-        filtered_input <- input
-    }
-
     # Split the input file, if chunk is provided
     if ( !is.null(chunk) ) {
-        max <- nrow(filtered_input)
+        max <- nrow(input)
         index <- 1
         start <- 1
         end <- ifelse(max < chunk, max, chunk)
         while ( end <= max ) {
             
             # Subset data and write the subset
-            subset <- filtered_input[c(start:end),]
+            subset <- input[c(start:end),]
             subset_output <- gsub("\\.xls$", paste0("_part", index, ".xls"), output)
             writeAccessionTemplate(subset, subset_output)
 
@@ -265,17 +214,14 @@ writeAccessionTemplate <- function(
                 end <- end + chunk
                 end <- ifelse(end > max, max, end)
             }
+
         }
     }
 
     # Write the entire file
     else {
         print(sprintf("Writing Accession Template: %s", output))
-        WriteXLS::WriteXLS(filtered_input, output)
+        WriteXLS::WriteXLS(input, output)
     }
 
 }
-
-
-# List of optional stock properties used for Accessions
-EDITABLE_STOCK_PROPS <- c("variety(s)", "donor(s)", "donor_institute(s)", "donor_PUI(s)", "country_of_origin(s)", "state(s)", "institute_code(s)", "institute_name(s)", "biological_status_of_accession_code(s)", "notes(s)", "accession_number(s)", "PUI(s)", "seed_source(s)", "type_of_germplasm_storage_code(s)", "acquisition_date(s)", "transgenic", "introgression_parent", "introgression_backcross_parent", "introgression_map_version", "introgression_chromosome", "introgression_start_position_bp", "introgression_end_position_bp", "purdy_pedigree", "filial_generation")
