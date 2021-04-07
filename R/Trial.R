@@ -79,16 +79,16 @@ setClass(
         }
 
         # Check Values
-        if ( !(object@design_type %in% DESIGN_TYPES) ) {
+        if ( !(object@design_type %in% getOption("breedbase.design_types")) ) {
             return(paste0(
                 "Design Type is not recognized. Supported Design Types: ", 
-                paste(DESIGN_TYPES, collapse=", ")
+                paste(getOption("breedbase.design_types"), collapse=", ")
             ))
         }
-        if ( !is.na(object@trial_type) && (!object@trial_type %in% TRIAL_TYPES) ) {
+        if ( !is.na(object@trial_type) && (!object@trial_type %in% getOption("breedbase.trial_types")) ) {
             return(paste0(
                 "Trial Type is not recognized. Supported Trial Types: ", 
-                paste(TRIAL_TYPES, collapse=", ")
+                paste(getOption("breedbase.trial_types"), collapse=", ")
             ))
         }
         if ( !grepl("^[0-9]{4}$", object@year) ) {
@@ -115,7 +115,7 @@ setClass(
 
 
 # List of supported Design Types
-DESIGN_TYPES <- c('CRD', 'RCBD', 'Alpha', 'Augmented', 'MAD', 'Westcott', 'Lattice')
+options("breedbase.design_types" = c('CRD', 'RCBD', 'Alpha', 'Augmented', 'MAD', 'Westcott', 'Lattice'))
 
 # List of supported Trial Types
-TRIAL_TYPES <- c('Seedling Nursery', 'phenotyping_trial', 'Advanced Yield Trial', 'Preliminary Yield Trial', 'Uniform Yield Trial', 'Variety Release Trial', 'Clonal Evaluation', 'genetic_gain_trial', 'storage_trial', 'heterosis_trial', 'health_status_trial', 'grafting_trial', 'Screen House', 'Seed Multiplication', 'crossing_block_trial', 'Specialty Trial')
+options("breedbase.trial_types" = c('Seedling Nursery', 'phenotyping_trial', 'Advanced Yield Trial', 'Preliminary Yield Trial', 'Uniform Yield Trial', 'Variety Release Trial', 'Clonal Evaluation', 'genetic_gain_trial', 'storage_trial', 'heterosis_trial', 'health_status_trial', 'grafting_trial', 'Screen House', 'Seed Multiplication', 'crossing_block_trial', 'Specialty Trial'))
