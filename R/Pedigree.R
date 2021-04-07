@@ -37,10 +37,10 @@ setClass(
             return("Male Parent Accession is required")
         }
 
-        if ( !(object@type %in% CROSS_TYPES) ) {
+        if ( !(object@type %in% getOption("breedbase.cross_types")) ) {
             return(paste0(
                 "Cross Type is not recognized. Supported Cross Types: ",
-                paste(CROSS_TYPES, collapse=", ")
+                paste(getOption("breedbase.cross_types"), collapse=", ")
             ))
         }
 
@@ -50,4 +50,4 @@ setClass(
 )
 
 # List of approved cross types
-CROSS_TYPES <- c("biparental", "self", "open", "sib")
+options("breedbase.cross_types" = c("biparental", "self", "open", "sib"))
