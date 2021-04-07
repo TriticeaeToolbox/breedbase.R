@@ -62,8 +62,8 @@ Accession <- function(
 #' @export
 getSupportedAccessionProperties <- function() {
     return(c(
-        getOption("breedbase.standard_stock_props"), 
-        getOption("breedbase.editable_stock_props")
+        getBBOption("standard_stock_props"), 
+        getBBOption("editable_stock_props")
     ))
 }
 
@@ -139,7 +139,7 @@ buildAccessionTemplate <- function(
     # Remove any unused editable stock props from the final template
     cols_to_remove <- c()
     for ( col in names(template) ) {
-        if ( col %in% getOption("breedbase.editable_stock_props") ) {
+        if ( col %in% getBBOption("editable_stock_props") ) {
             values <- unique(template[[col]])
             if ( length(values) == 1 && is.na(values) ) {
                 cols_to_remove <- c(cols_to_remove, col)
