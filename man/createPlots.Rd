@@ -64,3 +64,23 @@ accessions <- lapply(LETTERS[c(1:18)], function(x) {Accession(paste0("ACC_", x),
 plots <- createPlots("TEST_TRIAL", accessions, max_cols = 6, max_cols_per_block = 3)
 
 }
+\seealso{
+Other Trial: 
+\code{\link{Plot-class}},
+\code{\link{PlotData-class}},
+\code{\link{PlotData}},
+\code{\link{Plot}},
+\code{\link{Trial-class}},
+\code{\link{Trial}},
+\code{\link{buildPlotDataTemplate}()},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{setTrialPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

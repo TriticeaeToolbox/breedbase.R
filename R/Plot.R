@@ -19,6 +19,7 @@
 #' @slot weight_gram_seed_per_plot (optional) weight in gram of seeds in plot. seed is transferred from seedlot mentioned in seedlot name.
 #' @slot treatments (optional) A named list where the name is the name of a treatment (e.g. inoculated, drought, etc) and the value should be TRUE if the treatment was applied to the plot or FALSE if not.
 #' 
+#' @family Trial
 #' @importFrom methods is new slot<-
 #' @export
 setClass(

@@ -1,8 +1,7 @@
 #' Create PlotData
 #' 
-#' Create a PlotData object that contains phenotype observations 
-#' for a single plot in a phenotyping trial.  The Plot Name and 
-#' Observations are required.
+#' Create a PlotData object that contains phenotype observations for a single plot in a 
+#' phenotyping trial.  The Plot Name and Observations are required.
 #' 
 #' The Observations take the form of a named list where the list item name / key is the 
 #' full trait name, including the trait ID (ex: "Blade length cm|CO_360:0000240") and the 
@@ -18,6 +17,7 @@
 #' 
 #' @return PlotData
 #' 
+#' @family Trial
 #' @export
 PlotData <- function(
     plot_name = NULL,
@@ -54,6 +54,7 @@ PlotData <- function(
 #' 
 #' @return A \code{tibble} representation of the upload template
 #' 
+#' @family Trial
 #' @import dplyr tibble
 #' @export
 buildPlotDataTemplate <- function(
@@ -110,6 +111,7 @@ buildPlotDataTemplate <- function(
 #' a \code{tibble} representation of the upload template
 #' @param output The file path to the output .xls file
 #' 
+#' @family Trial
 #' @import WriteXLS
 #' @export
 writePlotDataTemplate <- function(

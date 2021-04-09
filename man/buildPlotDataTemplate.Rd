@@ -17,3 +17,23 @@ Create a \code{tibble} representing the breeDBasae upload
 template for the provided plotdata.  This will be a 'Simple' 
 spreadsheet format with data recorded at the plot-level.
 }
+\seealso{
+Other Trial: 
+\code{\link{Plot-class}},
+\code{\link{PlotData-class}},
+\code{\link{PlotData}},
+\code{\link{Plot}},
+\code{\link{Trial-class}},
+\code{\link{Trial}},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{createPlots}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{setTrialPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

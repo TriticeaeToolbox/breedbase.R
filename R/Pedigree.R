@@ -7,6 +7,7 @@
 #' @slot male_parent_accession Name of male parent Accession
 #' @slot type Cross type (biparental, self, open, sib)
 #' 
+#' @family Accession
 #' @importFrom methods is new slot<-
 #' @export
 setClass(

@@ -16,3 +16,15 @@ A \code{tibble} representation of the upload template
 Create a \code{tibble} representing the breeDBase upload 
 template for the provided pedigrees
 }
+\seealso{
+Other Accession: 
+\code{\link{Accession-class}},
+\code{\link{Accession}},
+\code{\link{Pedigree-class}},
+\code{\link{Pedigree}},
+\code{\link{buildAccessionTemplate}()},
+\code{\link{getSupportedAccessionProperties}()},
+\code{\link{writeAccessionTemplate}()},
+\code{\link{writePedigreeTemplate}()}
+}
+\concept{Accession}

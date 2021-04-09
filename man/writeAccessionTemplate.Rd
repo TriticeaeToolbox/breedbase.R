@@ -17,3 +17,15 @@ a \code{tibble} representation of the upload template}
 \description{
 Write a breeDBase upload template (.xls file) for accessions
 }
+\seealso{
+Other Accession: 
+\code{\link{Accession-class}},
+\code{\link{Accession}},
+\code{\link{Pedigree-class}},
+\code{\link{Pedigree}},
+\code{\link{buildAccessionTemplate}()},
+\code{\link{buildPedigreeTemplate}()},
+\code{\link{getSupportedAccessionProperties}()},
+\code{\link{writePedigreeTemplate}()}
+}
+\concept{Accession}

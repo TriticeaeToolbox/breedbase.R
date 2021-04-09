@@ -27,18 +27,21 @@ Trial(
 
 \item{description}{Additional text with any other relevant information about the trial}
 
-\item{properties}{(optional) Additional trial properties (as a named list)
-
-See Class \linkS4class{Trial} for all optional trial properties}
+\item{properties}{(optional) Additional trial properties (as a named list)}
 }
 \value{
 Trial
 }
 \description{
-Create a phenotyping Trial containing all of the provided 
-properties.  Trial Name, Breeding Program, Location, Year, 
-Design Type and Description are required.  All optional properties 
-can be added as a named value in the properties list.
+Create a phenotyping Trial containing all of the provided  properties.  Trial Name, 
+Breeding Program, Location, Year, Design Type and Description are required.  All 
+optional properties can be added as a named value in the properties list.
+}
+\details{
+See Class \linkS4class{Trial} for all optional trial properties
+
+Use the \code{\link{getTrialDesignTypes}} function to get a list of supported Trial design types and the 
+\code{\link{getTrialTypes}} function to get a list of the supported Trial types.
 }
 \examples{
 # Create a Trial with just the required parameters
@@ -49,3 +52,23 @@ opts <- list(planting_date = "2019-04-25", harvest_date = "2019-10-05", trial_ty
 trial2 <- Trial("UMOPN_2019_Arlington", "University of Wisconsin", "Arlington, WI", 2019, "RCBD", "UMOPN Nursery Trial", opts)
 
 }
+\seealso{
+Other Trial: 
+\code{\link{Plot-class}},
+\code{\link{PlotData-class}},
+\code{\link{PlotData}},
+\code{\link{Plot}},
+\code{\link{Trial-class}},
+\code{\link{buildPlotDataTemplate}()},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{createPlots}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{setTrialPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

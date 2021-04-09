@@ -17,3 +17,15 @@ grain yield in g/m2
 \description{
 Convert grain yield units from bu/ac to g/m2
 }
+\seealso{
+Other conversions: 
+\code{\link{convert_buac_kgHa}()},
+\code{\link{convert_gm2_kgHa}()},
+\code{\link{convert_in_cm}()},
+\code{\link{convert_kgHa_gm2}()},
+\code{\link{convert_kghl_gL}()},
+\code{\link{convert_lbsbu_gL}()},
+\code{\link{convert_scale}()},
+\code{\link{convert_sqft_m2}()}
+}
+\concept{conversions}

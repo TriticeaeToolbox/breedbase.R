@@ -53,6 +53,10 @@ results of which can be used to create the Location.
 
 The \code{\link{lookupNOAAStationId}} function can be used to obtain the NOAA
 Station ID of the location (using its lat and lon) if it is unknown.
+
+Use the \code{\link{getCountryCodes}} function to get a list of supported country 
+codes and the \code{\link{getLocationTypes}} function to get a list of supported 
+location types.
 }
 \examples{
 # Use the Location name to query lat/lon/alt properties
@@ -82,3 +86,14 @@ location <- Location(
 )
 
 }
+\seealso{
+Other Location: 
+\code{\link{Location-class}},
+\code{\link{buildLocationTemplate}()},
+\code{\link{geocodeLocation}()},
+\code{\link{getCountryCodes}()},
+\code{\link{getLocationTypes}()},
+\code{\link{lookupNOAAStationID}()},
+\code{\link{writeLocationTemplate}()}
+}
+\concept{Location}

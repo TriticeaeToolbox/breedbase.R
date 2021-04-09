@@ -38,3 +38,15 @@ father <- Accession('SL18-SF-S19-MG2', 'Saccharina latissima')
 pedigree2 <- Pedigree(offspring, mother, father)
 
 }
+\seealso{
+Other Accession: 
+\code{\link{Accession-class}},
+\code{\link{Accession}},
+\code{\link{Pedigree-class}},
+\code{\link{buildAccessionTemplate}()},
+\code{\link{buildPedigreeTemplate}()},
+\code{\link{getSupportedAccessionProperties}()},
+\code{\link{writeAccessionTemplate}()},
+\code{\link{writePedigreeTemplate}()}
+}
+\concept{Accession}

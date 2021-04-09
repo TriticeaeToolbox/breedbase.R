@@ -15,3 +15,15 @@ test weight in g/L
 \description{
 Convert test weight units from kg/hl to g/L
 }
+\seealso{
+Other conversions: 
+\code{\link{convert_buac_gm2}()},
+\code{\link{convert_buac_kgHa}()},
+\code{\link{convert_gm2_kgHa}()},
+\code{\link{convert_in_cm}()},
+\code{\link{convert_kgHa_gm2}()},
+\code{\link{convert_lbsbu_gL}()},
+\code{\link{convert_scale}()},
+\code{\link{convert_sqft_m2}()}
+}
+\concept{conversions}

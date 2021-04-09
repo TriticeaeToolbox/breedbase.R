@@ -24,3 +24,15 @@ the value in the new range
 Convert a value from an ordinal scale in one range to a
 value in a new range (0-->5, 1-->10)
 }
+\seealso{
+Other conversions: 
+\code{\link{convert_buac_gm2}()},
+\code{\link{convert_buac_kgHa}()},
+\code{\link{convert_gm2_kgHa}()},
+\code{\link{convert_in_cm}()},
+\code{\link{convert_kgHa_gm2}()},
+\code{\link{convert_kghl_gL}()},
+\code{\link{convert_lbsbu_gL}()},
+\code{\link{convert_sqft_m2}()}
+}
+\concept{conversions}

@@ -17,9 +17,8 @@ PlotData(plot_name = NULL, observations = list(), notes = NA_character_)
 PlotData
 }
 \description{
-Create a PlotData object that contains phenotype observations 
-for a single plot in a phenotyping trial.  The Plot Name and 
-Observations are required.
+Create a PlotData object that contains phenotype observations for a single plot in a 
+phenotyping trial.  The Plot Name and Observations are required.
 }
 \details{
 The Observations take the form of a named list where the list item name / key is the 
@@ -31,3 +30,23 @@ plotdata1 <- PlotData("FARM-2019-UNH_PLOT1", list("Blade length cm|CO_360:000024
 plotdata2 <- PlotData("FARM-2019-UNH_PLOT2", list("Blade length cm|CO_360:0000240" = 27, "Blade width cm|CO_360:0000241" = 4))
 
 }
+\seealso{
+Other Trial: 
+\code{\link{Plot-class}},
+\code{\link{PlotData-class}},
+\code{\link{Plot}},
+\code{\link{Trial-class}},
+\code{\link{Trial}},
+\code{\link{buildPlotDataTemplate}()},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{createPlots}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{setTrialPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

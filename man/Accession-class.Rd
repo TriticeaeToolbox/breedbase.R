@@ -17,64 +17,18 @@ The `accession_name` and `species_name` are required, all other fields are optio
 
 \item{\code{species_name}}{Species Name (must exist in the database)}
 
-\item{\code{population_name}}{(optional) a population is a grouping of accessions. if the population already exists in the database, the accession will be added into it, otherwise, the new population will be created.}
-
-\item{\code{organization_names}}{(optional) the names of the organizations which use this accession.}
-
-\item{\code{synonyms}}{(optional) an accession can be known by many names including local popular names. a synonym name can be used instead of the accession_name throughout the database; because of this, synonyms must themselves be unique.}
-
-\item{\code{location_codes}}{(optional) location codes for the accession.}
-
-\item{\code{ploidy_levels}}{(optional) a number indicating the ploidy (e.g. 2 for diploid, 3 for triploid), numeric.}
-
-\item{\code{genome_structures}}{(optional) genome structures for accession which take into account ploidy and ancestral genome info e.g. AAA, AB.}
-
-\item{\code{varietys}}{(optional) variety can be defined as a group of individuals or plants having similar traits that can be reproduced "true to type" from generation to generation.}
-
-\item{\code{donors}}{(optional) the accession_name of the donor accession.}
-
-\item{\code{donor_institutes}}{(optional) the institute of the donor accession.}
-
-\item{\code{donor_PUIs}}{(optional) the permanent unique identifier of the donor accession.}
-
-\item{\code{country_of_origins}}{(optional) the country of origin.}
-
-\item{\code{states}}{(optional) the state of origin.}
-
-\item{\code{institute_codes}}{(optional) the institute code of origin.}
-
-\item{\code{institute_names}}{(optional) the institute name of origin.}
-
-\item{\code{biological_status_of_accession_codes}}{(optional) code indicating the state of accession.}
-
-\item{\code{notes}}{(optional) free text for notes.}
-
-\item{\code{accession_numbers}}{(optional) accession number for accession from germplasm bank.}
-
-\item{\code{PUIs}}{(optional) permanent unique identifier of the accession.}
-
-\item{\code{seed_sources}}{(optional) origin of seed source.}
-
-\item{\code{type_of_germplasm_storage_codes}}{(optional) code indicating the type of germplasm storage.}
-
-\item{\code{acquisition_dates}}{(optional) dates of acquisition YYYYMMDD for accession.}
-
-\item{\code{transgenic}}{(optional) indicates if accession is transgenic. Please indicate 1 if transgenic and empty if otherwise.}
-
-\item{\code{introgression_parent}}{(optional) if the accession you are adding has an introgression that originated from one of the parents, you can specify the parent here}
-
-\item{\code{introgression_backcross_parent}}{(optional) the backcross parent for introducing an introgression into the accession being added}
-
-\item{\code{introgression_map_version}}{(optional) the map version for identifying the start and stop position of the introgression. e.g. AGPv2}
-
-\item{\code{introgression_chromosome}}{(optional) the chromosome number that the introgression is on.}
-
-\item{\code{introgression_start_position_bp}}{(optional) the start position of the introgression in base pairs}
-
-\item{\code{introgression_end_position_bp}}{(optional) the end position of the introgression in base pairs}
-
-\item{\code{purdy_pedigree}}{(optional, experimental) the purdy pedigree string}
-
-\item{\code{filial_generation}}{(optional, experimental) the filial generation number}
+\item{\code{properties}}{(optional) a list of additional accession stock properties, where the list key is a stock property name supported by the breedbase server and the list value is either a string value or a vector of string values.}
 }}
 
+\seealso{
+Other Accession: 
+\code{\link{Accession}},
+\code{\link{Pedigree-class}},
+\code{\link{Pedigree}},
+\code{\link{buildAccessionTemplate}()},
+\code{\link{buildPedigreeTemplate}()},
+\code{\link{getSupportedAccessionProperties}()},
+\code{\link{writeAccessionTemplate}()},
+\code{\link{writePedigreeTemplate}()}
+}
+\concept{Accession}

@@ -13,7 +13,7 @@ Accession(accession_name = NULL, species_name = NULL, properties = list())
 
 \item{properties}{(optional) Additional accession properties (as a named list)
 
-See Class \linkS4class{Accession} for all optional accession properties}
+See function \code{\link{getSupportedAccessionProperties}} for all supported accession property names}
 }
 \value{
 Accession
@@ -28,10 +28,24 @@ accession <- Accession(
      "JERRY", 
      "Triticum aestivum",
      list(
-         synonyms = c("ND9257", "PI632433"),
-         institute_codes = "NDSU",
-         organization_names = "North Dakota State University"
+         synonym = c("ND9257", "PI632433"),
+         "institute code" = "NDSU",
+         organization_name = "North Dakota State University"
      )
 )
 
 }
+\seealso{
+\link{getSupportedAccessionProperties}
+
+Other Accession: 
+\code{\link{Accession-class}},
+\code{\link{Pedigree-class}},
+\code{\link{Pedigree}},
+\code{\link{buildAccessionTemplate}()},
+\code{\link{buildPedigreeTemplate}()},
+\code{\link{getSupportedAccessionProperties}()},
+\code{\link{writeAccessionTemplate}()},
+\code{\link{writePedigreeTemplate}()}
+}
+\concept{Accession}

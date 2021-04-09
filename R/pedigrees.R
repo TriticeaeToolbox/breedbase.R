@@ -20,6 +20,7 @@
 #' 
 #' @return Pedigree
 #' 
+#' @family Accession
 #' @export
 Pedigree <- function(
     progeny = NULL,
@@ -74,6 +75,7 @@ Pedigree <- function(
 #' 
 #' @return A \code{tibble} representation of the upload template
 #' 
+#' @family Accession
 #' @import dplyr tibble
 #' @export
 buildPedigreeTemplate <- function(
@@ -127,6 +129,7 @@ buildPedigreeTemplate <- function(
 #' @param output The file path to the output .txt file
 #' @param chunk Chunk the file into parts with up to `chunk` number of lines per file
 #' 
+#' @family Accession
 #' @export
 writePedigreeTemplate <- function(
     input = NULL,

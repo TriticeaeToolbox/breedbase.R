@@ -8,6 +8,7 @@
 #' @slot observations A named list of phenotype observations trai-value key-pairs
 #' @slot notes (optional) Plot-level notes
 #' 
+#' @family Trial
 #' @importFrom methods is new slot<-
 #' @export
 setClass(

@@ -16,3 +16,14 @@ A \code{tibble} representation of the upload template
 Create a \code{tibble} representing the breeDBase upload 
 template for the provided locations
 }
+\seealso{
+Other Location: 
+\code{\link{Location-class}},
+\code{\link{Location}},
+\code{\link{geocodeLocation}()},
+\code{\link{getCountryCodes}()},
+\code{\link{getLocationTypes}()},
+\code{\link{lookupNOAAStationID}()},
+\code{\link{writeLocationTemplate}()}
+}
+\concept{Location}

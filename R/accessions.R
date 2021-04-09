@@ -25,6 +25,7 @@
 #' 
 #' @return Accession
 #' 
+#' @family Accession
 #' @export
 Accession <- function(
     accession_name = NULL,
@@ -53,20 +54,6 @@ Accession <- function(
 
 }
 
-#' Get Supported Accession Properties
-#' 
-#' Get a vector of accession property names that can be used by the Accession class
-#' 
-#' @return A vector of supported accession property names
-#' 
-#' @export
-getSupportedAccessionProperties <- function() {
-    return(c(
-        getBBOption("standard_stock_props"), 
-        getBBOption("editable_stock_props")
-    ))
-}
-
 
 #' Build Accession Template
 #' 
@@ -77,6 +64,7 @@ getSupportedAccessionProperties <- function() {
 #' 
 #' @return A \code{tibble} representation of the upload template
 #' 
+#' @family Accession
 #' @import dplyr tibble
 #' @export
 buildAccessionTemplate <- function(
@@ -166,6 +154,7 @@ buildAccessionTemplate <- function(
 #' @param output The file path to the output .xls file
 #' @param chunk Chunk the file into parts with up to `chunk` number of lines per file
 #' 
+#' @family Accession
 #' @import dplyr WriteXLS
 #' @export
 writeAccessionTemplate <- function(

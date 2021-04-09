@@ -5,13 +5,13 @@
 #' are required.  All optional properties can be added as a named value 
 #' in the properties list.
 #' 
+#' See Class \linkS4class{Plot} for all optional plot properties
+#' 
 #' @param plot_name The unique name for the plot (must be unique across entire database. this is often a concatenation of the trial name, the accession name, and the plot number.)
 #' @param accession_name The name of the accession being tested in the plot (must exist in the database)
 #' @param plot_number The sequential number for the plot in the field (e.g. 1001, 1002, 2001, 2002). these numbers should be unique for the trial.
 #' @param block_number A design parameter indicating which block the plot is in
 #' @param properties (optional) Additional plot properties (as a named list)
-#' 
-#' See Class \linkS4class{Plot} for all optional plot properties
 #' 
 #' @examples
 #' # Create plots with just the required parameters
@@ -39,6 +39,7 @@
 #' 
 #' @return Plot
 #' 
+#' @family Trial
 #' @export
 Plot <- function(
     plot_name = NULL,
@@ -124,6 +125,7 @@ Plot <- function(
 #' 
 #' @return vector of Plots
 #' 
+#' @family Trial
 #' @export
 createPlots <- function(
     trial_name = NULL,
@@ -304,6 +306,7 @@ createPlots <- function(
 #' # Row3: Control                      FALSE               FALSE               FALSE                TRUE               FALSE               FALSE
 #' 
 #' 
+#' @family Trial
 #' @import tibble
 #' @export
 printPlots <- function(plots) {
@@ -380,6 +383,7 @@ printPlots <- function(plots) {
 #' 
 #' @return A \code{tibble} representation of the upload template
 #' 
+#' @family Trial
 #' @import dplyr tibble
 #' @export
 buildPlotTemplate <- function(
@@ -456,6 +460,7 @@ buildPlotTemplate <- function(
 #' a \code{tibble} representation of the upload template
 #' @param output The file path to the output .xls file
 #' 
+#' @family Trial
 #' @import WriteXLS
 #' @export
 writePlotTemplate <- function(

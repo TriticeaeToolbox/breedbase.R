@@ -19,3 +19,15 @@ An S4 Class to represent a breeDBase pedigree
 \item{\code{type}}{Cross type (biparental, self, open, sib)}
 }}
 
+\seealso{
+Other Accession: 
+\code{\link{Accession-class}},
+\code{\link{Accession}},
+\code{\link{Pedigree}},
+\code{\link{buildAccessionTemplate}()},
+\code{\link{buildPedigreeTemplate}()},
+\code{\link{getSupportedAccessionProperties}()},
+\code{\link{writeAccessionTemplate}()},
+\code{\link{writePedigreeTemplate}()}
+}
+\concept{Accession}

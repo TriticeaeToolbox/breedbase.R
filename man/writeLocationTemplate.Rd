@@ -17,3 +17,14 @@ a \code{tibble} representation of the upload template}
 \description{
 Write a breeDBase upload template (.xls file) for locations
 }
+\seealso{
+Other Location: 
+\code{\link{Location-class}},
+\code{\link{Location}},
+\code{\link{buildLocationTemplate}()},
+\code{\link{geocodeLocation}()},
+\code{\link{getCountryCodes}()},
+\code{\link{getLocationTypes}()},
+\code{\link{lookupNOAAStationID}()}
+}
+\concept{Location}

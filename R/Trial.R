@@ -19,6 +19,7 @@
 #' @slot harvest_date (optional) The date of harvest in YYYY-MM-DD format
 #' @slot plots (optional) A vector of Plots that are used in the trial
 #' 
+#' @family Trial
 #' @importFrom methods is new slot<-
 #' @export
 setClass(

@@ -414,6 +414,18 @@ different commonly used units. All of these functions start with `convert_`, suc
 the package Documentation for more details.
 
 
+## Configurable Options
+
+- `breedbase.standard_stock_props`
+- `breedbase.editable_stock_props`
+- `breedbase.country_codes`
+- `breedbase.location_types`
+- `breedbase.cross_types`
+- `breedbase.design_types`
+- `breedbase.trial_types`
+- `breedbase.accession_search_api`
+- `breedbase.accession_search_config`
+
 ## Current Status
 
 The package currently contains functions for the following data types:

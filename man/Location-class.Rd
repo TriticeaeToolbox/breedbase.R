@@ -31,3 +31,14 @@ An S4 Class to represent a breeDBase Location
 \item{\code{noaa_station_id}}{The NOAA Station ID that is nearest and most relevant to the location (ex: GHCND:US1NYTM0042)}
 }}
 
+\seealso{
+Other Location: 
+\code{\link{Location}},
+\code{\link{buildLocationTemplate}()},
+\code{\link{geocodeLocation}()},
+\code{\link{getCountryCodes}()},
+\code{\link{getLocationTypes}()},
+\code{\link{lookupNOAAStationID}()},
+\code{\link{writeLocationTemplate}()}
+}
+\concept{Location}

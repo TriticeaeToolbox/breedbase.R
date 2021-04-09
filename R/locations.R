@@ -11,6 +11,10 @@
 #' The \code{\link{lookupNOAAStationId}} function can be used to obtain the NOAA
 #' Station ID of the location (using its lat and lon) if it is unknown.
 #' 
+#' Use the \code{\link{getCountryCodes}} function to get a list of supported country 
+#' codes and the \code{\link{getLocationTypes}} function to get a list of supported 
+#' location types.
+#' 
 #' @param name Unique location name (must not conflict with an existing location name)
 #' @param abbreviation Location abbreviation
 #' @param country_code ISO Alpha-3 country code
@@ -51,6 +55,7 @@
 #' 
 #' @return Location
 #' 
+#' @family Location
 #' @export
 Location <- function(
     name = NULL,
@@ -147,6 +152,7 @@ Location <- function(
 #'   \item{altitude}{Location elevation (meters)}
 #' }
 #' 
+#' @family Location
 #' @import utils httr rjson
 #' @export
 geocodeLocation <- function(location) {
@@ -207,6 +213,7 @@ geocodeLocation <- function(location) {
 #' 
 #' @return The NOAA Station ID
 #' 
+#' @family Location
 #' @import httr rjson
 #' @export
 lookupNOAAStationID <- function(lat, lon, max_radius=25) {
@@ -225,51 +232,6 @@ lookupNOAAStationID <- function(lat, lon, max_radius=25) {
 }
 
 
-# Query the NOAA Stations API for GHCND Stations located within the 
-# specified radius of the search location.  Return the full Station
-# object for the first GHCND station returned by the API.  If no 
-# matching Station is found, NULL is returned.
-queryNOAAStations <- function(lat, lon, radius) {
-
-    # Calculate bounding box coordinates with geodetic approximation (WGS84)
-    a <- 6378137            # Radius of earth at equator (m)
-    e2 <- 0.00669437999014  # eccentricity squared
-    m <- 1609.344           # mile to meters converstion factor
-    r <- pi / 180           # degrees to radians conversion factor
-
-    # Distance of latitude in miles
-    d1 <- r*a*(1-e2) / (1-e2*sin(lat*r)^2)^(3/2) / m
-
-    # Distane of longitude in miles
-    d2 <- r*a*cos(lat*r) / sqrt(1-e2*sin(lat*r)^2) / m
-
-    # Bounding Box Coords
-    minlat = lat - radius / d1
-    maxlat = lat + radius / d1
-    minlon = lon - radius / d2
-    maxlon = lon + radius / d2
-
-    # Set extent
-    extent = paste(minlat, minlon, maxlat, maxlon, sep=",")
-
-    # Make API Request
-    params <- list(extent = extent)
-    body <- api(NOAA_STATIONS, params, NOAA_TOKEN)
-
-    # Parse Stations
-    stations <- body$results
-    if ( !is.na(stations) && !is.null(stations) ) {
-        for ( station in stations ) {
-            if ( grepl("^GHCND", station$id) ) {
-                return(station)
-            }
-        }
-    }
-
-    return(NULL)
-}
-
-
 #' Build Location Template
 #' 
 #' Create a \code{tibble} representing the breeDBase upload 
@@ -279,6 +241,7 @@ queryNOAAStations <- function(lat, lon, radius) {
 #' 
 #' @return A \code{tibble} representation of the upload template
 #' 
+#' @family Location
 #' @import dplyr tibble
 #' @export
 buildLocationTemplate <- function(
@@ -344,6 +307,7 @@ buildLocationTemplate <- function(
 #' @param output The file path to the output .xls file
 #' @param chunk Chunk the file into parts with up to `chunk` number of lines per file
 #' 
+#' @family Location
 #' @import WriteXLS
 #' @export
 writeLocationTemplate <- function(
@@ -410,6 +374,51 @@ writeLocationTemplate <- function(
 
 
 ## ======== PRIVATE HELPER FUNCTIONS ======== ##
+
+
+# Query the NOAA Stations API for GHCND Stations located within the 
+# specified radius of the search location.  Return the full Station
+# object for the first GHCND station returned by the API.  If no 
+# matching Station is found, NULL is returned.
+queryNOAAStations <- function(lat, lon, radius) {
+
+    # Calculate bounding box coordinates with geodetic approximation (WGS84)
+    a <- 6378137            # Radius of earth at equator (m)
+    e2 <- 0.00669437999014  # eccentricity squared
+    m <- 1609.344           # mile to meters converstion factor
+    r <- pi / 180           # degrees to radians conversion factor
+
+    # Distance of latitude in miles
+    d1 <- r*a*(1-e2) / (1-e2*sin(lat*r)^2)^(3/2) / m
+
+    # Distane of longitude in miles
+    d2 <- r*a*cos(lat*r) / sqrt(1-e2*sin(lat*r)^2) / m
+
+    # Bounding Box Coords
+    minlat = lat - radius / d1
+    maxlat = lat + radius / d1
+    minlon = lon - radius / d2
+    maxlon = lon + radius / d2
+
+    # Set extent
+    extent = paste(minlat, minlon, maxlat, maxlon, sep=",")
+
+    # Make API Request
+    params <- list(extent = extent)
+    body <- api(NOAA_STATIONS, params, NOAA_TOKEN)
+
+    # Parse Stations
+    stations <- body$results
+    if ( !is.na(stations) && !is.null(stations) ) {
+        for ( station in stations ) {
+            if ( grepl("^GHCND", station$id) ) {
+                return(station)
+            }
+        }
+    }
+
+    return(NULL)
+}
 
 
 # Make an API request to the specified URL

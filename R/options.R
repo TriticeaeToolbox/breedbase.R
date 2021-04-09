@@ -1,5 +1,111 @@
+#' Get Supported Accession Properties
+#' 
+#' Get a vector of accession property names that can be used by the Accession class.
+#' These values can be overriden by setting the global \code{breedbase.editable_stock_props}
+#' option (Example: \code{options("breedbase.editable_stock_props" = c("prop1", "prop2"))}).
+#' 
+#' @return A vector of supported accession property names
+#' 
+#' @family Accession
+#' @export
+getSupportedAccessionProperties <- function() {
+    return(c(
+        getBBOption("standard_stock_props"), 
+        getBBOption("editable_stock_props")
+    ))
+}
 
-# Get value of breedbase option
+#' Get the Accession Search Server
+#' 
+#' Get the set URL for the BrAPI Accession Search server.  This value 
+#' can be overriden by setting the global \code{breedbase.accession_search_server}
+#' option (Example: \code{options("breedbase.accession_search_server" = "https://search.example.org")}).
+#' 
+#' @return The URL to the Acccession Search server
+#' 
+#' @family accessionSearch
+#' @export
+getAccessionSearchServer <- function() {
+    return(getBBOption("accession_search_server"))
+}
+
+#' Get the Accession Search Configuration
+#' 
+#' Get the default configuration properties for the accession search 
+#' function.  The default properties can be overriden by setting the 
+#' global \code{breedbase.accession_search_config} option (Example: 
+#' \code{options("breedbase.accession_search_config" = config)}).
+#' 
+#' @return a nested list containing the default accession search properties
+#' 
+#' @family accessionSearch
+#' @export
+getAccessionSearchConfig <- function() {
+    return(getBBOption("accession_search_config"))
+}
+
+#' Get the Country Codes
+#' 
+#' Get a vector of supported Location country codes.  This value can 
+#' be overridden by setting the global \code{breedbase.country_codes} 
+#' option (Example: \code{options("breedbase.country_codes" = country_codes)}).
+#' 
+#' @return A vector of country codes
+#' 
+#' @family Location
+#' @export
+getCountryCodes <- function() {
+    return(getBBOption("country_codes"))
+}
+
+#' Get Location Types
+#' 
+#' Get a vector of supported Location types.  This value can be 
+#' overridden by setting the global \code{breedbase.location_types} 
+#' option (Example: \code{options("breedbase.location_types" = location_types)}).
+#' 
+#' @return A vector of location types
+#' 
+#' @family Location
+#' @export
+getLocationTypes <- function() {
+    return(getBBOption("location_types"))
+}
+
+#' Get Trial Design Types
+#' 
+#' Get a vector of supported Trial design types.  This value can be 
+#' overridden by setting the global \code{breedbase.design_types} 
+#' option (Example: \code{options("breedbase.design_types" = design_types)}).
+#' 
+#' @return A vector of Trial design types
+#' 
+#' @family Trial
+#' @export
+getTrialDesignTypes <- function() {
+    return(getBBOption("design_types"))
+}
+
+#' Get Trial Types
+#' 
+#' Get a vector of supported Trial types.  This value can be 
+#' overridden by setting the global \code{breedbase.trial_types} 
+#' option (Example: \code{options("breedbase.trial_types" = trial_types)}).
+#' 
+#' @return A vector of Trial types
+#' 
+#' @family Trial
+#' @export
+getTrialTypes <- function() {
+    return(getBBOption("trial_types"))
+}
+
+
+
+## ======== PRIVATE HELPER FUNCTIONS ======== ##
+
+# Get the value of a breedbase option, either a user configured global 
+# option, if set, or the default value
 # @param key The name of the breedbase option (without the breedbase prefix)
 # @returns The value of the option from the global options, if set, or the default value
 getBBOption <- function(key) {
@@ -11,7 +117,10 @@ getBBOption <- function(key) {
     )
 }
 
-# SET OF DEFAULT BREEDBASE OPTIONS
+
+
+## ======== DEFAULT OPTION VALUES ======== ##
+
 DEFAULT_BB_OPTIONS = list(
     standard_stock_props = c("population_name", "organization_name", "synonym", "PUI"),
     editable_stock_props = c("variety", "released_variety_name", "donor", "donor institute", "donor PUI", "country of origin", "state", "institute code", "institute name", "biological status of accession code", "notes", "accession number", "seed source", "type of germplasm storage code", "acquisition date", "location_code", "ploidy_level", "genome_structure", "ncbi_taxonomy_id", "transgenic", "introgression_parent", "introgression_backcross_parent", "introgression_map_version", "introgression_chromosome", "introgression_start_position_bp", "introgression_end_position_bp", "purdy_pedigree", "filial_generation"),
@@ -20,7 +129,7 @@ DEFAULT_BB_OPTIONS = list(
     location_types = c('Farm', 'Field', 'Greenhouse', 'Screenhouse', 'Lab', 'Storage', 'Other'),
     design_types = c('CRD', 'RCBD', 'Alpha', 'Augmented', 'MAD', 'Westcott', 'Lattice'),
     trial_types = c('Seedling Nursery', 'phenotyping_trial', 'Advanced Yield Trial', 'Preliminary Yield Trial', 'Uniform Yield Trial', 'Variety Release Trial', 'Clonal Evaluation', 'genetic_gain_trial', 'storage_trial', 'heterosis_trial', 'health_status_trial', 'grafting_trial', 'Screen House', 'Seed Multiplication', 'crossing_block_trial', 'Specialty Trial'),
-    accession_search_api = "https://synonyms.triticeaetoolbox.org/api",
+    accession_search_server = "https://synonyms.triticeaetoolbox.org",
     accession_search_config = list(
         database_terms = list(name = TRUE, synonyms = TRUE, accession_numbers = TRUE), 
         search_routines = list(name = TRUE, punctuation = TRUE, substring = TRUE, edit_distance = FALSE, max_edit_distance = 2),

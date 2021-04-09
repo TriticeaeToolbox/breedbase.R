@@ -30,3 +30,14 @@ lon <- caldwell$longitude
 alt <- caldwell$altitude
 
 }
+\seealso{
+Other Location: 
+\code{\link{Location-class}},
+\code{\link{Location}},
+\code{\link{buildLocationTemplate}()},
+\code{\link{getCountryCodes}()},
+\code{\link{getLocationTypes}()},
+\code{\link{lookupNOAAStationID}()},
+\code{\link{writeLocationTemplate}()}
+}
+\concept{Location}

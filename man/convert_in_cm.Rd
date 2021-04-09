@@ -15,3 +15,15 @@ height in cm
 \description{
 Convert height / length units from in to cm
 }
+\seealso{
+Other conversions: 
+\code{\link{convert_buac_gm2}()},
+\code{\link{convert_buac_kgHa}()},
+\code{\link{convert_gm2_kgHa}()},
+\code{\link{convert_kgHa_gm2}()},
+\code{\link{convert_kghl_gL}()},
+\code{\link{convert_lbsbu_gL}()},
+\code{\link{convert_scale}()},
+\code{\link{convert_sqft_m2}()}
+}
+\concept{conversions}

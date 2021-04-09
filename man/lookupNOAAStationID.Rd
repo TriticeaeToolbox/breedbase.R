@@ -28,3 +28,14 @@ The query will search for NOAA stations within the specified max radius
 centered around the location position.  If multiple stations are found,
 the ID of the first station is returned.
 }
+\seealso{
+Other Location: 
+\code{\link{Location-class}},
+\code{\link{Location}},
+\code{\link{buildLocationTemplate}()},
+\code{\link{geocodeLocation}()},
+\code{\link{getCountryCodes}()},
+\code{\link{getLocationTypes}()},
+\code{\link{writeLocationTemplate}()}
+}
+\concept{Location}

@@ -13,6 +13,7 @@
 #' @slot altitude Location elevation (meters)
 #' @slot noaa_station_id The NOAA Station ID that is nearest and most relevant to the location (ex: GHCND:US1NYTM0042)
 #' 
+#' @family Location
 #' @importFrom methods is new slot<-
 #' @export
 setClass(

@@ -7,6 +7,7 @@
 #' 
 #' @return grain yield in kg/Ha
 #' 
+#' @family conversions
 #' @export
 convert_buac_kgHa <- function(x, crop=NULL) {
     if (is.null(crop)) stop("please provide the crop to convert bushels per acre to kg/ha")
@@ -25,6 +26,7 @@ convert_buac_kgHa <- function(x, crop=NULL) {
 #' 
 #' @return grain yield in g/m2
 #' 
+#' @family conversions
 #' @export
 convert_buac_gm2 <- function(x, crop=NULL) {
     if (is.null(crop)) stop("please provide the crop to convert bushels per acre to g/m2")
@@ -41,6 +43,7 @@ convert_buac_gm2 <- function(x, crop=NULL) {
 #' 
 #' @return grain yield in g/m2
 #' 
+#' @family conversions
 #' @export
 convert_kgHa_gm2 <- function(x) {
     y <- x/10
@@ -56,6 +59,7 @@ convert_kgHa_gm2 <- function(x) {
 #' 
 #' @return grain yield in kg/Ha
 #' 
+#' @family conversions
 #' @export
 convert_gm2_kgHa <- function(x) {
     y <- x*10
@@ -71,6 +75,7 @@ convert_gm2_kgHa <- function(x) {
 #' 
 #' @return test weight in g/L
 #' 
+#' @family conversions
 #' @export
 convert_lbsbu_gL <- function(x) {
     y <- x / 35.2391 / 2.2046 *1000 # c(LperBu = 35.2391, lbPerKg = 2.2046)
@@ -86,6 +91,7 @@ convert_lbsbu_gL <- function(x) {
 #' 
 #' @return test weight in g/L
 #' 
+#' @family conversions
 #' @export
 convert_kghl_gL <- function(x) {
     y <- x * 10
@@ -101,6 +107,7 @@ convert_kghl_gL <- function(x) {
 #' 
 #' @return height in cm
 #' 
+#' @family conversions
 #' @export
 convert_in_cm <- function(x) {
     y <- x * 2.54
@@ -117,6 +124,7 @@ convert_in_cm <- function(x) {
 #' 
 #' @return rate per square meter
 #' 
+#' @family conversions
 #' @export
 convert_sqft_m2 <- function(x) {
     y <- x * (1/0.09290304)
@@ -137,6 +145,7 @@ convert_sqft_m2 <- function(x) {
 #' 
 #' @return the value in the new range
 #' 
+#' @family conversions
 #' @export
 convert_scale <- function(x, oldmin, oldmax, newmin, newmax) {
     oldrange <- oldmax - oldmin

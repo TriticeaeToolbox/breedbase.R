@@ -41,3 +41,23 @@ The `trial_name`, `breeding_program`, `location`, `year`, `design_type`, and
 \item{\code{plots}}{(optional) A vector of Plots that are used in the trial}
 }}
 
+\seealso{
+Other Trial: 
+\code{\link{Plot-class}},
+\code{\link{PlotData-class}},
+\code{\link{PlotData}},
+\code{\link{Plot}},
+\code{\link{Trial}},
+\code{\link{buildPlotDataTemplate}()},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{createPlots}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{setTrialPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

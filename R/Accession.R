@@ -8,6 +8,7 @@
 #' @slot species_name Species Name (must exist in the database)
 #' @slot properties (optional) a list of additional accession stock properties, where the list key is a stock property name supported by the breedbase server and the list value is either a string value or a vector of string values.
 #' 
+#' @family Accession
 #' @importFrom methods is new slot<-
 #' @export
 setClass(

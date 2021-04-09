@@ -18,3 +18,23 @@ Trial
 Set the provided vector of Plots as the `plots` property 
 of the provided Trial
 }
+\seealso{
+Other Trial: 
+\code{\link{Plot-class}},
+\code{\link{PlotData-class}},
+\code{\link{PlotData}},
+\code{\link{Plot}},
+\code{\link{Trial-class}},
+\code{\link{Trial}},
+\code{\link{buildPlotDataTemplate}()},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{createPlots}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

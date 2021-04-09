@@ -41,3 +41,23 @@ are required, all other fields are optional
 \item{\code{treatments}}{(optional) A named list where the name is the name of a treatment (e.g. inoculated, drought, etc) and the value should be TRUE if the treatment was applied to the plot or FALSE if not.}
 }}
 
+\seealso{
+Other Trial: 
+\code{\link{PlotData-class}},
+\code{\link{PlotData}},
+\code{\link{Plot}},
+\code{\link{Trial-class}},
+\code{\link{Trial}},
+\code{\link{buildPlotDataTemplate}()},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{createPlots}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{setTrialPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

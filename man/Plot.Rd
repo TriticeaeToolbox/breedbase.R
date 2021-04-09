@@ -21,9 +21,7 @@ Plot(
 
 \item{block_number}{A design parameter indicating which block the plot is in}
 
-\item{properties}{(optional) Additional plot properties (as a named list)
-
-See Class \linkS4class{Plot} for all optional plot properties}
+\item{properties}{(optional) Additional plot properties (as a named list)}
 }
 \value{
 Plot
@@ -33,6 +31,9 @@ Create a phenotyping trial Plot containing all of the provided
 properties.  Plot Name, Accession Name, Plot Number and Block Number 
 are required.  All optional properties can be added as a named value 
 in the properties list.
+}
+\details{
+See Class \linkS4class{Plot} for all optional plot properties
 }
 \examples{
 # Create plots with just the required parameters
@@ -59,3 +60,23 @@ plot5 <- Plot(
 )
 
 }
+\seealso{
+Other Trial: 
+\code{\link{Plot-class}},
+\code{\link{PlotData-class}},
+\code{\link{PlotData}},
+\code{\link{Trial-class}},
+\code{\link{Trial}},
+\code{\link{buildPlotDataTemplate}()},
+\code{\link{buildPlotTemplate}()},
+\code{\link{buildTrialTemplate}()},
+\code{\link{createPlots}()},
+\code{\link{getTrialDesignTypes}()},
+\code{\link{getTrialTypes}()},
+\code{\link{printPlots}()},
+\code{\link{setTrialPlots}()},
+\code{\link{writePlotDataTemplate}()},
+\code{\link{writePlotTemplate}()},
+\code{\link{writeTrialTemplate}()}
+}
+\concept{Trial}

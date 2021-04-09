@@ -1,9 +1,13 @@
 #' Create Trial
 #' 
-#' Create a phenotyping Trial containing all of the provided 
-#' properties.  Trial Name, Breeding Program, Location, Year, 
-#' Design Type and Description are required.  All optional properties 
-#' can be added as a named value in the properties list.
+#' Create a phenotyping Trial containing all of the provided  properties.  Trial Name, 
+#' Breeding Program, Location, Year, Design Type and Description are required.  All 
+#' optional properties can be added as a named value in the properties list.
+#' 
+#' See Class \linkS4class{Trial} for all optional trial properties
+#' 
+#' Use the \code{\link{getTrialDesignTypes}} function to get a list of supported Trial design types and the 
+#' \code{\link{getTrialTypes}} function to get a list of the supported Trial types.
 #' 
 #' @param trial_name A name for the trial (must be unique across the entire database)
 #' @param breeding_program The name of the breeding program that managed the trial (must exist in database)
@@ -12,8 +16,6 @@
 #' @param design_type The shorthand for the design type (CRD, RCBD, Alpha, Augmented, MAD, Westcott, Lattice)
 #' @param description Additional text with any other relevant information about the trial
 #' @param properties (optional) Additional trial properties (as a named list)
-#' 
-#' See Class \linkS4class{Trial} for all optional trial properties
 #' 
 #' @examples
 #' # Create a Trial with just the required parameters
@@ -25,6 +27,7 @@
 #' 
 #' @return Trial
 #' 
+#' @family Trial
 #' @export
 Trial <- function(
     trial_name = NULL,
@@ -90,6 +93,7 @@ Trial <- function(
 #' 
 #' @return Trial
 #' 
+#' @family Trial
 #' @export
 setTrialPlots <- function(
     trial = NULL,
@@ -131,6 +135,7 @@ setTrialPlots <- function(
 #' 
 #' @return A \code{tibble} representation of the upload template
 #' 
+#' @family Trial
 #' @import dplyr tibble
 #' @export
 buildTrialTemplate <- function(
@@ -247,6 +252,7 @@ buildTrialTemplate <- function(
 #' a \code{tibble} representation of the upload template
 #' @param output The file path to the output .xls file
 #' 
+#' @family Trial
 #' @import WriteXLS
 #' @export
 writeTrialTemplate <- function(
