@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -59,19 +59,19 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="breedbaser" class="section level1">
+<div id="breedbase-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#breedbaser" class="anchor"></a>breedbase.R</h1></div>
+<a href="#breedbase-r" class="anchor"></a>breedbase.R</h1></div>
 <div id="an-r-package-for-generating-breedbase-upload-templates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#an-r-package-for-generating-breedbase-upload-templates" class="anchor"></a>An R package for generating breedbase upload templates</h3>
-<p>This R package (<strong>currently a work in progress</strong>) can be used to create classes of various breedbase data types (such as an Accession, a phenotyping Trial, a Plot of a phenotyping Trial, etc). One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breedbase website.</p>
+<p>This R package can be used to create classes of various breedbase data types (such as an Accession, a phenotyping Trial, a Plot of a phenotyping Trial, etc). One or more instances of a class can be passed to a <code>buildTemplate</code> or <code>writeTemplate</code> function to create and/or write an upload template to be used for adding data through the breedbase website.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Currently, the breedbase package can be installed directly from GitHub using <code>devtools</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
 <span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"TriticeaeToolbox/breedbase.R"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">breedbase</span><span class="op">)</span></code></pre></div>
@@ -79,7 +79,7 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>Documentation for all Classes and functions can be found in the package’s R documentation or online at <a href="https://triticeaetoolbox.github.io/breedbase.R/reference">https://triticeaetoolbox.github.io/breedbase.R/reference</a>.</p>
+<p>Documentation for all Classes and functions can be found in the package’s R documentation or online at <a href="https://triticeaetoolbox.github.io/breedbase.R/reference" class="uri">https://triticeaetoolbox.github.io/breedbase.R/reference</a>.</p>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -90,16 +90,18 @@
 <div id="accessions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#accessions" class="anchor"></a>Accessions</h4>
-<p>The <code>Accession</code> Class holds all of the information about a single Accession. The <code><a href="reference/Accession.html">Accession()</a></code> function can be used to create an instance of the <code>Accession</code> Class. The <code>accession_name</code> and <code>species_name</code> and required parameters. Additional optional parameters can be provided through a named list passed to the <code>properties</code> parameter. For a list of all of the supported optional parameters, see the <a href="https://triticeaetoolbox.github.io/breedbase.R/reference/Accession-class.html">Accession Class Documentation</a></p>
+<p>The <code>Accession</code> Class holds all of the information about a single Accession. The <code><a href="reference/Accession.html">Accession()</a></code> function can be used to create an instance of the <code>Accession</code> Class. The <code>accession_name</code> and <code>species_name</code> and required parameters. Additional optional parameters can be provided through a named list passed as the <code>properties</code> parameter. For a list of all of the supported optional parameters, see the <a href="https://triticeaetoolbox.github.io/breedbase.R/reference/Accession-class.html">Accession Class Documentation</a> or use the <code><a href="reference/getSupportedAccessionProperties.html">getSupportedAccessionProperties()</a></code> function to get a list of the names of all of the supported properties.</p>
+<p><strong>NOTE:</strong> With version 1.0.0 of the package, the Accession functions now use the new updated breedbase names for the Accession properties. The old names are no longer supported by the package.</p>
+<p>In order to avoid duplicate Accession entries in the database, it is recommended to perform a search of your Accession names against the names of those already in the database to find different possible variations in the spelling of the Accession name. The package now includes functions that interface with the <a href="https://github.com/TriticeaeToolbox/BrAPI-germplasm-search">BrAPI germplasm search tool</a> so Accession name searches can now be done directly in R. See the <a href="#accession-search">Accession Search</a> section below for more information on how to perform the search using this package.</p>
 <p><strong>Example:</strong> Create new Accessions with some optional properties</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">jerry</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span>
      accession_name <span class="op">=</span> <span class="st">"JERRY"</span>, 
      species_name <span class="op">=</span> <span class="st">"Triticum aestivum"</span>,
      properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-         synonyms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ND9257"</span>, <span class="st">"PI632433"</span><span class="op">)</span>,
-         institute_codes <span class="op">=</span> <span class="st">"NDSU"</span>,
-         organization_names <span class="op">=</span> <span class="st">"North Dakota State University"</span>
+         synonym <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ND9257"</span>, <span class="st">"PI632433"</span><span class="op">)</span>,
+         <span class="st">"institute code"</span> <span class="op">=</span> <span class="st">"NDSU"</span>,
+         organization_name <span class="op">=</span> <span class="st">"North Dakota State University"</span>
      <span class="op">)</span>
 <span class="op">)</span>
 
@@ -107,9 +109,9 @@
      accession_name <span class="op">=</span> <span class="st">"CALEDONIA"</span>, 
      species_name <span class="op">=</span> <span class="st">"Triticum aestivum"</span>,
      properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-         synonyms <span class="op">=</span> <span class="st">"PI610188"</span>,
-         institute_codes <span class="op">=</span> <span class="st">"CNL"</span>,
-         organization_names <span class="op">=</span> <span class="st">"Cornell University"</span>
+         synonym <span class="op">=</span> <span class="st">"PI610188"</span>,
+         <span class="st">"institute code"</span> <span class="op">=</span> <span class="st">"CNL"</span>,
+         organization_name <span class="op">=</span> <span class="st">"Cornell University"</span>
      <span class="op">)</span>
 <span class="op">)</span>
 
@@ -117,8 +119,8 @@
     accession_name <span class="op">=</span> <span class="st">"MY_CROSS"</span>,
     species_name <span class="op">=</span> <span class="st">"Triticum aestivum"</span>,
     properties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-        institute_codes <span class="op">=</span> <span class="st">"CNL"</span>,
-        organization_names <span class="op">=</span> <span class="st">"Cornell University"</span>
+        <span class="st">"institute code"</span> <span class="op">=</span> <span class="st">"CNL"</span>,
+        organization_name <span class="op">=</span> <span class="st">"Cornell University"</span>
     <span class="op">)</span>
 <span class="op">)</span>
 
@@ -130,7 +132,7 @@
 <a href="#pedigrees" class="anchor"></a>Pedigrees</h4>
 <p>The <code><a href="reference/Pedigree.html">Pedigree()</a></code> function can be used to create an object of the <code>Pedigree</code> Class which sets the parents (and optionally the cross type) of a single Accession.</p>
 <p><strong>Example:</strong> Create a <code>Pedigree</code> object that sets the parents of the <code>my_cross</code> Accession as <code>jerry</code> and <code>caledonia</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_cross_pedigree</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Pedigree.html">Pedigree</a></span><span class="op">(</span><span class="va">my_cross</span>, female_parent <span class="op">=</span> <span class="va">jerry</span>, male_parent <span class="op">=</span> <span class="va">caledonia</span><span class="op">)</span></code></pre></div>
 <p><strong>Note:</strong> The <strong>T3/Wheat</strong> breedbase instance is planning on keeping pedigree information stored as an unparsed purdy pedigree string (at least until we have time to try to parse purdy pedigrees into parents). The purdy pedigree string will be stored as an optional property (<code>purdy_pedigree</code>) of the Accession and can be added to the Accession upload template.</p>
 </div>
@@ -139,7 +141,7 @@
 <a href="#creating-upload-templates" class="anchor"></a>Creating Upload Templates</h4>
 <p>Once you have one or more objects of a particular Class (such as a vector of <code>Accession</code>s or a <code>Pedigree</code>) you can create the create the upload templates used to add that particular data type to a breedbase database through its website.</p>
 <p><strong>Example:</strong> Create an upload template for the 3 Accessions and 1 Pedigree.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/writeAccessionTemplate.html">writeAccessionTemplate</a></span><span class="op">(</span><span class="va">accessions</span>, <span class="st">'/path/to/accessions.xls'</span><span class="op">)</span>
 <span class="fu"><a href="reference/writePedigreeTemplate.html">writePedigreeTemplate</a></span><span class="op">(</span><span class="va">my_cross_pedigree</span>, <span class="st">"/path/to/pedigrees.txt"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -147,12 +149,11 @@
 <div id="locations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#locations" class="anchor"></a>Locations</h3>
-<p>Locations are required to have latitude and longitude coordinates as well as their altitude/elevation. These can be added manually as parameters or geocoded using the <a href="http://www.datasciencetoolkit.org/">DataScienceToolkit</a> API.</p>
-<p>Additionally, Locations are required to have a NOAA Station ID, which is used to get historical weather records. The <code>lookupNOAAStationId</code> function can be used to lookup a weather station close to the Location.</p>
-<ul>
-<li>Add location information directly as parameters, if it is already known</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Locations are required to have latitude and longitude coordinates as well as their altitude/elevation. These can be added manually as parameters or geocoded using the <code><a href="reference/geocodeLocation.html">geocodeLocation()</a></code> function which can lookup a street address or town name. The function uses the <a href="https://nominatim.org/release-docs/develop/api/Overview/">OpenStreetMap Nominatim API</a> for geocoding and the <a href="https://www.gmrt.org/services/pointserverinfo.php#!/services/getGMRTPoint">Global Multi-Resolution Topography PointServer Web Service</a> for elevation data.</p>
+<p>Additionally, Locations are required to have a NOAA Station ID, which is used to get historical weather records. The <code>lookupNOAAStationId()</code> function can be used to lookup a weather station close to the Location.</p>
+<p>Use the <code><a href="reference/getCountryCodes.html">getCountryCodes()</a></code> function to get a list of the supported country codes and the <code><a href="reference/getLocationTypes.html">getLocationTypes()</a></code> function to get a list of the supported location types.</p>
+<p><strong>Example:</strong> Create a Location with all of the required parameters known</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">loc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span><span class="op">(</span>
     name <span class="op">=</span> <span class="st">"Batavia, NY"</span>,
     abbreviation <span class="op">=</span> <span class="st">"BAT"</span>,
@@ -165,11 +166,8 @@
     altitude <span class="op">=</span> <span class="fl">274</span>,
     noaa_station_id <span class="op">=</span> <span class="st">"GHCND:US1NYGN0013"</span>
 <span class="op">)</span></code></pre></div>
-<ul>
-<li>If either the <code>latitude</code>, <code>longitude</code> or <code>altitude</code> parameters are not provided, they will be queried using the <code>name</code> as the location.</li>
-<li>If the <code>noaa_station_id</code> is not provided, it will be queried using the provided or queried lat and lon coordinates of the location.</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p><strong>Example:</strong> Create a Location without knowing its lat, lon or elevation/altitude.</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">loc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span><span class="op">(</span>
     name <span class="op">=</span> <span class="st">"Batavia, NY"</span>,
     abbreviation <span class="op">=</span> <span class="st">"BAT"</span>,
@@ -179,13 +177,15 @@
     type <span class="op">=</span> <span class="st">"Field"</span>
 <span class="op">)</span></code></pre></div>
 <ul>
-<li>Alternatively, you can query a more specific location string separately and use the results to build the Location</li>
+<li>If either the <code>latitude</code>, <code>longitude</code> or <code>altitude</code> parameters are not provided, they will be queried using the <code>name</code> as the location.</li>
+<li>If the <code>noaa_station_id</code> is not provided, it will be queried using the provided or queried lat and lon coordinates of the location.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p><strong>Example:</strong> Geocode a specific address first, then use that information to create the Location</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/geocodeLocation.html">geocodeLocation</a></span><span class="op">(</span><span class="st">"2 Caldwell Drive, Ithaca, NY"</span><span class="op">)</span>
 <span class="va">loc3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Location.html">Location</a></span><span class="op">(</span>
-     name <span class="op">=</span> <span class="st">"Caldwell - Ithaca, NY"</span>, 
-     abbreviation <span class="op">=</span> <span class="st">"ITH_CALD"</span>,
+     name <span class="op">=</span> <span class="st">"Ithaca, NY - Caldwell"</span>, 
+     abbreviation <span class="op">=</span> <span class="st">"ITHNY-CAL"</span>,
      country_code <span class="op">=</span> <span class="st">"USA"</span>,
      country_name <span class="op">=</span> <span class="st">"United States of America"</span>,
      program <span class="op">=</span> <span class="st">"Cornell"</span>,
@@ -194,10 +194,8 @@
      longitude <span class="op">=</span> <span class="va">geo</span><span class="op">$</span><span class="va">longitude</span>,
      altitude <span class="op">=</span> <span class="va">geo</span><span class="op">$</span><span class="va">altitude</span>
 <span class="op">)</span></code></pre></div>
-<ul>
-<li>You can use the location’s coordinates to lookup a nearby NOAA weather station.</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>You can use the <code>lookupNOAAStationId()</code> function to get ID of the closest NOAA weather station to the specified geographic coordinates.</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stationId</span> <span class="op">&lt;-</span> <span class="fu">lookupNOAAStationId</span><span class="op">(</span><span class="va">geo</span><span class="op">$</span><span class="va">latitude</span>, <span class="va">geo</span><span class="op">$</span><span class="va">longitude</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="trials" class="section level3">
@@ -206,7 +204,7 @@
 <p>A <code>Trial</code> includes the metadata about a single phenotyping trial as well as information about the individual plots in the trial (see the <a href="#plots">Plots</a> section below). A trial is assigned a unique name, associated with a breeding program, year and location, and includes the trial design type and a description. Additional information can include the field and plot sizes, planting and harvest dates, and type of trial (greenhouse, phenotyping, advanced yield, etc).</p>
 <p>A <code>Trial</code> object can be created without its plot information (it just contains metadata about the trial). However, the plot information must be added to the <code>Trial</code> before a trial upload template can be created.</p>
 <p><strong>Example:</strong> Create a Trial with just the required parameters</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">trial_mad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span><span class="op">(</span>
     trial_name <span class="op">=</span> <span class="st">"UMOPN_2019_Madison"</span>, 
     breeding_program <span class="op">=</span> <span class="st">"University of Wisconsin"</span>, 
@@ -216,7 +214,7 @@
     description <span class="op">=</span> <span class="st">"UMOPN Nursery Trial"</span>
 <span class="op">)</span></code></pre></div>
 <p><strong>Example:</strong> Create a Trial with optional parameters</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>planting_date <span class="op">=</span> <span class="st">"2019-04-25"</span>, harvest_date <span class="op">=</span> <span class="st">"2019-10-05"</span>, trial_type <span class="op">=</span> <span class="st">"phenotyping_trial"</span><span class="op">)</span>
 <span class="va">trial_arl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Trial.html">Trial</a></span><span class="op">(</span>
     trial_name <span class="op">=</span> <span class="st">"UMOPN_2019_Arlington"</span>, 
@@ -228,12 +226,13 @@
     properties <span class="op">=</span> <span class="va">opts</span>
 <span class="op">)</span> </code></pre></div>
 <p>See the <a href="https://triticeaetoolbox.github.io/breedbase.R/reference/Trial-class.html">Trial Class Documentation</a> for more information on the optional parameters.</p>
+<p>Use the <code><a href="reference/getTrialDesignTypes.html">getTrialDesignTypes()</a></code> function to get list of supported Trial design types and the <code><a href="reference/getTrialTypes.html">getTrialTypes()</a></code> function to get a list of supported Trial types.</p>
 <p><strong>Adding Plots:</strong> Once the <code>Plot</code>s for the trial have been created, they can be added to the <code>Trial</code> with the <code><a href="reference/setTrialPlots.html">setTrialPlots()</a></code> function. See the <a href="#plots">Plots section below</a> for more information on creating Trial Plots.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">trial_mad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span><span class="op">(</span><span class="va">trial_mad</span>, <span class="va">plots_mad</span><span class="op">)</span>
 <span class="va">trial_arl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/setTrialPlots.html">setTrialPlots</a></span><span class="op">(</span><span class="va">trial_arl</span>, <span class="va">plots_arl</span><span class="op">)</span></code></pre></div>
 <p><strong>Creating Trial Templates:</strong> Once you have one or more <code>Trial</code>s (that have <code>Plots</code> set), you can create a trial upload template that can be submitted to a breedbase website from the <strong>Manage Trials</strong> page (‘Upload Existing Trials’ &gt; ‘Multiple Trial Designs’).</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/writeTrialTemplate.html">writeTrialTemplate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">trial_mad</span>, <span class="va">trial_arl</span><span class="op">)</span>, <span class="st">'/path/to/trials.xls'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="plots" class="section level3">
@@ -243,7 +242,7 @@
 <ul>
 <li>A plot layout can be generated by manually creating each Plot with the desired parameters</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create the Plots</span>
 <span class="va">plot1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Plot.html">Plot</a></span><span class="op">(</span>
     plot_name <span class="op">=</span> <span class="st">"FARM-2019-UNH_PLOT1"</span>, 
@@ -277,7 +276,7 @@
 <li>Alternatively, a simple plot layout can be generated automatically when given a list of Accessions and basic layout properties.</li>
 </ul>
 <p><strong>Example</strong>: A trial with 24 plots that has a maximum of 6 columns. The blocks have a dimension of 3 columns by 2 rows. The Plots will start in the top left corner and work across columns and down rows.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Generate the list of Accessions</span>
 <span class="co"># here we're using a dummy list of Accessions named ACC_A - ACC_X</span>
 <span class="va">accessions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ACC_"</span>, <span class="va">x</span><span class="op">)</span>, <span class="st">"Saccharina latissima"</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
@@ -314,7 +313,7 @@
 <span class="co"># Row4: Block                            3                   3                   3                   4                   4                   4</span>
 <span class="co"># Row4: Control                      FALSE               FALSE               FALSE               FALSE               FALSE               FALSE </span></code></pre></div>
 <p><strong>Example:</strong> The same 24 plots, but the plots are assigned using a zig-zag method (ie left to right in the first row, right to left in the second row, etc). Additionally, the controls are specified using the names of the Accessions used as controls.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Generate the list of Accessions</span>
 <span class="va">accessions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="reference/Accession.html">Accession</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ACC_"</span>, <span class="va">x</span><span class="op">)</span>, <span class="st">"Saccharina latissima"</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span>
 
@@ -360,7 +359,7 @@
 <p>The <code>plot_name</code> must match the name of an existing Plot in an existing Trial.</p>
 <p>The <code>observations</code> must take the form of a named list where the list item name/key is the full trait name of the trait observed and the list item value is the observed trait value. The trait name must match an existing trait name in the breedbase database and follow the form {trait name}|{trait id} (ex: <code>Grain yield kg/ha|CO_321:0001218</code>).</p>
 <p><strong>Example:</strong> Create two <code>PlotData</code> objects representing two plots from the same Trial</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">plotData1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/PlotData.html">PlotData</a></span><span class="op">(</span>
     <span class="st">"FARM-2019-UNH_PLOT1"</span>, 
     <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
@@ -386,6 +385,102 @@
 <a href="#conversion-functions" class="anchor"></a>Conversion Functions</h2>
 <p>A number of helpful conversion functions are included to help convert phenotype observation values between different commonly used units. All of these functions start with <code>convert_</code>, such as <code>convert_buac_kgHa</code>. See the package Documentation for more details.</p>
 </div>
+<div id="accession-search" class="section level2">
+<h2 class="hasAnchor">
+<a href="#accession-search" class="anchor"></a>Accession Search</h2>
+<p>The package now includes functions that can interface with a <a href="https://synonyms.triticeaetoolbox.org">BrAPI germplasm search</a> server. The search tool allows the user to find matching database entries that are the same as or similar to the user-provided search terms using a number of configurable search options. Performing a search before submitting new Accessions to a breedbase database can limit the number of accidental duplicate entries in the database.</p>
+<p>To perform a search, you first need to create an Accession Search Database object which contains the information about the breedbase instance you are going to search on. The Accession search server has a number of pre-configured databases you can use (where the connection information is set by the search server) or you can create your own database specification.</p>
+<p>To get and choose a pre-configured database from the search server:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get a list of supported database names</span>
+dbs &lt;-<span class="st"> </span><span class="kw">getAccessionSearchDBs</span>()
+[<span class="dv">1</span>] <span class="st">"T3/Wheat: https://wheat.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
+[<span class="dv">1</span>] <span class="st">"T3/Oat: https://oat.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
+[<span class="dv">1</span>] <span class="st">"T3/Barley: https://barley.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
+[<span class="dv">1</span>] <span class="st">"Cassavabase: https://cassavabase.org/brapi/v1 [v1.3]"</span>
+<span class="co"># Select a database to use</span>
+db &lt;-<span class="st"> </span><span class="kw">getAccessionSearchDB</span>(dbs[[<span class="dv">1</span>]])</code></pre></div>
+<p>To create your own database connection:</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">db</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/createAccessionSearchDB.html">createAccessionSearchDB</a></span><span class="op">(</span><span class="st">"T3/Wheat-Sandbox"</span>, <span class="st">"https://wheat-sandbox.triticeaetoolbox.org/brapi/v1"</span>, <span class="st">"v1.3"</span><span class="op">)</span></code></pre></div>
+<p>Once you have a configured database connection, you can update the cache of database terms that the search server uses:</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/updateAccessionSearchCache.html">updateAccessionSearchCache</a></span><span class="op">(</span><span class="va">db</span><span class="op">)</span></code></pre></div>
+<p>Then, you can perform a search on a vector of your search terms:</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">search_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"jerry"</span>, <span class="st">"SY-Gold"</span>, <span class="st">"PU0128A1_36"</span><span class="op">)</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/performAccessionSearch.html">performAccessionSearch</a></span><span class="op">(</span><span class="va">db</span>, <span class="va">search_terms</span><span class="op">)</span> </code></pre></div>
+<p>The results are returned as a tibble with a column containing your search term and information about the matches:</p>
+<pre><code># A tibble: 3 x 6
+  search_term search_routine     germplasm_name germplasm_id database_term database_term_type
+  &lt;chr&gt;       &lt;chr&gt;              &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;             
+1 jerry       Exact Match        JERRY                230227 JERRY         name              
+2 SY-Gold     Exact Match        00X0100-51           232633 Sy-Gold       synonym           
+3 PU0128A1_36 Remove Punctuation 0128A1-36            238801 PU0128A1-36   synonym     </code></pre>
+</div>
+<div id="configurable-options" class="section level2">
+<h2 class="hasAnchor">
+<a href="#configurable-options" class="anchor"></a>Configurable Options</h2>
+<p>The breedbase package has a number of default property values that can be overriden using R’s global options. The following table lists the options that can be changed. To set the value of an option, use the <code><a href="https://rdrr.io/r/base/options.html">options()</a></code> function with the name of the option and the new value (Example: to change the supported Accession properties: <code><a href="https://rdrr.io/r/base/options.html">options("breedbase.editable_stock_props" = c("variety", "class", "notes", "purdy_pedigree"))</a></code></p>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="15%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Name</th>
+<th align="left">Definition                                              </th>
+<th align="left">Default Value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">breedbase.standard_stock_props</td>
+<td align="left">Accession properties that are used by the breedbase website</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/c.html">c("population_name", "organization_name", "synonym", "PUI")</a></code></td>
+</tr>
+<tr class="even">
+<td align="left">breedbase.editable_stock_props</td>
+<td align="left">Additional Accession properties defined by the individual breedbase instance</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/c.html">c("variety", "released_variety_name", "donor", "donor institute", "donor PUI", "country of origin", "state", "institute code", "institute name", "biological status of accession code", "notes", "accession number", "seed source", "type of germplasm storage code", "acquisition date", "location_code", "ploidy_level", "genome_structure", "ncbi_taxonomy_id", "transgenic", "introgression_parent", "introgression_backcross_parent", "introgression_map_version", "introgression_chromosome", "introgression_start_position_bp", "introgression_end_position_bp", "purdy_pedigree", "filial_generation")</a></code></td>
+</tr>
+<tr class="odd">
+<td align="left">breedbase.cross_types</td>
+<td align="left">The supported Pedigree cross types</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/c.html">c("biparental", "self", "open", "sib")</a></code></td>
+</tr>
+<tr class="even">
+<td align="left">breedbase.country_codes</td>
+<td align="left">List of 3-letter country codes</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/c.html">c('AFG','ALA','ALB','DZA','ASM','AND','AGO','AIA','ATA','ATG','ARG','ARM','ABW','AUS','AUT','AZE','BHS','BHR','BGD','BRB','BLR','BEL','BLZ','BEN','BMU','BTN','BOL','BES','BIH','BWA','BVT','BRA','IOT','VGB','BRN','BGR','BFA','BDI','CPV','KHM','CMR','CAN','CYM','CAF','TCD','CHL','CHN','HKG','MAC','CXR','CCK','COL','COM','COG','COK','CRI','CIV','HRV','CUB','CUW','CYP','CZE','PRK','COD','DNK','DJI','DMA','DOM','ECU','EGY','SLV','GNQ','ERI','EST','SWZ','ETH','FLK','FRO','FJI','FIN','FRA','GUF','PYF','ATF','GAB','GMB','GEO','DEU','GHA','GIB','GRC','GRL','GRD','GLP','GUM','GTM','GGY','GIN','GNB','GUY','HTI','HMD','VAT','HND','HUN','ISL','IND','IDN','IRN','IRQ','IRL','IMN','ISR','ITA','JAM','JPN','JEY','JOR','KAZ','KEN','KIR','KWT','KGZ','LAO','LVA','LBN','LSO','LBR','LBY','LIE','LTU','LUX','MDG','MWI','MYS','MDV','MLI','MLT','MHL','MTQ','MRT','MUS','MYT','MEX','FSM','MCO','MNG','MNE','MSR','MAR','MOZ','MMR','NAM','NRU','NPL','NLD','NCL','NZL','NIC','NER','NGA','NIU','NFK','MKD','MNP','NOR','OMN','PAK','PLW','PAN','PNG','PRY','PER','PHL','PCN','POL','PRT','PRI','QAT','KOR','MDA','REU','ROU','RUS','RWA','BLM','SHN','KNA','LCA','MAF','SPM','VCT','WSM','SMR','STP','SAU','SEN','SRB','SYC','SLE','SGP','SXM','SVK','SVN','SLB','SOM','ZAF','SGS','SSD','ESP','LKA','PSE','SDN','SUR','SJM','SWE','CHE','SYR','TJK','THA','TLS','TGO','TKL','TON','TTO','TUN','TUR','TKM','TCA','TUV','UGA','UKR','ARE','GBR','TZA','UMI','USA','VIR','URY','UZB','VUT','VEN','VNM','WLF','ESH','YEM','ZMB','ZWE')</a></code></td>
+</tr>
+<tr class="odd">
+<td align="left">breedbase.location_types</td>
+<td align="left">The supported types of Locations</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/c.html">c('Farm', 'Field', 'Greenhouse', 'Screenhouse', 'Lab', 'Storage', 'Other')</a></code></td>
+</tr>
+<tr class="even">
+<td align="left">breedbase.design_types</td>
+<td align="left">The supported Trial design types</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/c.html">c('CRD', 'RCBD', 'Alpha', 'Augmented', 'MAD', 'Westcott', 'Lattice')</a></code></td>
+</tr>
+<tr class="odd">
+<td align="left">breedbase.trial_types</td>
+<td align="left">The supported Trial types</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/c.html">c('Seedling Nursery', 'phenotyping_trial', 'Advanced Yield Trial', 'Preliminary Yield Trial', 'Uniform Yield Trial', 'Variety Release Trial', 'Clonal Evaluation', 'genetic_gain_trial', 'storage_trial', 'heterosis_trial', 'health_status_trial', 'grafting_trial', 'Screen House', 'Seed Multiplication', 'crossing_block_trial', 'Specialty Trial')</a></code></td>
+</tr>
+<tr class="even">
+<td align="left">breedbase.accession_search_server</td>
+<td align="left">The URL of the <a href="https://github.com/TriticeaeToolbox/BrAPI-germplasm-search">BrAPI germplasm search</a> server used by the Accession search functions</td>
+<td align="left"><code>"https://synonyms.triticeaetoolbox.org"</code></td>
+</tr>
+<tr class="odd">
+<td align="left">breedbase.accession_search_config</td>
+<td align="left">The default Accession search parameters</td>
+<td align="left"><code><a href="https://rdrr.io/r/base/list.html">list(database_terms = list(name = TRUE, synonyms = TRUE, accession_numbers = TRUE),search_routines = list(name = TRUE, punctuation = TRUE, substring = TRUE, edit_distance = FALSE, max_edit_distance = 2),return_records = FALSE)</a></code></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="current-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#current-status" class="anchor"></a>Current Status</h2>
@@ -398,6 +493,8 @@
 <li>Plot</li>
 <li>PlotData</li>
 <li>Conversions</li>
+<li>Accession Searches (using the <a href="https://github.com/TriticeaeToolbox/BrAPI-germplasm-search">BrAPI-germplasm-search tool</a>
+</li>
 </ul>
 </div>
 </div>

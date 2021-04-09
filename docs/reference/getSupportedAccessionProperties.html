@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Accession Class — Accession-class • breedbase</title>
+<title>Get Supported Accession Properties — getSupportedAccessionProperties • breedbase</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Accession Class — Accession-class" />
-<meta property="og:description" content="An S4 Class to represent a breeDBase accession" />
+<meta property="og:title" content="Get Supported Accession Properties — getSupportedAccessionProperties" />
+<meta property="og:description" content="Get a vector of accession property names that can be used by the Accession class.
+These values can be overriden by setting the global breedbase.editable_stock_props
+option (Example: options(&quot;breedbase.editable_stock_props&quot; = c(&quot;prop1&quot;, &quot;prop2&quot;)))." />
 
 
 
@@ -103,41 +105,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Accession Class</h1>
+    <h1>Get Supported Accession Properties</h1>
     
-    <div class="hidden name"><code>Accession-class.Rd</code></div>
+    <div class="hidden name"><code>getSupportedAccessionProperties.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An S4 Class to represent a breeDBase accession</p>
+    <p>Get a vector of accession property names that can be used by the Accession class.
+These values can be overriden by setting the global <code>breedbase.editable_stock_props</code>
+option (Example: <code><a href='https://rdrr.io/r/base/options.html'>options("breedbase.editable_stock_props" = c("prop1", "prop2"))</a></code>).</p>
     </div>
 
+    <pre class="usage"><span class='fu'>getSupportedAccessionProperties</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The `accession_name` and `species_name` are required, all other fields are optional.</p>
-    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
-
-    
-
-<dl>
-<dt><code>accession_name</code></dt><dd><p>Accession Name (must be unique)</p></dd>
-
-<dt><code>species_name</code></dt><dd><p>Species Name (must exist in the database)</p></dd>
-
-<dt><code>properties</code></dt><dd><p>(optional) a list of additional accession stock properties, where the list key is a stock property name supported by the breedbase server and the list value is either a string value or a vector of string values.</p></dd>
-
-</dl>
+    <p>A vector of supported accession property names</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Accession: 
+<code><a href='Accession-class.html'>Accession-class</a></code>,
 <code><a href='Accession.html'>Accession</a></code>,
 <code><a href='Pedigree-class.html'>Pedigree-class</a></code>,
 <code><a href='Pedigree.html'>Pedigree</a></code>,
 <code><a href='buildAccessionTemplate.html'>buildAccessionTemplate</a>()</code>,
 <code><a href='buildPedigreeTemplate.html'>buildPedigreeTemplate</a>()</code>,
-<code><a href='getSupportedAccessionProperties.html'>getSupportedAccessionProperties</a>()</code>,
 <code><a href='writeAccessionTemplate.html'>writeAccessionTemplate</a>()</code>,
 <code><a href='writePedigreeTemplate.html'>writePedigreeTemplate</a>()</code></p></div>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Accession Class — Accession-class • breedbase</title>
+<title>Get Accession Search Database — getAccessionSearchDB • breedbase</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Accession Class — Accession-class" />
-<meta property="og:description" content="An S4 Class to represent a breeDBase accession" />
+<meta property="og:title" content="Get Accession Search Database — getAccessionSearchDB" />
+<meta property="og:description" content="Get the Accession Search Database by the name of the BrAPI-compliant 
+database configured by the accession search server." />
 
 
 
@@ -103,43 +104,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Accession Class</h1>
+    <h1>Get Accession Search Database</h1>
     
-    <div class="hidden name"><code>Accession-class.Rd</code></div>
+    <div class="hidden name"><code>getAccessionSearchDB.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An S4 Class to represent a breeDBase accession</p>
+    <p>Get the Accession Search Database by the name of the BrAPI-compliant 
+database configured by the accession search server.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>getAccessionSearchDB</span><span class='op'>(</span><span class='va'>name</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>The name of the database</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Accession Search Database, a list with the following names:</p><dl>
+  <dt>name</dt><dd><p>Database name</p></dd>
+  <dt>address</dt><dd><p>Database BrAPI URL</p></dd>
+  <dt>version</dt><dd><p>Database BrAPI version</p></dd>
+  <dt>call_limit</dt><dd><p>Max number of concurrent connections to the Databse</p></dd>
+
+</dl>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The `accession_name` and `species_name` are required, all other fields are optional.</p>
-    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
-
-    
-
-<dl>
-<dt><code>accession_name</code></dt><dd><p>Accession Name (must be unique)</p></dd>
-
-<dt><code>species_name</code></dt><dd><p>Species Name (must exist in the database)</p></dd>
-
-<dt><code>properties</code></dt><dd><p>(optional) a list of additional accession stock properties, where the list key is a stock property name supported by the breedbase server and the list value is either a string value or a vector of string values.</p></dd>
-
-</dl>
+    <p>The name must match the name of a database supported by the accession 
+search server.  Use the <code><a href='getAccessionSearchDBs.html'>getAccessionSearchDBs</a></code> function 
+to get a list of the supported database names.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Accession: 
-<code><a href='Accession.html'>Accession</a></code>,
-<code><a href='Pedigree-class.html'>Pedigree-class</a></code>,
-<code><a href='Pedigree.html'>Pedigree</a></code>,
-<code><a href='buildAccessionTemplate.html'>buildAccessionTemplate</a>()</code>,
-<code><a href='buildPedigreeTemplate.html'>buildPedigreeTemplate</a>()</code>,
-<code><a href='getSupportedAccessionProperties.html'>getSupportedAccessionProperties</a>()</code>,
-<code><a href='writeAccessionTemplate.html'>writeAccessionTemplate</a>()</code>,
-<code><a href='writePedigreeTemplate.html'>writePedigreeTemplate</a>()</code></p></div>
+    <div class='dont-index'><p><a href='getAccessionSearchDBs.html'>getAccessionSearchDBs</a></p>
+<p>Other accessionSearch: 
+<code><a href='createAccessionSearchDB.html'>createAccessionSearchDB</a>()</code>,
+<code><a href='getAccessionSearchCacheStatus.html'>getAccessionSearchCacheStatus</a>()</code>,
+<code><a href='getAccessionSearchConfig.html'>getAccessionSearchConfig</a>()</code>,
+<code><a href='getAccessionSearchDBs.html'>getAccessionSearchDBs</a>()</code>,
+<code><a href='getAccessionSearchServer.html'>getAccessionSearchServer</a>()</code>,
+<code><a href='performAccessionSearch.html'>performAccessionSearch</a>()</code>,
+<code><a href='updateAccessionSearchCache.html'>updateAccessionSearchCache</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
