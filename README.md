@@ -374,14 +374,16 @@ To perform a search, you first need to create an Accession Search Database objec
 
 To get and choose a pre-configured database from the search server:
 ```R
-# Get a list of supported database names
+# Get a list of supported databases
 dbs <- getAccessionSearchDBs()
-[1] "T3/Wheat: https://wheat.triticeaetoolbox.org/brapi/v1 [v1.3]"
-[1] "T3/Oat: https://oat.triticeaetoolbox.org/brapi/v1 [v1.3]"
-[1] "T3/Barley: https://barley.triticeaetoolbox.org/brapi/v1 [v1.3]"
-[1] "Cassavabase: https://cassavabase.org/brapi/v1 [v1.3]"
+[1] "1 = T3/Wheat: https://wheat.triticeaetoolbox.org/brapi/v1 [v1.3]"
+[1] "2 = T3/Oat: https://oat.triticeaetoolbox.org/brapi/v1 [v1.3]"
+[1] "3 = T3/Barley: https://barley.triticeaetoolbox.org/brapi/v1 [v1.3]"
+[1] "4 = Cassavabase: https://cassavabase.org/brapi/v1 [v1.3]"
 # Select a database to use
-db <- getAccessionSearchDB(dbs[[1]])
+db <- dbs[[1]]
+# Or get the Database by name
+db <- getAccessionSearchDB("T3/Wheat")
 ```
 
 To create your own database connection:

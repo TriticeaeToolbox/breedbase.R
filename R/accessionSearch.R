@@ -1,30 +1,32 @@
-#' Get Accession Search Database Names
+#' Get Accession Search Databases
 #' 
-#' Get the names of all of the supported BrAPI-compliant databases configured 
-#' by the accession search server.  
+#' Get all of the supported BrAPI-compliant databases configured by the accession search server.  
 #' 
-#' Using the database name, the \code{\link{getAccessionSearchDB}} function 
-#' can be used to get the Accession Search Database object needed by the other accession 
-#' search functions. The accession search server can be changed by setting the global 
-#' \code{breedbase.accession_search_server} option (Example: 
+#' This function returns a vector of Accession Search Database objects, one of which can be used 
+#' by the other accession search functions. The accession search server can be changed by setting 
+#' the global \code{breedbase.accession_search_server} option (Example: 
 #' \code{options("breedbase.accession_search_server" = "https://search.example.org")}).
 #' 
-#' @seealso \link{getAccessionSearchDB}
 #' @seealso \link{getAccessionSearchServer}
 #' 
-#' @return Vector of supported database names
+#' @return Vector of supported Accession Search Databases, where each Database is 
+#' a list with the following names:
+#' \describe{
+#'   \item{name}{Database name}
+#'   \item{address}{Database BrAPI URL}
+#'   \item{version}{Database BrAPI version}
+#'   \item{call_limit}{Max number of concurrent connections to the Databse}
+#' }
 #' 
 #' @family accessionSearch
 #' @export
 getAccessionSearchDBs <- function() {
     dbs <- asGet("/databases")
-    names <- c()
     for ( i in c(1:length(dbs)) ) {
         db <- dbs[[i]]
-        print(sprintf("%s: %s [%s]", db$name, db$address, db$version))
-        names <- c(names, db$name)
+        print(sprintf("%i = %s: %s [%s]", i, db$name, db$address, db$version))
     }
-    return(names)
+    return(dbs)
 }
 
 #' Get Accession Search Database
@@ -34,7 +36,7 @@ getAccessionSearchDBs <- function() {
 #' 
 #' The name must match the name of a database supported by the accession 
 #' search server.  Use the \code{\link{getAccessionSearchDBs}} function 
-#' to get a list of the supported database names.
+#' to get a list of all of the supported databases.
 #' 
 #' @seealso \link{getAccessionSearchDBs}
 #' 
@@ -243,7 +245,7 @@ asPOST <- function(path, query=NULL, body=NULL, results=FAlSE) {
 # @param [results] Flag to include the results if a job is spawned
 # @return JSON body of the response
 asHTTP <- function(method, path, query=NULL, body=NULL, results=FALSE) {
-    url <- paste(getBBOption("accession_search_server"), "api", path, sep="/")
+    url <- paste0(getBBOption("accession_search_server"), "/api", path)
     body <- tryCatch({
         ua <- paste0("breedbase.R/", utils::packageVersion("breedbase"), " (httr/", utils::packageVersion("httr"), ")")
         
