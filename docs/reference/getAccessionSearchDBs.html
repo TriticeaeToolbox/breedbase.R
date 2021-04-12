@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Accession Search Database Names — getAccessionSearchDBs • breedbase</title>
+<title>Get Accession Search Databases — getAccessionSearchDBs • breedbase</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Get Accession Search Database Names — getAccessionSearchDBs" />
-<meta property="og:description" content="Get the names of all of the supported BrAPI-compliant databases configured 
-by the accession search server." />
+<meta property="og:title" content="Get Accession Search Databases — getAccessionSearchDBs" />
+<meta property="og:description" content="Get all of the supported BrAPI-compliant databases configured by the accession search server." />
 
 
 
@@ -73,7 +72,7 @@ by the accession search server." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -104,14 +103,13 @@ by the accession search server." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Accession Search Database Names</h1>
+    <h1>Get Accession Search Databases</h1>
     
     <div class="hidden name"><code>getAccessionSearchDBs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the names of all of the supported BrAPI-compliant databases configured 
-by the accession search server.</p>
+    <p>Get all of the supported BrAPI-compliant databases configured by the accession search server.</p>
     </div>
 
     <pre class="usage"><span class='fu'>getAccessionSearchDBs</span><span class='op'>(</span><span class='op'>)</span></pre>
@@ -119,18 +117,24 @@ by the accession search server.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Vector of supported database names</p>
+    <p>Vector of supported Accession Search Databases, where each Database is 
+a list with the following names:</p><dl>
+  <dt>name</dt><dd><p>Database name</p></dd>
+  <dt>address</dt><dd><p>Database BrAPI URL</p></dd>
+  <dt>version</dt><dd><p>Database BrAPI version</p></dd>
+  <dt>call_limit</dt><dd><p>Max number of concurrent connections to the Databse</p></dd>
+
+</dl>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Using the database name, the <code><a href='getAccessionSearchDB.html'>getAccessionSearchDB</a></code> function 
-can be used to get the Accession Search Database object needed by the other accession 
-search functions. The accession search server can be changed by setting the global 
-<code>breedbase.accession_search_server</code> option (Example: 
+    <p>This function returns a vector of Accession Search Database objects, one of which can be used 
+by the other accession search functions. The accession search server can be changed by setting 
+the global <code>breedbase.accession_search_server</code> option (Example: 
 <code><a href='https://rdrr.io/r/base/options.html'>options("breedbase.accession_search_server" = "https://search.example.org")</a></code>).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='getAccessionSearchDB.html'>getAccessionSearchDB</a></p>
-<p><a href='getAccessionSearchServer.html'>getAccessionSearchServer</a></p>
+    <div class='dont-index'><p><a href='getAccessionSearchServer.html'>getAccessionSearchServer</a></p>
 <p>Other accessionSearch: 
 <code><a href='createAccessionSearchDB.html'>createAccessionSearchDB</a>()</code>,
 <code><a href='getAccessionSearchCacheStatus.html'>getAccessionSearchCacheStatus</a>()</code>,

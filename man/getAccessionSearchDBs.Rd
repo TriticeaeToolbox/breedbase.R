@@ -2,27 +2,30 @@
 % Please edit documentation in R/accessionSearch.R
 \name{getAccessionSearchDBs}
 \alias{getAccessionSearchDBs}
-\title{Get Accession Search Database Names}
+\title{Get Accession Search Databases}
 \usage{
 getAccessionSearchDBs()
 }
 \value{
-Vector of supported database names
+Vector of supported Accession Search Databases, where each Database is 
+a list with the following names:
+\describe{
+  \item{name}{Database name}
+  \item{address}{Database BrAPI URL}
+  \item{version}{Database BrAPI version}
+  \item{call_limit}{Max number of concurrent connections to the Databse}
+}
 }
 \description{
-Get the names of all of the supported BrAPI-compliant databases configured 
-by the accession search server.
+Get all of the supported BrAPI-compliant databases configured by the accession search server.
 }
 \details{
-Using the database name, the \code{\link{getAccessionSearchDB}} function 
-can be used to get the Accession Search Database object needed by the other accession 
-search functions. The accession search server can be changed by setting the global 
-\code{breedbase.accession_search_server} option (Example: 
+This function returns a vector of Accession Search Database objects, one of which can be used 
+by the other accession search functions. The accession search server can be changed by setting 
+the global \code{breedbase.accession_search_server} option (Example: 
 \code{options("breedbase.accession_search_server" = "https://search.example.org")}).
 }
 \seealso{
-\link{getAccessionSearchDB}
-
 \link{getAccessionSearchServer}
 
 Other accessionSearch: 

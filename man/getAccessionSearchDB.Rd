@@ -25,7 +25,7 @@ database configured by the accession search server.
 \details{
 The name must match the name of a database supported by the accession 
 search server.  Use the \code{\link{getAccessionSearchDBs}} function 
-to get a list of the supported database names.
+to get a list of all of the supported databases.
 }
 \seealso{
 \link{getAccessionSearchDBs}

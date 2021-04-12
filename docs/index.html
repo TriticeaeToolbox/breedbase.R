@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">breedbase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -391,14 +391,16 @@
 <p>The package now includes functions that can interface with a <a href="https://synonyms.triticeaetoolbox.org">BrAPI germplasm search</a> server. The search tool allows the user to find matching database entries that are the same as or similar to the user-provided search terms using a number of configurable search options. Performing a search before submitting new Accessions to a breedbase database can limit the number of accidental duplicate entries in the database.</p>
 <p>To perform a search, you first need to create an Accession Search Database object which contains the information about the breedbase instance you are going to search on. The Accession search server has a number of pre-configured databases you can use (where the connection information is set by the search server) or you can create your own database specification.</p>
 <p>To get and choose a pre-configured database from the search server:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get a list of supported database names</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get a list of supported databases</span>
 dbs &lt;-<span class="st"> </span><span class="kw">getAccessionSearchDBs</span>()
-[<span class="dv">1</span>] <span class="st">"T3/Wheat: https://wheat.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
-[<span class="dv">1</span>] <span class="st">"T3/Oat: https://oat.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
-[<span class="dv">1</span>] <span class="st">"T3/Barley: https://barley.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
-[<span class="dv">1</span>] <span class="st">"Cassavabase: https://cassavabase.org/brapi/v1 [v1.3]"</span>
+[<span class="dv">1</span>] <span class="st">"1 = T3/Wheat: https://wheat.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
+[<span class="dv">1</span>] <span class="st">"2 = T3/Oat: https://oat.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
+[<span class="dv">1</span>] <span class="st">"3 = T3/Barley: https://barley.triticeaetoolbox.org/brapi/v1 [v1.3]"</span>
+[<span class="dv">1</span>] <span class="st">"4 = Cassavabase: https://cassavabase.org/brapi/v1 [v1.3]"</span>
 <span class="co"># Select a database to use</span>
-db &lt;-<span class="st"> </span><span class="kw">getAccessionSearchDB</span>(dbs[[<span class="dv">1</span>]])</code></pre></div>
+db &lt;-<span class="st"> </span>dbs[[<span class="dv">1</span>]]
+<span class="co"># Or get the Database by name</span>
+db &lt;-<span class="st"> </span><span class="kw">getAccessionSearchDB</span>(<span class="st">"T3/Wheat"</span>)</code></pre></div>
 <p>To create your own database connection:</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">db</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/createAccessionSearchDB.html">createAccessionSearchDB</a></span><span class="op">(</span><span class="st">"T3/Wheat-Sandbox"</span>, <span class="st">"https://wheat-sandbox.triticeaetoolbox.org/brapi/v1"</span>, <span class="st">"v1.3"</span><span class="op">)</span></code></pre></div>
