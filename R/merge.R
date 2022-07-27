@@ -2,13 +2,13 @@
 #' 
 #' Create a merged accession template from multiple submissions
 #' 
-#' @param dir The path to the parent directory that contains the submission directories
+#' @param dir The path to the parent directory that contains the submission directories (default=current directory)
 #' @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
 #' @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
 #' 
 #' @import readxl WriteXLS tibble dplyr readr digest
 #' @export
-mergeAccessions <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
+mergeAccessions <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
     mergeData(
         dir, 
         "accessions.xls", 
@@ -23,13 +23,13 @@ mergeAccessions <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE)
 #' 
 #' Create a merged location template from multiple submissions
 #' 
-#' @param dir The path to the parent directory that contains the submission directories
+#' @param dir The path to the parent directory that contains the submission directories (default=current directory)
 #' @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
 #' @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
 #' 
 #' @import readxl WriteXLS tibble dplyr readr digest
 #' @export
-mergeLocations <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
+mergeLocations <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
     mergeData(
         dir, 
         "locations.xls", 
@@ -44,13 +44,13 @@ mergeLocations <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) 
 #' 
 #' Create a merged trial layout template from multiple submissions
 #' 
-#' @param dir The path to the parent directory that contains the submission directories
+#' @param dir The path to the parent directory that contains the submission directories (default=current directory)
 #' @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
 #' @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
 #' 
 #' @import readxl WriteXLS tibble dplyr readr digest
 #' @export
-mergeTrials <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
+mergeTrials <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
     mergeData(
         dir, 
         "trial_layout.xls", 
@@ -65,13 +65,13 @@ mergeTrials <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 #' 
 #' Create a merged plot data template from multiple submissions
 #' 
-#' @param dir The path to the parent directory that contains the submission directories
+#' @param dir The path to the parent directory that contains the submission directories (default=current directory)
 #' @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
 #' @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
 #' 
 #' @import readxl WriteXLS tibble dplyr readr digest
 #' @export
-mergePlots <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
+mergePlots <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
     mergeData(
         dir, 
         "trial_observations.xls", 
@@ -86,13 +86,13 @@ mergePlots <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 #' 
 #' Merge all of the supported data types
 #' 
-#' @param dir The path to the parent directory that contains the submission directories
+#' @param dir The path to the parent directory that contains the submission directories (default=current directory)
 #' @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
 #' @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
 #' 
 #' @import readxl WriteXLS tibble dplyr readr digest
 #' @export
-mergeAll <- function(dir, useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
+mergeAll <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
     mergeAccessions(dir, useMostRecent, keepUniqueDuplicates)
     mergeLocations(dir, useMostRecent, keepUniqueDuplicates)
     mergeTrials(dir, useMostRecent, keepUniqueDuplicates)
@@ -114,7 +114,7 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
 
     # Subset plot data with these columns
     col_oun <- 23
-    col_start_traits <- 40
+    col_start_traits <- 31
     is_plot_data <- grepl("^trial_observations", filename)
 
     # Get directories to parse
@@ -186,7 +186,7 @@ removeDuplicates <- function(merged, key_column, keepUniqueDuplicates) {
     
     # Get unique keys of the key column
     keys <- sort(unique(merged[[key_column]]))
-    filtered <- readr::read_csv("\n", col_names=colnames(merged))
+    filtered <- readr::read_csv("\n", col_names=colnames(merged), show_col_types=FALSE)
     
     # Parse each key
     for ( key in keys ) {
