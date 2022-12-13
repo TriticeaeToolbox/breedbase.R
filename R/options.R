@@ -132,7 +132,13 @@ DEFAULT_BB_OPTIONS = list(
     accession_search_server = "https://synonyms.triticeaetoolbox.org",
     accession_search_config = list(
         database_terms = list(name = TRUE, synonyms = TRUE, accession_numbers = TRUE), 
-        search_routines = list(name = TRUE, punctuation = TRUE, substring = TRUE, edit_distance = FALSE, max_edit_distance = 2),
+        search_routines = list(exact = TRUE, punctuation = TRUE, substring = TRUE, prefix = FALSE, edit_distance = FALSE),
+        search_routine_options = list(
+            substring = list(substring_length_min = 3),
+            prefix = list(prefixes = c(), find_db_prefixes = TRUE, prefix_length_min = 2, prefix_length_max = 5, threshold = 250),
+            edit_distance = list(max_edit_distance = 2)
+        ),
+        case_sensitive = TRUE,
         return_records = FALSE
     )
 )

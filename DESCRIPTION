@@ -1,5 +1,5 @@
 Package: breedbase
-Version: 1.1.1
+Version: 1.1.2
 Date: 2021-04-09
 Title: breeDBase
 Description: Helper functions for generating breeDBase upload templates.
@@ -19,4 +19,4 @@ Suggests:
     utils,
     readr,
     digest
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1

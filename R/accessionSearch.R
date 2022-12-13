@@ -144,12 +144,21 @@ updateAccessionSearchCache <- function(db) {
 #' | database_terms$name | flag to include accession names in the accession search | TRUE |
 #' | database_terms$synonyms | flag to include accession synonyms in the accession search | TRUE |
 #' | database_terms$accession_numbers | flag to include the accession numbers in the accession search | TRUE |
-#' | **search_routines** | a list with the names: name, punctuation, substring, edit_distance, max_edit_distance | |
-#' | search_routines$name | flag to use the exact name search routine in the accession search | TRUE |
+#' | **search_routines** | a list with the names: exact, punctuation, substring, prefix, edit_distance | |
+#' | search_routines$exact | flag to use the exact name search routine in the accession search | TRUE |
 #' | search_routines$punctuation | flag to use the punctuation search routine in the accession search | TRUE |
 #' | search_routines$substring | flag to use the substring search routine in the accession search | TRUE |
+#' | search_routines$prefix | flag to use the prefix search routine in the accession search | FALSE |
 #' | search_routines$edit_distance | flag to use the edit distance search routine in the accession search | FALSE |
-#' | search_routines$max_edit_distance | max number of changes to use for the edit distance search routine | 2 |
+#' | **search_routine_options** | a list that has names of the supported search routines with values set as a list of the search routine options | |
+#' | search_routine_options$substring$substring_length_min | the minimum length of a term to be included as a substring match | 3 |
+#' | search_routine_options$prefix$prefixes | default prefixes to include | [] |
+#' | search_routine_options$prefix$find_db_prefixes | scan the database terms to find common prefixes | TRUE |
+#' | search_routine_options$prefix$prefix_length_min | when finding db prefixes, the minimum length of a prefix to include | 2 |
+#' | search_routine_options$prefix$prefix_length_max | when finding db prefixes, the maximum length of a prefix to include | 5 |
+#' | search_routine_options$prefix$threshold | when finding db prefixes, the minimum number of times a prefix is used before it is included | 250 |
+#' | search_routine_options$edit_distance$max_edit_distance | the maximum number of changes for the edit distance comparison | 2 |
+#' | **case_sensitive** | flag to perform a case-sensitive search | TRUE |
 #' | **return_records** | flag to include the germplasm records with the search results | FALSE |
 #' 
 #' @param db Accession Search Database
@@ -188,16 +197,19 @@ performAccessionSearch <- function(db, terms, config=getBBOption("accession_sear
     )
     for ( search_term in names(results) ) {
         matches <- results[[search_term]]$matches
-        for ( match in matches ) {
-            r <- tibble(
-                search_term = search_term,
-                search_routine = match$search_routine$name,
-                germplasm_name = match$db_term$germplasmName,
-                germplasm_id = match$db_term$germplasmDbId,
-                database_term = match$db_term$term,
-                database_term_type = match$db_term$type
-            )
-            t <- dplyr::bind_rows(t, r)
+        for ( germplasm_name in names(matches) ) {
+            gm = matches[[germplasm_name]]
+            for ( dm in gm$matched_db_terms ) {
+                r <- tibble(
+                    search_term = search_term,
+                    search_routine = dm$search_routine$name,
+                    germplasm_name = gm$germplasmName,
+                    germplasm_id = gm$germplasmDbId,
+                    database_term = dm$db_term$term,
+                    database_term_type = dm$db_term$type
+                )
+                t <- dplyr::bind_rows(t, r)
+            }
         }
     }
 
