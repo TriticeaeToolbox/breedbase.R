@@ -4,10 +4,10 @@
 \alias{mergeLocations}
 \title{Merge Locations}
 \usage{
-mergeLocations(dir, useMostRecent = TRUE, keepUniqueDuplicates = FALSE)
+mergeLocations(dir = ".", useMostRecent = TRUE, keepUniqueDuplicates = FALSE)
 }
 \arguments{
-\item{dir}{The path to the parent directory that contains the submission directories}
+\item{dir}{The path to the parent directory that contains the submission directories (default=current directory)}
 
 \item{useMostRecent}{When set to TRUE, only use the most recent submission directory for each trial}
 

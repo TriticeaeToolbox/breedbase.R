@@ -37,12 +37,21 @@ configuration properties, which is a nested list with the following names:\tabul
    database_terms$name \tab flag to include accession names in the accession search \tab TRUE \cr
    database_terms$synonyms \tab flag to include accession synonyms in the accession search \tab TRUE \cr
    database_terms$accession_numbers \tab flag to include the accession numbers in the accession search \tab TRUE \cr
-   \strong{search_routines} \tab a list with the names: name, punctuation, substring, edit_distance, max_edit_distance \tab  \cr
-   search_routines$name \tab flag to use the exact name search routine in the accession search \tab TRUE \cr
+   \strong{search_routines} \tab a list with the names: exact, punctuation, substring, prefix, edit_distance \tab  \cr
+   search_routines$exact \tab flag to use the exact name search routine in the accession search \tab TRUE \cr
    search_routines$punctuation \tab flag to use the punctuation search routine in the accession search \tab TRUE \cr
    search_routines$substring \tab flag to use the substring search routine in the accession search \tab TRUE \cr
+   search_routines$prefix \tab flag to use the prefix search routine in the accession search \tab FALSE \cr
    search_routines$edit_distance \tab flag to use the edit distance search routine in the accession search \tab FALSE \cr
-   search_routines$max_edit_distance \tab max number of changes to use for the edit distance search routine \tab 2 \cr
+   \strong{search_routine_options} \tab a list that has names of the supported search routines with values set as a list of the search routine options \tab  \cr
+   search_routine_options$substring$substring_length_min \tab the minimum length of a term to be included as a substring match \tab 3 \cr
+   search_routine_options$prefix$prefixes \tab default prefixes to include \tab [] \cr
+   search_routine_options$prefix$find_db_prefixes \tab scan the database terms to find common prefixes \tab TRUE \cr
+   search_routine_options$prefix$prefix_length_min \tab when finding db prefixes, the minimum length of a prefix to include \tab 2 \cr
+   search_routine_options$prefix$prefix_length_max \tab when finding db prefixes, the maximum length of a prefix to include \tab 5 \cr
+   search_routine_options$prefix$threshold \tab when finding db prefixes, the minimum number of times a prefix is used before it is included \tab 250 \cr
+   search_routine_options$edit_distance$max_edit_distance \tab the maximum number of changes for the edit distance comparison \tab 2 \cr
+   \strong{case_sensitive} \tab flag to perform a case-sensitive search \tab TRUE \cr
    \strong{return_records} \tab flag to include the germplasm records with the search results \tab FALSE \cr
 }
 }
