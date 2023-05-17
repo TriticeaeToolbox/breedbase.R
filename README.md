@@ -10,6 +10,10 @@ This R package can be used to create classes of various breedbase data types (su
 Currently, the breedbase package can be installed directly from GitHub using `devtools`.
 
 ```R
+# Install the devtools package, if you don't have it already
+install.packages("devtools")
+
+# Install the breedbase package directly from GitHub
 library(devtools)
 install_github("TriticeaeToolbox/breedbase.R")
 library(breedbase)
