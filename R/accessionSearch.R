@@ -204,7 +204,7 @@ performAccessionSearch <- function(db, terms, config=getBBOption("accession_sear
                     search_term = search_term,
                     search_routine = dm$search_routine$name,
                     germplasm_name = gm$germplasmName,
-                    germplasm_id = gm$germplasmDbId,
+                    germplasm_id = as.numeric(gm$germplasmDbId),
                     database_term = dm$db_term$term,
                     database_term_type = dm$db_term$type
                 )
@@ -217,7 +217,49 @@ performAccessionSearch <- function(db, terms, config=getBBOption("accession_sear
     return(t)
 }
 
+#' Attempt to Find Best Match for Set of Accessions 
+#' 
+#' Use performAccessionSearch() to obtain a data frame of potential matches for a set of accessions, then identify the root accession name for all matches.
+#'
+#' This is intended for use cases such as identifying the breedbase-stored names of a trial given a list of lines in that trial from a collaborator or other source.
+#' 
+#' The accession search can be configured by providing a list of accession search properties.
 
+matchAccessions <- function (db, terms, config=getBBOption("accession_search_config")) {
+  trialMatches <- performAccessionSearch(db, terms, config = config)
+  
+  germplasmNames <- c()
+  for ( term in terms ) {
+    termMatches <- trialMatches[trialMatches$search_term == term, ]
+    matchNumber <- length(unique(termMatches$germplasm_name))
+    if (matchNumber == 0) {
+      newName <- NA 
+    } else if (matchNumber == 1) {
+      newName <- termMatches$germplasm_name[1]
+    } else if (matchNumber > 1) {
+      #In some case where I have two exact matches, I can choose either
+      exactMatch <- which(grepl("Exact Match", termMatches$search_routine))[1]
+      if (is.na(exactMatch)) {
+        warning(paste0("No Best Match Found for: ", term))
+        newName <- NA
+      } else {
+        newName <- termMatches$germplasm_name[exactMatch]
+      }
+    }
+    germplasmNames <- c(germplasmNames, newName)
+  }
+  
+  missingNum <- sum(is.na(germplasmNames))
+  propFoundStr <- paste0((length(germplasmNames) - missingNum), "/", length(germplasmNames))
+  
+  if ( (missingNum / length(germplasmNames)) > 0.5 ) {
+    warning(paste0("Warning: ", propFoundStr, " accessions found. Maybe try adjusting config settings?"))
+  } else if ((missingNum / length(germplasmNames)) != 0 ) {
+    warning(paste0("Warning: ", propFoundStr, " accessions found. Try adjusting search settings?"))
+  }
+  
+  return(germplasmNames)
+}
 
 ## ======== ACCESSION SEARCH API FUNCTIONS ======== ##
 
