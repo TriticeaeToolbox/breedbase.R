@@ -74,10 +74,11 @@ mergeTrials <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE)
 mergePlots <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
     mergeData(
         dir, 
-        "trial_observations.xls", 
-        "observationunit_name", 
+        "trial_observations.xls",
+        "observationUnitName",
         useMostRecent,
-        keepUniqueDuplicates
+        keepUniqueDuplicates,
+        include_cols = c("observationUnitName", "notes", "\\|CO_[0-9]+:[0-9]+$", "\\|COMP:[0-9]+$")
     )
 }
 
@@ -109,13 +110,10 @@ mergeAll <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 # @param key the name of the key column for finding duplicates
 # @param useMostRecent When set to TRUE, only use the most recent submission directory for each trial
 # @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
-mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
+# @param skip_rows The number of rows to skip in the data file (before the header row)
+# @param include_cols An array of colnames or regex statements of columns to include
+mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates, skip_rows=0, include_cols=NULL) {
     print(sprintf("Merging %s files from submissions in %s", filename, dir))
-
-    # Subset plot data with these columns
-    col_oun <- 23
-    col_start_traits <- 31
-    is_plot_data <- grepl("^trial_observations", filename)
 
     # Get directories to parse
     dirs <- getSubmissionDirectories(dir, useMostRecent)
@@ -123,11 +121,18 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
     # Read the Excel files
     tables <- list()
     for ( sub_dir in dirs ) {
-        skip <- ifelse(is_plot_data, 3, 0)
-        table <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"), skip=skip, col_types="text")
-        if ( is_plot_data ) {
-            cols <- c(23, col_start_traits:ncol(table))
-            table <- table[, cols]
+        table <- readxl::read_excel(paste(dir, sub_dir, filename, sep="/"), skip=skip_rows, col_types="text", na=c("NA"))
+        if ( !is.null(include_cols) ) {
+            keep_cols = c()
+            for ( i in c(1:ncol(table)) ) {
+                col = colnames(table)[i]
+                for ( include in include_cols ) {
+                    if ( col == include || grepl(include, col) ) {
+                        keep_cols = c(keep_cols, i)
+                    }
+                }
+            }
+            table <- table[, keep_cols]
         }
         tables[[sub_dir]] <- table
     }
@@ -155,12 +160,6 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates) {
     for ( sub_dir in names(tables) ) {
         table <- tables[[sub_dir]]
         merged <- dplyr::bind_rows(merged, table)
-    }
-
-    # Fix plot data (rename observationunit and move notes to end)
-    if ( is_plot_data ) {
-        colnames(merged)[which(colnames(merged) == "observationUnitName")] <- "observationunit_name"
-        merged <- relocate(merged, notes, .after = last_col())
     }
 
     # Filter out duplicates
