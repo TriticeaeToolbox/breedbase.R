@@ -23,8 +23,8 @@ The `accession_name` and `species_name` are required, all other fields are optio
 \seealso{
 Other Accession: 
 \code{\link{Accession}},
-\code{\link{Pedigree-class}},
 \code{\link{Pedigree}},
+\code{\link{Pedigree-class}},
 \code{\link{buildAccessionTemplate}()},
 \code{\link{buildPedigreeTemplate}()},
 \code{\link{getSupportedAccessionProperties}()},

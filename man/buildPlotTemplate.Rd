@@ -18,12 +18,12 @@ template for the provided plots
 }
 \seealso{
 Other Trial: 
-\code{\link{Plot-class}},
-\code{\link{PlotData-class}},
-\code{\link{PlotData}},
 \code{\link{Plot}},
-\code{\link{Trial-class}},
+\code{\link{Plot-class}},
+\code{\link{PlotData}},
+\code{\link{PlotData-class}},
 \code{\link{Trial}},
+\code{\link{Trial-class}},
 \code{\link{buildPlotDataTemplate}()},
 \code{\link{buildTrialTemplate}()},
 \code{\link{createPlots}()},

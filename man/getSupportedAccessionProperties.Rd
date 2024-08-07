@@ -16,10 +16,10 @@ option (Example: \code{options("breedbase.editable_stock_props" = c("prop1", "pr
 }
 \seealso{
 Other Accession: 
-\code{\link{Accession-class}},
 \code{\link{Accession}},
-\code{\link{Pedigree-class}},
+\code{\link{Accession-class}},
 \code{\link{Pedigree}},
+\code{\link{Pedigree-class}},
 \code{\link{buildAccessionTemplate}()},
 \code{\link{buildPedigreeTemplate}()},
 \code{\link{writeAccessionTemplate}()},

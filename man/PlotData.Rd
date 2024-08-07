@@ -32,11 +32,11 @@ plotdata2 <- PlotData("FARM-2019-UNH_PLOT2", list("Blade length cm|CO_360:000024
 }
 \seealso{
 Other Trial: 
+\code{\link{Plot}},
 \code{\link{Plot-class}},
 \code{\link{PlotData-class}},
-\code{\link{Plot}},
-\code{\link{Trial-class}},
 \code{\link{Trial}},
+\code{\link{Trial-class}},
 \code{\link{buildPlotDataTemplate}()},
 \code{\link{buildPlotTemplate}()},
 \code{\link{buildTrialTemplate}()},

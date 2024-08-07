@@ -22,11 +22,11 @@ The `plot_name` and `observations` parameters are required.
 
 \seealso{
 Other Trial: 
+\code{\link{Plot}},
 \code{\link{Plot-class}},
 \code{\link{PlotData}},
-\code{\link{Plot}},
-\code{\link{Trial-class}},
 \code{\link{Trial}},
+\code{\link{Trial-class}},
 \code{\link{buildPlotDataTemplate}()},
 \code{\link{buildPlotTemplate}()},
 \code{\link{buildTrialTemplate}()},

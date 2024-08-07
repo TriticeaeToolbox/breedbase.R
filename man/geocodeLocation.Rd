@@ -32,8 +32,8 @@ alt <- caldwell$altitude
 }
 \seealso{
 Other Location: 
-\code{\link{Location-class}},
 \code{\link{Location}},
+\code{\link{Location-class}},
 \code{\link{buildLocationTemplate}()},
 \code{\link{getCountryCodes}()},
 \code{\link{getLocationTypes}()},

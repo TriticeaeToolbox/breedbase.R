@@ -40,8 +40,8 @@ pedigree2 <- Pedigree(offspring, mother, father)
 }
 \seealso{
 Other Accession: 
-\code{\link{Accession-class}},
 \code{\link{Accession}},
+\code{\link{Accession-class}},
 \code{\link{Pedigree-class}},
 \code{\link{buildAccessionTemplate}()},
 \code{\link{buildPedigreeTemplate}()},

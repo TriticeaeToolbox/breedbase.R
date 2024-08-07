@@ -63,10 +63,10 @@ plot5 <- Plot(
 \seealso{
 Other Trial: 
 \code{\link{Plot-class}},
-\code{\link{PlotData-class}},
 \code{\link{PlotData}},
-\code{\link{Trial-class}},
+\code{\link{PlotData-class}},
 \code{\link{Trial}},
+\code{\link{Trial-class}},
 \code{\link{buildPlotDataTemplate}()},
 \code{\link{buildPlotTemplate}()},
 \code{\link{buildTrialTemplate}()},

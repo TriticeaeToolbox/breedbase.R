@@ -54,10 +54,10 @@ trial2 <- Trial("UMOPN_2019_Arlington", "University of Wisconsin", "Arlington, W
 }
 \seealso{
 Other Trial: 
-\code{\link{Plot-class}},
-\code{\link{PlotData-class}},
-\code{\link{PlotData}},
 \code{\link{Plot}},
+\code{\link{Plot-class}},
+\code{\link{PlotData}},
+\code{\link{PlotData-class}},
 \code{\link{Trial-class}},
 \code{\link{buildPlotDataTemplate}()},
 \code{\link{buildPlotTemplate}()},

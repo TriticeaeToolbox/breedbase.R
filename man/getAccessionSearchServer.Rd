@@ -19,8 +19,8 @@ Other accessionSearch:
 \code{\link{createAccessionSearchDB}()},
 \code{\link{getAccessionSearchCacheStatus}()},
 \code{\link{getAccessionSearchConfig}()},
-\code{\link{getAccessionSearchDBs}()},
 \code{\link{getAccessionSearchDB}()},
+\code{\link{getAccessionSearchDBs}()},
 \code{\link{performAccessionSearch}()},
 \code{\link{updateAccessionSearchCache}()}
 }

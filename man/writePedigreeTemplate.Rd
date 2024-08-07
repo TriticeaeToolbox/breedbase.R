@@ -19,10 +19,10 @@ Write a breeDBase upload template (.txt tab delimited file) for pedigrees
 }
 \seealso{
 Other Accession: 
-\code{\link{Accession-class}},
 \code{\link{Accession}},
-\code{\link{Pedigree-class}},
+\code{\link{Accession-class}},
 \code{\link{Pedigree}},
+\code{\link{Pedigree-class}},
 \code{\link{buildAccessionTemplate}()},
 \code{\link{buildPedigreeTemplate}()},
 \code{\link{getSupportedAccessionProperties}()},

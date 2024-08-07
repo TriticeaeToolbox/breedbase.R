@@ -21,8 +21,8 @@ An S4 Class to represent a breeDBase pedigree
 
 \seealso{
 Other Accession: 
-\code{\link{Accession-class}},
 \code{\link{Accession}},
+\code{\link{Accession-class}},
 \code{\link{Pedigree}},
 \code{\link{buildAccessionTemplate}()},
 \code{\link{buildPedigreeTemplate}()},

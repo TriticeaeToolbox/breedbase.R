@@ -16,8 +16,8 @@ option (Example: \code{options("breedbase.location_types" = location_types)}).
 }
 \seealso{
 Other Location: 
-\code{\link{Location-class}},
 \code{\link{Location}},
+\code{\link{Location-class}},
 \code{\link{buildLocationTemplate}()},
 \code{\link{geocodeLocation}()},
 \code{\link{getCountryCodes}()},

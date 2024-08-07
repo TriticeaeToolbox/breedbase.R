@@ -30,8 +30,8 @@ the ID of the first station is returned.
 }
 \seealso{
 Other Location: 
-\code{\link{Location-class}},
 \code{\link{Location}},
+\code{\link{Location-class}},
 \code{\link{buildLocationTemplate}()},
 \code{\link{geocodeLocation}()},
 \code{\link{getCountryCodes}()},

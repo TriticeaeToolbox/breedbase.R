@@ -43,10 +43,10 @@ The `trial_name`, `breeding_program`, `location`, `year`, `design_type`, and
 
 \seealso{
 Other Trial: 
-\code{\link{Plot-class}},
-\code{\link{PlotData-class}},
-\code{\link{PlotData}},
 \code{\link{Plot}},
+\code{\link{Plot-class}},
+\code{\link{PlotData}},
+\code{\link{PlotData-class}},
 \code{\link{Trial}},
 \code{\link{buildPlotDataTemplate}()},
 \code{\link{buildPlotTemplate}()},

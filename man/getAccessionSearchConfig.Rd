@@ -19,8 +19,8 @@ global \code{breedbase.accession_search_config} option (Example:
 Other accessionSearch: 
 \code{\link{createAccessionSearchDB}()},
 \code{\link{getAccessionSearchCacheStatus}()},
-\code{\link{getAccessionSearchDBs}()},
 \code{\link{getAccessionSearchDB}()},
+\code{\link{getAccessionSearchDBs}()},
 \code{\link{getAccessionSearchServer}()},
 \code{\link{performAccessionSearch}()},
 \code{\link{updateAccessionSearchCache}()}

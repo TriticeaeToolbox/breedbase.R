@@ -30,8 +30,8 @@ function to update the cached database terms for an Accession Search Database.
 Other accessionSearch: 
 \code{\link{createAccessionSearchDB}()},
 \code{\link{getAccessionSearchConfig}()},
-\code{\link{getAccessionSearchDBs}()},
 \code{\link{getAccessionSearchDB}()},
+\code{\link{getAccessionSearchDBs}()},
 \code{\link{getAccessionSearchServer}()},
 \code{\link{performAccessionSearch}()},
 \code{\link{updateAccessionSearchCache}()}

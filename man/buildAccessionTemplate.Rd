@@ -18,10 +18,10 @@ template for the provided accessions
 }
 \seealso{
 Other Accession: 
-\code{\link{Accession-class}},
 \code{\link{Accession}},
-\code{\link{Pedigree-class}},
+\code{\link{Accession-class}},
 \code{\link{Pedigree}},
+\code{\link{Pedigree-class}},
 \code{\link{buildPedigreeTemplate}()},
 \code{\link{getSupportedAccessionProperties}()},
 \code{\link{writeAccessionTemplate}()},
