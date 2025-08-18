@@ -1,210 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Accession-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Accession.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Location-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Location.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Pedigree-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Pedigree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Plot-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotData-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PlotData.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Progeny-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Progeny.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Trial-class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Trial.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildAccessionTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildLocationTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildPedigreeTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildPlotDataTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildPlotTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildProgenyTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildTrialTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_buac_gm2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_buac_kgHa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_gm2_kgHa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_in_cm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_kgHa_gm2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_kghl_gL.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_lbsbu_gL.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_scale.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_sqft_m2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/createAccessionSearchDB.html</loc>
-  </url>
-  <url>
-    <loc>/reference/createPlots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geocodeLocation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getAccessionSearchCacheStatus.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getAccessionSearchConfig.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getAccessionSearchDB.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getAccessionSearchDBs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getAccessionSearchServer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getCountryCodes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getLocationTypes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getSubmissionDirectories.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getSupportedAccessionProperties.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getTrialDesignTypes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getTrialTypes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lookupNOAAStationID.html</loc>
-  </url>
-  <url>
-    <loc>/reference/matchAccessions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mergeAccessions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mergeAll.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mergeData.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mergeLocations.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mergePlots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mergeTrials.html</loc>
-  </url>
-  <url>
-    <loc>/reference/performAccessionSearch.html</loc>
-  </url>
-  <url>
-    <loc>/reference/printPlots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeDuplicates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setTrialPlots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateAccessionSearchCache.html</loc>
-  </url>
-  <url>
-    <loc>/reference/writeAccessionTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/writeLocationTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/writePedigreeTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/writePlotDataTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/writePlotTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/writeProgenyTemplate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/writeTrialTemplate.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/Accession-class.html</loc></url>
+<url><loc>/reference/Accession.html</loc></url>
+<url><loc>/reference/Location-class.html</loc></url>
+<url><loc>/reference/Location.html</loc></url>
+<url><loc>/reference/Pedigree-class.html</loc></url>
+<url><loc>/reference/Pedigree.html</loc></url>
+<url><loc>/reference/Plot-class.html</loc></url>
+<url><loc>/reference/Plot.html</loc></url>
+<url><loc>/reference/PlotData-class.html</loc></url>
+<url><loc>/reference/PlotData.html</loc></url>
+<url><loc>/reference/Progeny-class.html</loc></url>
+<url><loc>/reference/Progeny.html</loc></url>
+<url><loc>/reference/Trial-class.html</loc></url>
+<url><loc>/reference/Trial.html</loc></url>
+<url><loc>/reference/buildAccessionTemplate.html</loc></url>
+<url><loc>/reference/buildLocationTemplate.html</loc></url>
+<url><loc>/reference/buildPedigreeTemplate.html</loc></url>
+<url><loc>/reference/buildPlotDataTemplate.html</loc></url>
+<url><loc>/reference/buildPlotTemplate.html</loc></url>
+<url><loc>/reference/buildProgenyTemplate.html</loc></url>
+<url><loc>/reference/buildTrialTemplate.html</loc></url>
+<url><loc>/reference/convert_buac_gm2.html</loc></url>
+<url><loc>/reference/convert_buac_kgHa.html</loc></url>
+<url><loc>/reference/convert_gm2_kgHa.html</loc></url>
+<url><loc>/reference/convert_in_cm.html</loc></url>
+<url><loc>/reference/convert_kgHa_gm2.html</loc></url>
+<url><loc>/reference/convert_kghl_gL.html</loc></url>
+<url><loc>/reference/convert_lbsbu_gL.html</loc></url>
+<url><loc>/reference/convert_scale.html</loc></url>
+<url><loc>/reference/convert_sqft_m2.html</loc></url>
+<url><loc>/reference/createAccessionSearchDB.html</loc></url>
+<url><loc>/reference/createPlots.html</loc></url>
+<url><loc>/reference/formatTemplates.html</loc></url>
+<url><loc>/reference/geocodeLocation.html</loc></url>
+<url><loc>/reference/getAccessionSearchCacheStatus.html</loc></url>
+<url><loc>/reference/getAccessionSearchConfig.html</loc></url>
+<url><loc>/reference/getAccessionSearchDB.html</loc></url>
+<url><loc>/reference/getAccessionSearchDBs.html</loc></url>
+<url><loc>/reference/getAccessionSearchServer.html</loc></url>
+<url><loc>/reference/getCountryCodes.html</loc></url>
+<url><loc>/reference/getLocationTypes.html</loc></url>
+<url><loc>/reference/getSubmissionDirectories.html</loc></url>
+<url><loc>/reference/getSupportedAccessionProperties.html</loc></url>
+<url><loc>/reference/getTrialDesignTypes.html</loc></url>
+<url><loc>/reference/getTrialTypes.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/lookupNOAAStationID.html</loc></url>
+<url><loc>/reference/matchAccessions.html</loc></url>
+<url><loc>/reference/mergeAccessions.html</loc></url>
+<url><loc>/reference/mergeAll.html</loc></url>
+<url><loc>/reference/mergeData.html</loc></url>
+<url><loc>/reference/mergeLocations.html</loc></url>
+<url><loc>/reference/mergePlots.html</loc></url>
+<url><loc>/reference/mergeTrials.html</loc></url>
+<url><loc>/reference/performAccessionSearch.html</loc></url>
+<url><loc>/reference/printPlots.html</loc></url>
+<url><loc>/reference/removeDuplicates.html</loc></url>
+<url><loc>/reference/setTrialPlots.html</loc></url>
+<url><loc>/reference/updateAccessionSearchCache.html</loc></url>
+<url><loc>/reference/writeAccessionTemplate.html</loc></url>
+<url><loc>/reference/writeLocationTemplate.html</loc></url>
+<url><loc>/reference/writePedigreeTemplate.html</loc></url>
+<url><loc>/reference/writePlotDataTemplate.html</loc></url>
+<url><loc>/reference/writePlotTemplate.html</loc></url>
+<url><loc>/reference/writeProgenyTemplate.html</loc></url>
+<url><loc>/reference/writeTrialTemplate.html</loc></url>
 </urlset>
+
