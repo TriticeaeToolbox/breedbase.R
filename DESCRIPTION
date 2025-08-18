@@ -11,12 +11,15 @@ Depends:
 Imports:
     tibble,
     dplyr,
+    digest,
+    readr,
     httr,
     rjson,
     WriteXLS,
-    readxl    
+    readxl,
+    sjmisc
 Suggests:
     utils,
     readr,
     digest
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

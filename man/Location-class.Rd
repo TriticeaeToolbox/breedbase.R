@@ -20,7 +20,7 @@ An S4 Class to represent a breeDBase Location
 
 \item{\code{program}}{Name of one or more existing Breeding Programs}
 
-\item{\code{type}}{Location type (Farm, Field, Greenhouse, Screenhouse, Lab, Storage, Other)}
+\item{\code{type}}{Location type (Town, Farm, Field, Greenhouse, Screenhouse, Lab, Storage, Other)}
 
 \item{\code{latitude}}{Location latitude (decimal degrees)}
 

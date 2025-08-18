@@ -71,7 +71,8 @@ location <- Location(
 
 # Geocode an address to use as lat/lon/alt properties
 geo <- geocodeLocation("2 Caldwell Drive, Ithaca, NY")
-noaa_station_id <- lookupNOAAStationId(geo$latitude, geo$longitude)
+#noaa_station_id <- lookupNOAAStationID(geo$latitude, geo$longitude)
+noaa_station_id <- "none"
 location <- Location(
      "Caldwell - Ithaca, NY", 
      "ITH_CALD",
