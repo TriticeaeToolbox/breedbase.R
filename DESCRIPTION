@@ -1,6 +1,6 @@
 Package: breedbase
-Version: 1.1.4
-Date: 2024-08-07
+Version: 1.1.5
+Date: 2025-06-06
 Title: breeDBase
 Description: Helper functions for generating breeDBase upload templates.
 Author: David Waring <djw64@cornell.edu>

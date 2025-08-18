@@ -7,7 +7,7 @@
 #' @slot country_code ISO Alpha-3 country code
 #' @slot country_name Uppercase english short name from the ISO standard
 #' @slot program Name of one or more existing Breeding Programs
-#' @slot type Location type (Farm, Field, Greenhouse, Screenhouse, Lab, Storage, Other)
+#' @slot type Location type (Town, Farm, Field, Greenhouse, Screenhouse, Lab, Storage, Other)
 #' @slot latitude Location latitude (decimal degrees)
 #' @slot longitude Location longitude (decimal degrees)
 #' @slot altitude Location elevation (meters)
