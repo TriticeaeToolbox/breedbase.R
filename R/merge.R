@@ -173,7 +173,7 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates, s
 
     # Write the filtered table
     dir.create(file.path(dir, "merged"), showWarnings=FALSE)
-    output <- paste(dir, "merged", filename, sep="/")
+    output <- paste(dir, "merged", gsub("\\.xlsx?$", "\\.csv", filename), sep="/")
 
     # Split the filtered data, if chunk is provided
     if ( !is.null(chunk) ) {
@@ -200,9 +200,9 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates, s
             }
 
             # Write the subset output to the chunk file
-            subset_output <- gsub("\\.xls$", paste0("_part", index, ".xls"), output)
+            subset_output <- gsub("\\.csv$", paste0("_part", index, ".csv"), output)
             print(sprintf("...writing chunk %i: %s", index, subset_output))
-            WriteXLS::WriteXLS(subset, subset_output)
+            write.csv(subset, subset_output, row.names=F, na="")
 
             # Set next chunk
             if ( end == max ) {
@@ -221,7 +221,7 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates, s
     # Write the entire file
     else {
         print(sprintf("...writing all data: %s", output))
-        WriteXLS::WriteXLS(filtered, output)
+        write.csv(filtered, output, row.names=F, na="")
     }
 }
 
