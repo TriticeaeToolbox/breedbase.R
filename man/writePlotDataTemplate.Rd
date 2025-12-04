@@ -4,7 +4,7 @@
 \alias{writePlotDataTemplate}
 \title{Write PlotData Template}
 \usage{
-writePlotDataTemplate(input = NULL, output = NULL)
+writePlotDataTemplate(input = NULL, output = NULL, chunk = NULL)
 }
 \arguments{
 \item{input}{Either a vector of PlotDatas to include in the template OR 

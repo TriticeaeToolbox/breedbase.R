@@ -116,7 +116,8 @@ buildPlotDataTemplate <- function(
 #' @export
 writePlotDataTemplate <- function(
     input = NULL,
-    output = NULL
+    output = NULL,
+    chunk = NULL
 ) {
 
     # Check for required arguments
@@ -135,6 +136,32 @@ writePlotDataTemplate <- function(
     # Set output extension
     if ( !grepl("\\.xls$", output) ) {
         output <- paste(output, ".xls", sep="")
+    }
+
+    # Split the input file, if chunk is provided
+    if ( !is.null(chunk) ) {
+        max <- nrow(input)
+        index <- 1
+        start <- 1
+        end <- ifelse(max < chunk, max, chunk)
+        while ( end <= max ) {
+
+            # Subset data and write the subset
+            subset <- input[c(start:end),]
+            subset_output <- gsub("\\.xls$", paste0("_part", index, ".xls"), output)
+            writePlotDataTemplate(subset, subset_output)
+
+            if ( end == max ) {
+                end <- max + 1
+            }
+            else {
+                index <- index + 1
+                start <- end + 1
+                end <- end + chunk
+                end <- ifelse(end > max, max, end)
+            }
+
+        }
     }
 
     # Write the entire file
