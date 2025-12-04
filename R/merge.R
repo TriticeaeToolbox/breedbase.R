@@ -14,7 +14,8 @@ mergeAccessions <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FA
         "accessions.xls", 
         "accession_name", 
         useMostRecent,
-        keepUniqueDuplicates
+        keepUniqueDuplicates,
+        chunk=2500
     )
 }
 
@@ -56,7 +57,9 @@ mergeTrials <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE)
         "trial_layout.xls", 
         "plot_name", 
         useMostRecent,
-        keepUniqueDuplicates
+        keepUniqueDuplicates,
+        chunk=50,
+        chunkBy="trial_name"
     )
 }
 
@@ -78,7 +81,8 @@ mergePlots <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) 
         "observationUnitName",
         useMostRecent,
         keepUniqueDuplicates,
-        include_cols = c("observationUnitName", "notes", "\\|CO_[0-9]+:[0-9]+$", "\\|COMP:[0-9]+$")
+        include_cols = c("observationUnitName", "notes", "\\|CO_[0-9]+:[0-9]+$", "\\|COMP:[0-9]+$"),
+        chunk=5000
     )
 }
 
@@ -112,7 +116,9 @@ mergeAll <- function(dir=".", useMostRecent=TRUE, keepUniqueDuplicates=FALSE) {
 # @param keepUniqueDuplicates When set to TRUE, the script will keep all unique versions of duplicate rows (and won't prompt the user to pick)
 # @param skip_rows The number of rows to skip in the data file (before the header row)
 # @param include_cols An array of colnames or regex statements of columns to include
-mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates, skip_rows=0, include_cols=NULL) {
+# @param chunk Split data into multiple files of 'chunk' rows
+# @param chunkBy When specified, chunk by the value in this column instead of by row
+mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates, skip_rows=0, include_cols=NULL, chunk=NULL, chunkBy=NULL) {
     print(sprintf("Merging %s files from submissions in %s", filename, dir))
 
     # Get directories to parse
@@ -167,7 +173,56 @@ mergeData <- function(dir, filename, key, useMostRecent, keepUniqueDuplicates, s
 
     # Write the filtered table
     dir.create(file.path(dir, "merged"), showWarnings=FALSE)
-    WriteXLS::WriteXLS(filtered, paste(dir, "merged", filename, sep="/"))
+    output <- paste(dir, "merged", filename, sep="/")
+
+    # Split the filtered data, if chunk is provided
+    if ( !is.null(chunk) ) {
+
+        max <- nrow(filtered)
+        keys <- c()
+        if ( !is.null(chunkBy) ) {
+            keys <- unique(filtered[[chunkBy]])
+            max <- length(keys)
+        }
+        index <- 1
+        start <- 1
+        end <- ifelse(max < chunk, max, chunk)
+        while ( end <= max ) {
+
+            # Subset the data, by this chunk of keys or rows
+            subset <- tibble()
+            if ( !is.null(chunkBy) ) {
+                subset_keys <- keys[c(start:end)]
+                subset <- filter(filtered, .data[[chunkBy]] %in% subset_keys)
+            }
+            else {
+                subset <- filtered[c(start:end),]
+            }
+
+            # Write the subset output to the chunk file
+            subset_output <- gsub("\\.xls$", paste0("_part", index, ".xls"), output)
+            print(sprintf("...writing chunk %i: %s", index, subset_output))
+            WriteXLS::WriteXLS(subset, subset_output)
+
+            # Set next chunk
+            if ( end == max ) {
+                end <- max + 1
+            }
+            else {
+                index <- index + 1
+                start <- end + 1
+                end <- end + chunk
+                end <- ifelse(end > max, max, end)
+            }
+
+        }
+    }
+
+    # Write the entire file
+    else {
+        print(sprintf("...writing all data: %s", output))
+        WriteXLS::WriteXLS(filtered, output)
+    }
 }
 
 
